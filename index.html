@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Free Fire — Profile (Enhanced)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{
+      --bg-1:#0b0610;
+      --bg-2:#23102a;
+      --panel:#141214cc;
+      --accent:#f0b90f;
+      --muted:#bdbdbd;
+      --glass: rgba(255,255,255,0.03);
+      --card-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      --border-glow: 0 0 10px rgba(240, 185, 15, 0.3);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial}
+    body{
+      background: linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 100%);
+      color:#fff;overflow:hidden;
+      padding-top: 60px;
+    }
+
+    /* Top Header */
+    .top-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to right, #4b0082, #000);
+      border-bottom: 1px solid var(--accent);
+      z-index: 100;
+      box-shadow: var(--border-glow);
+    }
+    .top-header > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo-top {
+      font-family: Oswald, sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px var(--accent);
+    }
+    .title-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .title-section span:first-child {
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .close {
+      font-size: 24px;
+      cursor: pointer;
+      color: #fff;
+      transition: color 0.3s;
+    }
+    .close:hover {
+      color: var(--accent);
+    }
+
+    /* Layout */
+    .wrap{display:grid;grid-template-columns:260px 1fr;height:calc(100vh - 60px);gap:0;padding:0;overflow:hidden;max-width:100vw;margin:0}
+
+    /* LEFT SIDEBAR */
+    .sidebar{background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.55));border-radius:0;padding:18px;border-right:1px solid rgba(255,255,255,0.03);box-shadow:var(--card-shadow);height:100%;overflow-y:auto}
+    .logo{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+    .logo .avatar-mini{width:44px;height:44px;border-radius:8px;background:url('avatar.png') center/cover;border:2px solid #000; box-shadow: var(--border-glow);}
+    .logo > div {font-weight:700;letter-spacing:1px;margin-top:5px; color: var(--accent);}
+
+    .menu{display:flex;flex-direction:column;gap:12px}
+    .menu button{appearance:none;border:none;padding:16px 14px;text-align:left;border-radius:8px;background:transparent;color:#ddd;font-weight:600;cursor:pointer;position:relative;width:100%;transition: all 0.3s;}
+    .menu button:hover{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:var(--accent); transform: translateX(5px);}
+    .menu button.active{background:linear-gradient(90deg, #f7c83b 0%, #e39f07 100%);color:#111;font-weight:800;box-shadow:0 0 10px var(--accent); position: relative;}
+    .menu button.active::after {content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 20px; background: #111;}
+
+    /* center stage */
+    .stage{position:relative;border-radius:0;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;box-shadow:var(--card-shadow);height:100%;overflow-y:auto}
+
+    /* Top Stats Row */
+    .top-stats {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 10px 18px;
+      width: 100%;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 12px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .top-stats .small-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: url('avatar.png') center/cover;
+      border: 1px solid var(--accent);
+      box-shadow: var(--border-glow);
+    }
+    .top-stats > div:nth-child(2) {
+      font-weight: bold;
+      color: var(--accent);
+      font-size: 14px;
+    }
+    .top-stats .flame { color: #ff4500; }
+    .top-stats .gold { color: var(--accent); }
+    .top-stats .diamond { color: #00bfff; }
+    .top-stats .crown { color: var(--accent); }
+
+    /* Character pedestal */
+    .pedestal{width:100%;display:flex;gap:18px;padding:22px;align-items:flex-start;flex:1}
+    .character-stage{flex: 0 0 360px;display:flex;align-items:center;justify-content:center;min-height:520px;position:relative}
+    .character-card{width:360px;height:540px;display:flex;align-items:center;justify-content:center;background:transparent}
+    .character{width:320px;height:520px;background:url('character.png') center/contain no-repeat;animation:float 4s ease-in-out infinite; box-shadow: 0 10px 20px rgba(0,0,0,0.5), var(--border-glow);}
+    @keyframes float{0%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(1deg)}100%{transform:translateY(0) rotate(0deg)}}
+
+    /* right column */
+    .profile-panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:0;padding:10px;box-shadow:var(--card-shadow);display:flex;flex-direction:column;height:100%;overflow-y:auto; flex:1; min-width:380px; border-left: 1px solid rgba(255,255,255,0.03);}
+
+    .profile-head{display:flex;gap:12px;padding:12px;background:linear-gradient(90deg, rgba(250,250,250,0.02), rgba(0,0,0,0.02));align-items:center;border-radius:8px; box-shadow: var(--border-glow);}
+    .pf-avatar{width:86px;height:86px;border-radius:6px;background:url('avatar.png') center/cover;border:3px solid #fff; box-shadow: var(--border-glow);}
+    .pf-info{flex:1}
+    .pf-name{font-family:Oswald, sans-serif;font-weight:600;color:var(--accent);font-size:20px; text-shadow: 0 0 5px var(--accent);}
+    .pf-meta{font-size:13px;color:var(--muted);margin-top:6px}
+    .pf-actions{display:flex;align-items:center;gap:8px}
+    .pf-actions button{background:transparent;border:2px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px;color:#fff;cursor:pointer; transition: all 0.3s;}
+    .pf-actions button:hover {background: var(--accent); color: #111; transform: scale(1.1);}
+
+    .level-badge{background:linear-gradient(90deg,#ffc84d,#f58c00);padding:6px 10px;border-radius:8px;color:#111;font-weight:700;margin-top:8px;display:inline-block; box-shadow: var(--border-glow); animation: pulse 2s infinite;}
+
+    @keyframes pulse {0%, 100% { box-shadow: 0 0 5px var(--accent); } 50% { box-shadow: 0 0 20px var(--accent); }}
+
+    .section-title{font-size:13px;color:var(--muted);text-transform:uppercase;padding:12px 6px;margin-top:12px; border-bottom: 1px solid rgba(255,255,255,0.1); letter-spacing: 1px;}
+
+    .battle-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px}
+    .br-card{background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;text-align:center; min-height:60px; display:flex; flex-direction:column; justify-content:center; transition: all 0.3s; border: 1px solid rgba(255,255,255,0.05);}
+    .br-card:hover {background: rgba(240,185,15,0.1); border-color: var(--accent); transform: translateY(-2px);}
+    .br-card .num{font-weight:800;font-size:20px;color:var(--accent)}
+    .br-card .sub{font-size:12px;color:var(--muted);margin-top:6px}
+
+    .emblems{display:flex;gap:10px;align-items:center;padding:10px}
+    .emblem{width:64px;height:64px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,0,0,0.4); font-size:24px; transition: all 0.3s; box-shadow: var(--border-glow);}
+    .emblem:hover {transform: scale(1.05);}
+
+    .badges{display:flex;gap:8px;padding:12px;flex-wrap:wrap}
+    .badge{width:110px;height:44px;background:linear-gradient(90deg,#f7c83b,#e39f07);color:#111;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 6px 18px rgba(227,159,7,0.12); font-size:12px; transition: all 0.3s;}
+    .badge:hover {transform: translateY(-3px); box-shadow: 0 10px 25px rgba(227,159,7,0.3);}
+
+    .icons-row{display:flex;gap:12px;padding:10px}
+    .icon{width:56px;height:56px;border-radius:8px;background:purple;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.03); color:gold; font-size:20px; transition: all 0.3s;}
+    .icon:hover {background: var(--accent); color: #111; transform: rotate(360deg);}
+
+    .style-row{display:flex; align-items:center; gap:20px; padding:20px 10px; border-top:1px solid rgba(255,255,255,0.1);}
+    .style-row .photo {font-size:30px; cursor: pointer; transition: all 0.3s;}
+    .style-row .photo:hover {color: var(--accent); transform: scale(1.2);}
+    .style-row .battle-style {flex:1; background:linear-gradient(90deg, purple, #4b0082); color:white; padding:10px; border-radius:5px; text-align:center; font-weight: bold; box-shadow: var(--border-glow);}
+    .style-row .qr {width:60px; height:60px; background:black; border-radius:5px; display: flex; align-items: center; justify-content: center;}
+    .style-row .edit {width:30px; height:30px; background:black; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s;}
+    .style-row .edit:hover {background: var(--accent); color: #111;}
+
+    /* Floating quick actions center-right */
+    .quick-actions{position:absolute;left:calc(260px + 50%);top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;gap:10px}
+    .qa-btn{width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.45));display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.03);cursor:pointer; transition: all 0.3s; box-shadow: var(--border-glow);}
+    .qa-btn:hover {transform: scale(1.1); background: var(--accent); color: #111;}
+
+    /* small screens */
+    @media (max-width:1200px){
+      .profile-panel {min-width: 350px;}
+      .quick-actions {left: calc(260px + 40%);}
+    }
+
+    @media (max-width:1100px){
+      .wrap{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:0;}
+      .sidebar{grid-column:1;grid-row:1;border-right:none;border-bottom:1px solid rgba(255,255,255,0.03);border-radius:0;padding:10px;height:auto;overflow:hidden;}
+      .stage{grid-column:1;grid-row:2;border-radius:0;padding:10px;height:auto;}
+      .profile-panel{flex: none; min-width: auto; width:100%;border-radius:0;}
+      .pedestal{flex-direction:column;gap:10px;padding:10px;}
+      .character-stage{flex: none; width:100%; min-height:300px;}
+      .character{width:250px;height:400px;}
+      .quick-actions{display:none}
+      .battle-row{grid-template-columns:1fr;}
+    }
+
+    @media (max-width:700px){
+      .wrap{grid-template-columns:1fr;grid-template-rows:auto auto auto;padding:0;}
+      .sidebar{order:1;display:flex;flex-direction:row;justify-content:space-around;overflow:auto;white-space:nowrap;height:auto;padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);}
+      .menu{flex-direction:row;gap:5px;}
+      .menu button{padding:8px 12px;font-size:12px;}
+      .logo{display:none;}
+      .stage{order:3;padding:5px;}
+      .profile-panel{order:2;padding:5px;}
+      .character{width:200px;height:300px;}
+      .top-stats{flex-wrap:wrap;gap:10px;justify-content:center;}
+      .top-header > div{padding:10px 10px;}
+      .logo-top{font-size:20px;}
+      .battle-row{grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));}
+    }
+
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div>
+      <div class="logo-top">FREE FIRE</div>
+      <div class="title-section">
+        <span>PROFILE</span>
+        <span class="close">×</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <!-- LEFT MENU -->
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="avatar-mini"></div>
+        <div>Dare 2 Kill</div>
+      </div>
+
+      <nav class="menu" aria-label="profile sections">
+        <button class="active"><i class="fas fa-images"></i> GALLERY</button>
+        <button><i class="fas fa-eye"></i> OVERVIEW</button>
+        <button><i class="fas fa-user"></i> ROLE</button>
+        <button><i class="fas fa-history"></i> HISTORY</button>
+        <button><i class="fas fa-gun"></i> WEAPON</button>
+        <button><i class="fas fa-images"></i> ALBUM</button>
+        <button><i class="fas fa-trophy"></i> HONOR SCORE</button>
+        <button><i class="fas fa-heart"></i> WISHLIST</button>
+      </nav>
+
+    </aside>
+
+    <!-- CENTER STAGE -->
+    <main class="stage">
+      <div class="top-stats">
+        <div class="small-avatar"></div>
+        <div>Dare 2 Kill</div>
+        <div class="flame"><i class="fas fa-fire"></i></div>
+        <div class="gold"><i class="fas fa-coins"></i> 7514</div>
+        <div class="diamond"><i class="fas fa-gem"></i> 102+</div>
+        <div class="crown"><i class="fas fa-crown"></i> 4</div>
+        <div class="diamond"><i class="fas fa-gem"></i></div>
+      </div>
+
+      <section class="pedestal">
+        <div class="character-stage">
+          <div class="character-card">
+            <div class="character" role="img" aria-label="character image"></div>
+          </div>
+        </div>
+
+        <!-- right column tucked inside center so layout resembles screenshot -->
+        <div class="profile-panel">
+            <div class="profile-head">
+              <div class="pf-avatar"></div>
+              <div class="pf-info">
+                <div class="pf-name">DARE 2 KILL</div>
+                <div class="pf-meta">English <i class="fas fa-thumbs-up"></i> 12850 · UID: <strong>1253163475</strong></div>
+                <div class="level-badge">Lv. 65</div>
+              </div>
+              <div class="pf-actions">
+                <button title="Edit"><i class="fas fa-cog"></i></button>
+                <button title="Share"><i class="fas fa-share"></i></button>
+              </div>
+            </div>
+
+            <div class="section-title">Battle Royale</div>
+            <div class="battle-row">
+              <div class="br-card"><div class="num">3899</div><div class="sub">S47</div></div>
+              <div class="br-card"><div class="num">Heroic</div><div class="sub">Emblem</div></div>
+              <div class="br-card"><div class="num">Rifler</div></div>
+            </div>
+
+            <div class="emblems">
+              <div class="emblem" style="background:gold; color:#ff8c00; font-size:28px;"><i class="fas fa-dove"></i></div>
+              <div class="emblem" style="background:crimson; color:white; flex-direction:column; gap:0; padding:2px; font-size:12px; font-weight:bold;"><div>14</div><div><i class="fas fa-heart"></i></div></div>
+              <div class="emblem" style="background:purple; color:#add8e6; font-size:28px;"><i class="fas fa-gun"></i></div>
+            </div>
+
+            <div style="display:flex;gap:8px;margin-top:12px">
+              <div class="badge">HEAD EXPERT</div>
+              <div class="badge">DOMINATOR</div>
+            </div>
+
+            <div class="icons-row">
+              <div class="icon"><i class="fas fa-star"></i></div>
+              <div class="icon"><i class="fas fa-star"></i></div>
+              <div class="icon"><i class="fas fa-star"></i></div>
+              <div class="icon"><i class="fas fa-star"></i></div>
+              <div class="icon"><i class="fas fa-star"></i></div>
+            </div>
+
+            <div class="style-row">
+              <div class="photo"><i class="fas fa-camera"></i></div>
+              <div class="battle-style">Battle in Style!</div>
+              <div class="qr"><i class="fas fa-qrcode"></i></div>
+              <div class="edit"><i class="fas fa-edit"></i></div>
+            </div>
+          </div>
+        </section>
+
+      <!-- floating quick actions (small vertical bar) -->
+      <div class="quick-actions" aria-hidden>
+        <div class="qa-btn"><i class="fas fa-camera"></i></div>
+        <div class="qa-btn"><i class="fas fa-user"></i></div>
+        <div class="qa-btn"><i class="fas fa-link"></i></div>
+      </div>
+
+    </main>
+
+  </div>
+</body>
+</html>
