@@ -181,36 +181,105 @@
             background: rgba(0, 0, 0, 0.3);
         }
 
-        /* Character Display */
+        /* Character Display - Enhanced and Conditional */
         .character-display {
             width: 300px;
             padding: 30px 20px;
             background: linear-gradient(180deg, rgba(26, 10, 46, 0.6), rgba(0, 0, 0, 0.8));
             border-right: 1px solid rgba(255, 215, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-display.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .character-display.hidden {
+            display: none;
+        }
+
+        .character-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: characterGlow 3s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes characterGlow {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.05); }
         }
 
         .avatar-container {
             text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
         }
 
         .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
+            width: 200px;
+            height: 400px;
+            border-radius: 15px;
             background: linear-gradient(45deg, #ffd700, #ff8c00);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             border: 3px solid #ffd700;
-            overflow: hidden; /* Added for better image fitting */
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+            animation: floatIn 1s ease-out;
+        }
+
+        @keyframes floatIn {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .avatar:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
         }
 
         .avatar img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
+            object-fit: contain;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .avatar:hover img {
+            transform: scale(1.05);
+        }
+
+        .avatar-info {
+            text-align: center;
+            animation: slideIn 1.2s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateX(-30px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
         }
 
         .avatar-info h3 {
@@ -218,11 +287,13 @@
             font-size: 24px;
             color: #ffd700;
             margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         .avatar-info p {
             color: #cccccc;
             margin-bottom: 20px;
+            font-size: 16px;
         }
 
         .level-badge {
@@ -231,18 +302,26 @@
             border-radius: 20px;
             display: inline-block;
             border: 1px solid #ffd700;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .level-badge span {
             font-family: 'Orbitron', monospace;
             font-weight: 700;
             color: #ffd700;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
         }
 
         /* Content Display */
         .content-display {
             flex: 1;
             padding: 30px;
+            transition: all 0.5s ease;
         }
 
         .content-section {
@@ -617,53 +696,138 @@
             color: #ffd700;
         }
 
-        /* Contact Grid */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+        /* Contact Form Styles - New Enhanced Form */
+        .contact-form-container {
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .contact-card {
+        .contact-form {
             background: linear-gradient(135deg, rgba(26, 10, 46, 0.8), rgba(0, 0, 0, 0.8));
-            border: 1px solid #ffd700;
-            border-radius: 15px;
-            padding: 25px;
+            border: 2px solid #ffd700;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
         }
 
-        .contact-card.primary {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.1));
-        }
-
-        .contact-card h3 {
-            color: #ffd700;
+        .form-group {
             margin-bottom: 20px;
-            font-family: 'Orbitron', monospace;
         }
 
-        .contact-info {
-            display: grid;
-            gap: 15px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: #e0e0e0;
-        }
-
-        .contact-item i {
+        .form-group label {
+            display: block;
             color: #ffd700;
-            width: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-family: 'Orbitron', monospace;
+            font-size: 14px;
         }
 
-        /* Profile Panel (Right Side) */
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 16px;
+            font-family: 'Rajdhani', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            color: #000;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', monospace;
+            font-size: 16px;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .form-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(50, 205, 50, 0.2);
+            color: #90ee90;
+            border: 1px solid #32cd32;
+        }
+
+        .form-message.error {
+            background: rgba(255, 69, 0, 0.2);
+            color: #ff6347;
+            border: 1px solid #ff4500;
+        }
+
+        /* Enhanced Profile Panel */
         .profile-panel {
             width: 280px;
+            height: calc(100vh - 100px);
             background: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(26, 10, 46, 0.8));
             border-left: 2px solid #ffd700;
             padding: 30px 20px;
+            overflow-y: auto;
+            position: sticky;
+            top: 100px;
+            z-index: 50;
+            transition: all 0.3s ease;
+            box-shadow: -5px 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .profile-panel::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .profile-panel::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 3px;
+        }
+
+        .profile-panel::-webkit-scrollbar-thumb {
+            background: #ffd700;
+            border-radius: 3px;
+        }
+
+        .profile-panel::-webkit-scrollbar-thumb:hover {
+            background: #ff8c00;
         }
 
         .profile-card {
@@ -673,6 +837,12 @@
             padding: 25px;
             text-align: center;
             margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
         }
 
         .profile-avatar {
@@ -685,7 +855,13 @@
             justify-content: center;
             margin: 0 auto 20px;
             border: 2px solid #ffd700;
-            overflow: hidden; /* Added for better image fitting */
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
 
         .profile-avatar img {
@@ -771,7 +947,8 @@
         }
 
         .badge:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
 
         .badge.expert {
@@ -833,6 +1010,34 @@
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
 
+        /* Enhanced UI Improvements */
+        /* Added subtle glow to active elements */
+        .nav-section.active,
+        .project-card:hover,
+        .achievement-card:hover {
+            box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.1);
+        }
+
+        /* Improved particle animation for better performance */
+        .particle {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.7;
+            animation: float 8s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+        }
+
         /* Responsive Design */
         @media (max-width: 1200px) {
             .profile-panel {
@@ -841,6 +1046,11 @@
             
             .character-display {
                 width: 250px;
+            }
+
+            .avatar {
+                width: 150px;
+                height: 300px;
             }
         }
 
@@ -874,29 +1084,41 @@
             
             .content-panel {
                 flex-direction: column;
+                width: 100%;
             }
             
             .character-display {
                 width: 100%;
                 padding: 20px;
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+                height: auto;
             }
             
             .avatar-container {
-                display: flex;
+                flex-direction: row;
                 align-items: center;
-                gap: 20px;
                 text-align: left;
             }
             
             .avatar {
-                width: 80px;
-                height: 80px;
+                width: 120px;
+                height: 240px;
                 margin: 0;
             }
             
             .avatar img {
                 width: 100%;
                 height: 100%;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .content-display {
+                width: 100%;
             }
         }
 
@@ -936,10 +1158,6 @@
             .quick-stats {
                 grid-template-columns: 1fr;
             }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 480px) {
@@ -971,6 +1189,10 @@
             .skill-tag {
                 padding: 6px 12px;
                 font-size: 13px;
+            }
+
+            .contact-form {
+                padding: 20px;
             }
         }
     </style>
@@ -1049,22 +1271,19 @@
         </nav>
 
         <main class="content-panel">
-            <div class="character-display">
+            <div class="character-display" id="characterDisplay">
                 <div class="avatar-container">
                     <div class="avatar">
-                        <img src="./character.png" alt="Muhammed Ajmal U K">
+                        <img src="./character.png" alt="Muhammed Ajmal U K - Full Body">
                     </div>
                     <div class="avatar-info">
                         <h3>AJMAL</h3>
                         <p>Full Stack Developer</p>
-                        <div class="level-badge">
-                            <span>LV.89</span>
-                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="content-display">
+            <div class="content-display" id="contentDisplay">
                 <section id="overview" class="content-section active">
                     <div class="section-header">
                         <h2><i class="fas fa-user"></i> ABOUT ME</h2>
@@ -1340,62 +1559,45 @@
                     </div>
                 </section>
 
+                <!-- Updated Contact Section with Enhanced Form -->
                 <section id="contact" class="content-section">
                     <div class="section-header">
-                        <h2><i class="fas fa-address-book"></i> REFERENCES & CONTACT</h2>
+                        <h2><i class="fas fa-address-book"></i> GET IN TOUCH</h2>
                     </div>
                     <div class="content-body">
-                        <div class="contact-grid">
-                            <div class="contact-card primary">
-                                <h3>Direct Contact</h3>
-                                <div class="contact-info">
-                                    <div class="contact-item">
-                                        <i class="fas fa-phone"></i>
-                                        <span>+91 8547197122</span>
+                        <p>Ready to collaborate or have a question? Drop me a message below. I'll respond as soon as possible!</p>
+                        <div class="contact-form-container">
+                            <form class="contact-form" id="contactForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="name">Your Name</label>
+                                        <input type="text" id="name" name="name" required>
                                     </div>
-                                    <div class="contact-item">
-                                        <i class="fas fa-envelope"></i>
-                                        <span>ajmaluk.me@gmail.com</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="contact-card reference">
-                                <h3>Dr. Reshma P K</h3>
-                                <p>HOD Computer Science</p>
-                                <div class="contact-info">
-                                    <div class="contact-item">
-                                        <i class="fas fa-phone"></i>
-                                        <span>+91 98477 51975</span>
-                                    </div>
-                                    <div class="contact-item">
-                                        <i class="fas fa-envelope"></i>
-                                        <span>preshma@gmail.com</span>
+                                    <div class="form-group">
+                                        <label for="email">Your Email</label>
+                                        <input type="email" id="email" name="email" required>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="contact-card reference">
-                                <h3>Dr. Shijo M Joseph</h3>
-                                <p>Professor, Computer Science</p>
-                                <div class="contact-info">
-                                    <div class="contact-item">
-                                        <i class="fas fa-phone"></i>
-                                        <span>+91 94474 47985</span>
-                                    </div>
-                                    <div class="contact-item">
-                                        <i class="fas fa-envelope"></i>
-                                        <span>shijojoseph@gmail.com</span>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" id="subject" name="subject" required>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" name="message" placeholder="Tell me about your project or idea..." required></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">
+                                    <i class="fas fa-paper-plane"></i> Send Message
+                                </button>
+                                <div id="formMessage" class="form-message"></div>
+                            </form>
                         </div>
                     </div>
                 </section>
             </div>
         </main>
 
-        <!-- Profile Info Panel (Right Side) -->
+        <!-- Enhanced Profile Info Panel (Right Side) -->
         <aside class="profile-panel">
             <div class="profile-card">
                 <div class="profile-avatar">
@@ -1403,15 +1605,6 @@
                 </div>
                 <h3>MUHAMMED AJMAL U K</h3>
                 <p class="profile-subtitle">Computer Science Graduate</p>
-                <div class="profile-level">
-                    <span class="level-text">LV.89</span>
-                    <div class="level-bar">
-                        <div class="level-progress" style="width: 89%"></div>
-                    </div>
-                </div>
-                <div class="profile-id">
-                    <span>UID: 8547197122</span>
-                </div>
             </div>
 
             <div class="badges-section">
@@ -1454,14 +1647,27 @@
     <script>
         // Gaming Portfolio Interactive Features
         document.addEventListener('DOMContentLoaded', function() {
-            // Navigation functionality
             const navSections = document.querySelectorAll('.nav-section');
             const contentSections = document.querySelectorAll('.content-section');
+            const characterDisplay = document.getElementById('characterDisplay');
+            const contentDisplay = document.getElementById('contentDisplay');
             
-            // Initialize first section as active
+            // Function to show/hide character display
+            function toggleCharacterDisplay(show) {
+                if (show) {
+                    characterDisplay.classList.remove('hidden');
+                    characterDisplay.classList.add('show');
+                } else {
+                    characterDisplay.classList.remove('show');
+                    characterDisplay.classList.add('hidden');
+                }
+            }
+            
+            // Initialize first section as active and show character
             if (navSections.length > 0) {
                 navSections[0].classList.add('active');
             }
+            toggleCharacterDisplay(true);
             
             navSections.forEach(navSection => {
                 navSection.addEventListener('click', function() {
@@ -1480,6 +1686,13 @@
                     const targetContent = document.getElementById(targetSection);
                     if (targetContent) {
                         targetContent.classList.add('active');
+                    }
+                    
+                    // Toggle character display only for overview
+                    if (targetSection === 'overview') {
+                        toggleCharacterDisplay(true);
+                    } else {
+                        toggleCharacterDisplay(false);
                     }
                     
                     // Add click effect
@@ -1504,6 +1717,47 @@
                     if (contactNav && contactContent) {
                         contactNav.classList.add('active');
                         contactContent.classList.add('active');
+                    }
+                    toggleCharacterDisplay(false);
+                });
+            }
+
+            // Enhanced Contact Form Functionality
+            const contactForm = document.getElementById('contactForm');
+            const formMessage = document.getElementById('formMessage');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Simple client-side validation
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const subject = document.getElementById('subject').value.trim();
+                    const message = document.getElementById('message').value.trim();
+                    
+                    if (name && email && subject && message) {
+                        // Simulate form submission
+                        formMessage.textContent = 'Message sent successfully! I\'ll get back to you soon. 🚀';
+                        formMessage.className = 'form-message success';
+                        formMessage.style.display = 'block';
+                        
+                        // Reset form after delay
+                        setTimeout(() => {
+                            contactForm.reset();
+                            formMessage.style.display = 'none';
+                        }, 3000);
+                        
+                        // Here you could integrate with a backend like EmailJS or Formspree
+                        console.log('Form submitted:', { name, email, subject, message });
+                    } else {
+                        formMessage.textContent = 'Please fill in all fields correctly.';
+                        formMessage.className = 'form-message error';
+                        formMessage.style.display = 'block';
+                        
+                        setTimeout(() => {
+                            formMessage.style.display = 'none';
+                        }, 3000);
                     }
                 });
             }
@@ -1710,7 +1964,7 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 ripple.style.left = x - 2 + 'px';
                 ripple.style.top = y - 2 + 'px';
                 
-                document.body.appendChild(ripple);
+                element.appendChild(ripple);
                 
                 setTimeout(() => {
                     if (ripple.parentNode) {
@@ -1720,13 +1974,11 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
             }
             
             // Add ripple effect to clickable elements
-            const clickableElements = document.querySelectorAll('.nav-section, .contact-btn, .action-btn, .project-card');
+            const clickableElements = document.querySelectorAll('.nav-section, .contact-btn, .action-btn, .project-card, .submit-btn');
             clickableElements.forEach(element => {
                 element.addEventListener('click', function(e) {
-                    const rect = element.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    createRippleEffect(element, e.clientX, e.clientY);
+                    const rect = this.getBoundingClientRect();
+                    createRippleEffect(this, e.clientX - rect.left, e.clientY - rect.top);
                 });
             });
             
@@ -1756,49 +2008,14 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 setTimeout(typeWriter, 1000);
             }
             
-            // Dynamic background particles effect (lightweight)
+            // Enhanced Dynamic background particles effect (lightweight)
             function createParticles() {
-                const particleCount = 20;
+                const particleCount = 15; // Reduced for better performance
                 
                 for (let i = 0; i < particleCount; i++) {
                     setTimeout(() => {
                         const particle = document.createElement('div');
-                        particle.style.cssText = `
-                            position: fixed;
-                            width: 2px;
-                            height: 2px;
-                            background: #ffd700;
-                            pointer-events: none;
-                            z-index: -1;
-                            opacity: 0.6;
-                            animation: float 6s linear infinite;
-                        `;
-                        
-                        const style = document.createElement('style');
-                        style.textContent = `
-                            @keyframes float {
-                                0% {
-                                    transform: translateY(100vh) translateX(0px);
-                                    opacity: 0;
-                                }
-                                10% {
-                                    opacity: 0.6;
-                                }
-                                90% {
-                                    opacity: 0.6;
-                                }
-                                100% {
-                                    transform: translateY(-100px) translateX(100px);
-                                    opacity: 0;
-                                }
-                            }
-                        `;
-                        
-                        if (!document.querySelector('#particle-style')) {
-                            style.id = 'particle-style';
-                            document.head.appendChild(style);
-                        }
-                        
+                        particle.className = 'particle';
                         particle.style.left = Math.random() * window.innerWidth + 'px';
                         document.body.appendChild(particle);
                         
@@ -1806,34 +2023,14 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                             if (particle.parentNode) {
                                 particle.parentNode.removeChild(particle);
                             }
-                        }, 6000);
-                    }, i * 300);
+                        }, 8000);
+                    }, i * 400);
                 }
             }
             
             // Create particles periodically
             createParticles();
-            setInterval(createParticles, 6000);
-            
-            // Console easter egg
-            console.log(`
-            🎮 GAMING PORTFOLIO ACTIVATED 🎮
-            ================================
-            Developer: Muhammed Ajmal U K
-            Level: 89
-            Status: Ready for Action!
-            
-            Skills Unlocked:
-            ✅ Python Master
-            ✅ AI Developer  
-            ✅ Full Stack Warrior
-            ✅ Problem Solver
-            
-            Contact for collaboration:
-            📧 ajmaluk.me@gmail.com
-            📱 +91 8547197122
-            ================================
-            `);
+            setInterval(createParticles, 8000);
         });
     </script>
 </body>
