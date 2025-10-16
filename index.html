@@ -39,6 +39,61 @@
             z-index: -1;
         }
 
+        /* Rotate Prompt Overlay - Game-like */
+        .rotate-prompt {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #16213e 100%);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .rotate-prompt.show {
+            display: flex;
+        }
+
+        .rotate-content h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(24px, 5vw, 32px);
+            color: #ffd700;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: glowText 2s ease-in-out infinite alternate;
+        }
+
+        .rotate-content p {
+            font-size: clamp(14px, 4vw, 18px);
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+
+        .rotate-content i {
+            font-size: clamp(80px, 20vw, 120px);
+            color: #ffd700;
+            animation: rotateIcon 3s linear infinite;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+
+        @keyframes rotateIcon {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes glowText {
+            from { text-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
+            to { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+        }
+
         /* Header/Profile Section */
         .profile-header {
             background: linear-gradient(90deg, rgba(0, 0, 0, 0.9), rgba(26, 10, 46, 0.8));
@@ -115,9 +170,10 @@
             transition: all 0.3s ease;
             font-family: 'Rajdhani', sans-serif;
             font-size: 16px;
+            min-height: 48px; /* Touch-friendly */
         }
 
-        .contact-btn:hover {
+        .contact-btn:hover, .contact-btn:active {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
         }
@@ -147,9 +203,10 @@
             font-weight: 500;
             font-size: 14px;
             letter-spacing: 1px;
+            min-height: 48px; /* Touch-friendly */
         }
 
-        .nav-section:hover {
+        .nav-section:hover, .nav-section:active {
             background: rgba(255, 215, 0, 0.1);
             border-left-color: #ffd700;
         }
@@ -255,7 +312,7 @@
             100% { transform: translateY(0); opacity: 1; }
         }
 
-        .avatar:hover {
+        .avatar:hover, .avatar:active {
             transform: scale(1.05) rotate(2deg);
             box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
         }
@@ -268,7 +325,7 @@
             transition: transform 0.3s ease;
         }
 
-        .avatar:hover img {
+        .avatar:hover img, .avatar:active img {
             transform: scale(1.05);
         }
 
@@ -425,9 +482,10 @@
             border-radius: 15px;
             padding: 25px;
             transition: all 0.3s ease;
+            min-height: 48px; /* Touch-friendly for interactions */
         }
 
-        .project-card:hover {
+        .project-card:hover, .project-card:active {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
         }
@@ -495,6 +553,9 @@
             border: 2px solid;
             transition: all 0.3s ease;
             cursor: default;
+            min-height: 40px; /* Touch-friendly */
+            display: inline-flex;
+            align-items: center;
         }
 
         .skill-tag.expert {
@@ -608,9 +669,10 @@
             padding: 25px;
             text-align: center;
             transition: all 0.3s ease;
+            min-height: 48px; /* Touch-friendly */
         }
 
-        .achievement-card:hover {
+        .achievement-card:hover, .achievement-card:active {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
         }
@@ -734,6 +796,7 @@
             font-size: 16px;
             font-family: 'Rajdhani', sans-serif;
             transition: all 0.3s ease;
+            min-height: 48px; /* Touch-friendly */
         }
 
         .form-group input:focus,
@@ -769,9 +832,10 @@
             width: 100%;
             text-transform: uppercase;
             letter-spacing: 1px;
+            min-height: 56px; /* Touch-friendly */
         }
 
-        .submit-btn:hover {
+        .submit-btn:hover, .submit-btn:active {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
         }
@@ -840,7 +904,7 @@
             transition: all 0.3s ease;
         }
 
-        .profile-card:hover {
+        .profile-card:hover, .profile-card:active {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
         }
@@ -859,7 +923,7 @@
             transition: all 0.3s ease;
         }
 
-        .profile-avatar:hover {
+        .profile-avatar:hover, .profile-avatar:active {
             transform: scale(1.1);
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
@@ -944,9 +1008,10 @@
             border: 2px solid;
             transition: all 0.3s ease;
             cursor: pointer;
+            min-height: 48px; /* Touch-friendly */
         }
 
-        .badge:hover {
+        .badge:hover, .badge:active {
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
@@ -992,6 +1057,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            min-height: 56px; /* Touch-friendly */
         }
 
         .action-btn.primary {
@@ -1005,7 +1071,7 @@
             color: #ffd700;
         }
 
-        .action-btn:hover {
+        .action-btn:hover, .action-btn:active {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
@@ -1038,7 +1104,7 @@
             100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
         }
 
-        /* Responsive Design */
+        /* Responsive Design - Enhanced Mobile */
         @media (max-width: 1200px) {
             .profile-panel {
                 display: none;
@@ -1064,18 +1130,22 @@
                 display: flex;
                 overflow-x: auto;
                 padding: 10px 0;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
             }
             
             .nav-section {
-                min-width: 120px;
+                min-width: 140px; /* Increased for better touch */
                 text-align: center;
                 flex-direction: column;
                 gap: 5px;
-                padding: 10px;
+                padding: 15px; /* Increased padding */
+                scroll-snap-align: center;
+                flex-shrink: 0;
             }
             
             .nav-section span {
-                font-size: 12px;
+                font-size: 13px; /* Slightly larger */
             }
             
             .dropdown-icon {
@@ -1089,10 +1159,10 @@
             
             .character-display {
                 width: 100%;
-                padding: 20px;
+                padding: 25px; /* Increased padding */
                 flex-direction: row;
                 justify-content: center;
-                gap: 20px;
+                gap: 25px;
                 height: auto;
             }
             
@@ -1103,8 +1173,8 @@
             }
             
             .avatar {
-                width: 120px;
-                height: 240px;
+                width: 140px; /* Larger on mobile */
+                height: 280px;
                 margin: 0;
             }
             
@@ -1119,6 +1189,33 @@
 
             .content-display {
                 width: 100%;
+                padding: 25px; /* Increased padding */
+            }
+
+            /* Landscape mode enhancements for game-like feel */
+            @media (orientation: landscape) and (max-height: 500px) {
+                .content-display {
+                    padding: 15px;
+                }
+
+                .project-grid, .achievements-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 15px;
+                }
+
+                .quick-stats {
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                }
+
+                .character-display {
+                    flex-direction: column;
+                    padding: 15px;
+                }
+
+                .avatar {
+                    width: 120px;
+                    height: 240px;
+                }
             }
         }
 
@@ -1136,68 +1233,105 @@
             }
             
             .stat-item {
-                min-width: 70px;
+                min-width: 80px; /* Larger touch target */
+                padding: 15px; /* Increased */
             }
             
             .profile-title h1 {
-                font-size: 24px;
+                font-size: 26px; /* Larger on mobile */
             }
             
             .content-display {
-                padding: 20px;
+                padding: 25px;
             }
             
             .project-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .achievements-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 15px;
             }
             
             .quick-stats {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            /* Show rotate prompt in portrait */
+            @media (orientation: portrait) {
+                body {
+                    overflow: hidden; /* Prevent scrolling when prompt is shown */
+                }
             }
         }
 
         @media (max-width: 480px) {
             .profile-title h1 {
-                font-size: 20px;
+                font-size: 22px;
             }
             
             .sidebar {
-                padding: 5px 0;
+                padding: 10px 0;
             }
             
             .nav-section {
-                min-width: 100px;
-                padding: 8px;
+                min-width: 120px;
+                padding: 12px; /* Balanced padding */
+                font-size: 12px;
             }
             
             .content-display {
-                padding: 15px;
+                padding: 20px;
             }
             
             .section-header h2 {
-                font-size: 20px;
+                font-size: 22px;
             }
             
             .skill-tags {
-                gap: 8px;
+                gap: 10px;
             }
             
             .skill-tag {
-                padding: 6px 12px;
-                font-size: 13px;
+                padding: 10px 15px; /* Larger touch area */
+                font-size: 14px;
             }
 
             .contact-form {
+                padding: 25px;
+            }
+
+            .project-card, .achievement-card {
                 padding: 20px;
+            }
+
+            /* Enhanced swipe gestures hint */
+            .sidebar::after {
+                content: '👉 Swipe to Navigate';
+                position: absolute;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 12px;
+                color: #ffd700;
+                opacity: 0.7;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Rotate Prompt Overlay -->
+    <div id="rotatePrompt" class="rotate-prompt">
+        <div class="rotate-content">
+            <i class="fas fa-mobile-alt fa-rotate-270"></i>
+            <h2>Rotate to Landscape!</h2>
+            <p>Unlock the full gaming experience and epic view 🚀</p>
+        </div>
+    </div>
+
     <!-- Header/Profile Section -->
     <header class="profile-header">
         <div class="profile-stats">
@@ -1645,12 +1779,32 @@
     </div>
 
     <script>
-        // Gaming Portfolio Interactive Features
+        // Gaming Portfolio Interactive Features - Enhanced for Mobile
         document.addEventListener('DOMContentLoaded', function() {
             const navSections = document.querySelectorAll('.nav-section');
             const contentSections = document.querySelectorAll('.content-section');
             const characterDisplay = document.getElementById('characterDisplay');
             const contentDisplay = document.getElementById('contentDisplay');
+            const rotatePrompt = document.getElementById('rotatePrompt');
+            
+            // Mobile detection
+            const isMobile = window.innerWidth <= 768;
+            
+            // Orientation handling for game-like rotate prompt
+            const mediaQuery = window.matchMedia('(orientation: portrait)');
+            
+            function handleOrientationChange(e) {
+                if (isMobile && e.matches) {
+                    rotatePrompt.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    rotatePrompt.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            mediaQuery.addListener(handleOrientationChange);
+            handleOrientationChange(mediaQuery);
             
             // Function to show/hide character display
             function toggleCharacterDisplay(show) {
@@ -1695,13 +1849,46 @@
                         toggleCharacterDisplay(false);
                     }
                     
-                    // Add click effect
+                    // Add click effect with haptic feedback simulation
                     this.style.transform = 'scale(0.95)';
                     setTimeout(() => {
                         this.style.transform = '';
                     }, 150);
+                    
+                    // Vibrate on mobile for game feel (if supported)
+                    if (navigator.vibrate) {
+                        navigator.vibrate(50);
+                    }
                 });
             });
+            
+            // Enhanced swipe for sidebar on mobile
+            let startX = 0;
+            let currentIndex = 0;
+            const sidebar = document.querySelector('.sidebar');
+            
+            if (sidebar) {
+                sidebar.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                }, { passive: true });
+                
+                sidebar.addEventListener('touchend', (e) => {
+                    const endX = e.changedTouches[0].clientX;
+                    const diffX = startX - endX;
+                    
+                    if (Math.abs(diffX) > 50) { // Swipe threshold
+                        if (diffX > 0 && currentIndex < navSections.length - 1) {
+                            currentIndex++;
+                        } else if (diffX < 0 && currentIndex > 0) {
+                            currentIndex--;
+                        }
+                        sidebar.scrollTo({
+                            left: currentIndex * 140, // Approximate nav width
+                            behavior: 'smooth'
+                        });
+                    }
+                }, { passive: true });
+            }
             
             // Contact button functionality
             const contactBtn = document.querySelector('.contact-btn');
@@ -1719,6 +1906,11 @@
                         contactContent.classList.add('active');
                     }
                     toggleCharacterDisplay(false);
+                    
+                    // Vibrate
+                    if (navigator.vibrate) {
+                        navigator.vibrate(100);
+                    }
                 });
             }
 
@@ -1750,6 +1942,11 @@
                         
                         // Here you could integrate with a backend like EmailJS or Formspree
                         console.log('Form submitted:', { name, email, subject, message });
+                        
+                        // Success vibration pattern
+                        if (navigator.vibrate) {
+                            navigator.vibrate([100, 50, 100]);
+                        }
                     } else {
                         formMessage.textContent = 'Please fill in all fields correctly.';
                         formMessage.className = 'form-message error';
@@ -1758,6 +1955,11 @@
                         setTimeout(() => {
                             formMessage.style.display = 'none';
                         }, 3000);
+                        
+                        // Error vibration
+                        if (navigator.vibrate) {
+                            navigator.vibrate(200);
+                        }
                     }
                 });
             }
@@ -1821,6 +2023,11 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                     setTimeout(() => {
                         this.style.transform = '';
                     }, 150);
+                    
+                    // Vibration
+                    if (navigator.vibrate) {
+                        navigator.vibrate(100);
+                    }
                 });
             }
             
@@ -1854,10 +2061,15 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                     setTimeout(() => {
                         this.style.transform = '';
                     }, 150);
+                    
+                    // Vibration
+                    if (navigator.vibrate) {
+                        navigator.vibrate(100);
+                    }
                 });
             }
             
-            // Skill tag hover effects
+            // Skill tag hover/tap effects - enhanced for touch
             const skillTags = document.querySelectorAll('.skill-tag');
             skillTags.forEach(tag => {
                 tag.addEventListener('mouseenter', function() {
@@ -1867,9 +2079,21 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 tag.addEventListener('mouseleave', function() {
                     this.style.transform = 'scale(1)';
                 });
+                
+                // Tap effect for mobile
+                tag.addEventListener('touchstart', function(e) {
+                    this.style.transform = 'scale(0.95)';
+                }, { passive: true });
+                
+                tag.addEventListener('touchend', function() {
+                    this.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 200);
+                }, { passive: true });
             });
             
-            // Project card hover effects with sound simulation
+            // Project card hover/tap effects
             const projectCards = document.querySelectorAll('.project-card');
             projectCards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
@@ -1879,6 +2103,15 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 card.addEventListener('mouseleave', function() {
                     this.style.borderColor = '#ffd700';
                 });
+                
+                // Mobile tap
+                card.addEventListener('touchstart', function(e) {
+                    this.style.borderColor = '#ff8c00';
+                }, { passive: true });
+                
+                card.addEventListener('touchend', function() {
+                    this.style.borderColor = '#ffd700';
+                }, { passive: true });
             });
             
             // Achievement card animation
@@ -1974,12 +2207,18 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
             }
             
             // Add ripple effect to clickable elements
-            const clickableElements = document.querySelectorAll('.nav-section, .contact-btn, .action-btn, .project-card, .submit-btn');
+            const clickableElements = document.querySelectorAll('.nav-section, .contact-btn, .action-btn, .project-card, .submit-btn, .skill-tag, .badge, .achievement-card');
             clickableElements.forEach(element => {
                 element.addEventListener('click', function(e) {
                     const rect = this.getBoundingClientRect();
                     createRippleEffect(this, e.clientX - rect.left, e.clientY - rect.top);
                 });
+                
+                // Touch ripple
+                element.addEventListener('touchstart', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    createRippleEffect(this, e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
+                }, { passive: true });
             });
             
             // Level progress animation
@@ -2010,7 +2249,7 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
             
             // Enhanced Dynamic background particles effect (lightweight)
             function createParticles() {
-                const particleCount = 15; // Reduced for better performance
+                const particleCount = isMobile ? 8 : 15; // Fewer on mobile for performance
                 
                 for (let i = 0; i < particleCount; i++) {
                     setTimeout(() => {
