@@ -39,50 +39,36 @@
             z-index: -1;
         }
 
-        /* Rotate Prompt Overlay - Enhanced Game-like */
-        .rotate-prompt {
+        /* Landscape Prompt Banner - Subtle for Portrait Mobile */
+        .landscape-prompt {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #16213e 100%);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 69, 0, 0.15));
+            color: #ffd700;
             text-align: center;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .rotate-prompt.show {
-            display: flex;
-        }
-
-        .rotate-content h2 {
+            padding: 10px;
             font-family: 'Orbitron', monospace;
-            font-size: clamp(28px, 6vw, 36px);
-            color: #ffd700;
-            margin-bottom: 15px;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-            animation: glowText 1.5s ease-in-out infinite alternate;
+            font-size: 14px;
+            z-index: 1500;
+            border-bottom: 2px solid #ffd700;
+            animation: slideDown 0.5s ease;
         }
 
-        .rotate-content p {
-            font-size: clamp(16px, 4.5vw, 20px);
-            color: #cccccc;
-            margin-bottom: 25px;
-            line-height: 1.4;
+        .landscape-prompt.show {
+            display: block;
         }
 
-        .rotate-content i {
-            font-size: clamp(100px, 25vw, 150px);
-            color: #ffd700;
+        .landscape-prompt i {
+            margin-right: 8px;
             animation: rotateIcon 2s linear infinite;
-            margin-bottom: 25px;
-            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         @keyframes rotateIcon {
@@ -90,12 +76,7 @@
             to { transform: rotate(360deg); }
         }
 
-        @keyframes glowText {
-            from { text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
-            to { text-shadow: 0 0 25px rgba(255, 215, 0, 0.9); }
-        }
-
-        /* Header/Profile Section - Enhanced */
+        /* Header/Profile Section - Enhanced with Title and Stats */
         .profile-header {
             background: linear-gradient(90deg, rgba(0, 0, 0, 0.95), rgba(26, 10, 46, 0.85));
             border-bottom: 3px solid #ffd700;
@@ -110,20 +91,44 @@
             box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
         }
 
+        .profile-title {
+            flex: 1;
+            text-align: center;
+        }
+
+        .profile-title h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(20px, 4vw, 30px);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffd700, #ff8c00, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        .subtitle {
+            font-size: clamp(12px, 2.5vw, 16px);
+            color: #cccccc;
+            text-align: center;
+        }
+
         .profile-stats {
             display: flex;
-            gap: 30px;
+            gap: clamp(10px, 2vw, 30px);
+            flex-shrink: 0;
         }
 
         .stat-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 12px;
+            padding: clamp(8px, 1.5vw, 12px);
             background: rgba(255, 215, 0, 0.15);
             border: 2px solid #ffd700;
             border-radius: 10px;
-            min-width: 85px;
+            min-width: clamp(60px, 12vw, 85px);
             transition: all 0.3s ease;
         }
 
@@ -133,65 +138,50 @@
         }
 
         .stat-item i {
-            font-size: 20px;
+            font-size: clamp(16px, 3vw, 20px);
             color: #ffd700;
             margin-bottom: 5px;
         }
 
         .stat-item span:first-of-type {
-            font-size: 13px;
+            font-size: clamp(10px, 2vw, 13px);
             color: #cccccc;
         }
 
         .stat-value {
-            font-size: 22px;
+            font-size: clamp(16px, 3vw, 22px);
             font-weight: 700;
             color: #ffd700;
             font-family: 'Orbitron', monospace;
         }
 
-        .profile-title h1 {
-            font-family: 'Orbitron', monospace;
-            font-size: 30px;
-            font-weight: 900;
-            background: linear-gradient(45deg, #ffd700, #ff8c00, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-align: center;
-            margin-bottom: 5px;
-            animation: gradientShift 3s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #cccccc;
-            text-align: center;
+        .profile-actions {
+            flex-shrink: 0;
         }
 
         .contact-btn {
             background: linear-gradient(45deg, #ffd700, #ff8c00);
             border: none;
-            padding: 14px 28px;
+            padding: clamp(10px, 2vw, 14px) clamp(20px, 4vw, 28px);
             border-radius: 30px;
             color: #000;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Rajdhani', sans-serif;
-            font-size: 16px;
-            min-height: 50px;
+            font-size: clamp(14px, 2.5vw, 16px);
+            min-height: clamp(40px, 6vw, 50px);
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
         }
 
         .contact-btn:hover, .contact-btn:active {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         /* Main Container */
@@ -206,6 +196,7 @@
             background: linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(26, 10, 46, 0.85));
             border-right: 3px solid #ffd700;
             padding: 25px 0;
+            transition: transform 0.3s ease;
         }
 
         .nav-section {
@@ -551,6 +542,12 @@
             gap: 12px;
             color: #ffd700;
             font-size: 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #ff8c00;
         }
 
         /* Skills Container - Enhanced */
@@ -1158,10 +1155,21 @@
             100% { transform: translateY(-100px) translateX(60px); opacity: 0; }
         }
 
-        /* Responsive Design - Portrait Mobile: Rotate Prompt; Landscape Mobile: Desktop-like with Reduced Sizes */
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #ffd700;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        /* Responsive Design - Desktop First */
         @media (max-width: 1200px) {
             .profile-panel {
-                display: none;
+                width: 250px;
             }
             
             .character-display {
@@ -1174,82 +1182,284 @@
             }
         }
 
+        /* Mobile Portrait - Compact Column Layout */
         @media (max-width: 968px) and (orientation: portrait) {
-            /* Portrait Mobile: Full rotate prompt, locked layout */
-            body {
-                overflow: hidden;
-            }
-
-            .main-container {
-                display: none; /* Hide content until rotated */
+            .landscape-prompt.show {
+                display: block;
             }
 
             .profile-header {
-                display: none;
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 15px;
             }
-        }
 
-        @media (max-width: 968px) and (orientation: landscape) {
-            /* Landscape Mobile: Mimic Desktop Layout with Reduced Sizes for Better Fit */
+            .profile-stats {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .profile-title {
+                order: 2;
+                flex: none;
+            }
+
+            .profile-actions {
+                order: 1;
+            }
+
             .main-container {
-                flex-direction: row;
+                flex-direction: column;
             }
 
             .sidebar {
-                width: 180px; /* Reduced sidebar width */
-                flex-direction: column;
-                overflow-y: auto;
-                overflow-x: hidden;
-                padding: 15px 0;
+                width: 100%;
+                border-right: none;
+                border-bottom: 3px solid #ffd700;
+                padding: 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
             }
 
             .nav-section {
-                min-width: auto;
-                flex-direction: row;
-                justify-content: flex-start;
-                padding: 12px 15px; /* Reduced padding */
-                font-size: 13px; /* Smaller font */
-                border-left: 3px solid transparent; /* Slightly thinner border */
+                flex: 1 1 150px;
+                min-width: 140px;
+                padding: 15px;
+                justify-content: center;
+                border-left: none;
+                border-bottom: 2px solid transparent;
+            }
+
+            .nav-section:hover, .nav-section.active {
+                border-bottom-color: #ffd700;
+                transform: translateY(-2px);
+            }
+
+            .nav-section span {
+                display: none;
+            }
+
+            .nav-section i:first-child {
+                margin-right: 0;
+                font-size: 18px;
+            }
+
+            .dropdown-icon {
+                display: none;
+            }
+
+            .content-panel {
+                flex-direction: column;
+            }
+
+            .character-display {
+                width: 100%;
                 border-right: none;
+                border-bottom: 2px solid rgba(255, 215, 0, 0.4);
+                padding: 25px 0;
+                justify-content: center;
+            }
+
+            .avatar {
+                width: 150px;
+                height: 300px;
+            }
+
+            .avatar-info h3 {
+                font-size: 22px;
+            }
+
+            .avatar-info p {
+                font-size: 16px;
+            }
+
+            .profile-panel {
+                display: none;
+            }
+
+            .content-display {
+                padding: 25px 20px;
+            }
+
+            .quick-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .skills-container {
+                gap: 30px;
+            }
+
+            .skill-tags {
+                justify-content: center;
+            }
+
+            .education-timeline {
+                gap: 25px;
+            }
+
+            .education-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .education-year {
+                min-width: auto;
+                order: 2;
+            }
+
+            .education-details {
+                order: 1;
+            }
+
+            .achievements-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .experience-list {
+                gap: 25px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+        }
+
+        /* Mobile Landscape - Desktop-Like Layout for Better Interaction */
+        @media (max-width: 968px) and (orientation: landscape) {
+            .landscape-prompt {
+                display: none !important;
+            }
+
+            .profile-header {
+                padding: 10px 15px;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .profile-stats {
+                gap: 10px;
+            }
+
+            .stat-item {
+                min-width: 70px;
+                padding: 8px;
+            }
+
+            .profile-title {
+                flex: none;
+                text-align: left;
+            }
+
+            .profile-title h1 {
+                font-size: 24px;
+                margin-bottom: 0;
+            }
+
+            .subtitle {
+                display: none;
+            }
+
+            .main-container {
+                flex-direction: row;
+                height: calc(100vh - 80px); /* Adjust for smaller header */
+            }
+
+            .sidebar {
+                width: 180px;
+                border-right: 3px solid #ffd700;
+                border-bottom: none;
+                padding: 20px 0;
+                flex-direction: column;
+                overflow-y: auto;
+                justify-content: flex-start;
+            }
+
+            .nav-section {
+                flex: none;
+                min-width: auto;
+                padding: 15px 20px;
+                justify-content: flex-start;
+                border-bottom: none;
+                border-left: 4px solid transparent;
+                font-size: 14px;
+                min-height: 45px;
             }
 
             .nav-section:hover, .nav-section.active {
                 border-left-color: #ffd700;
-                transform: translateX(3px); /* Smaller translate */
+                transform: translateX(3px);
+            }
+
+            .nav-section span {
+                display: inline;
+            }
+
+            .nav-section i:first-child {
+                margin-right: 12px;
+                width: auto;
+                font-size: 16px;
+            }
+
+            .dropdown-icon {
+                display: inline;
+                font-size: 12px;
             }
 
             .content-panel {
                 flex-direction: row;
+                flex: 1;
             }
 
             .character-display {
-                width: 200px; /* Reduced width */
-                flex-direction: column;
-                padding: 20px; /* Reduced padding */
+                width: 200px;
+                border-right: 2px solid rgba(255, 215, 0, 0.4);
+                border-bottom: none;
+                padding: 20px;
+                min-height: 100%;
             }
 
             .avatar {
-                width: 120px; /* Further reduced */
-                height: 240px;
+                width: 140px;
+                height: 280px;
             }
 
             .avatar-info h3 {
-                font-size: 20px; /* Smaller */
+                font-size: 20px;
             }
 
             .avatar-info p {
-                font-size: 14px; /* Smaller */
+                font-size: 14px;
+                margin-bottom: 15px;
             }
 
             .profile-panel {
                 display: block;
-                width: 200px; /* Reduced width */
-                padding: 20px 15px; /* Reduced padding */
+                width: 200px;
+                padding: 20px 15px;
+                border-left: 3px solid #ffd700;
+                height: 100%;
             }
 
             .profile-card {
-                padding: 20px; /* Reduced */
-                margin-bottom: 25px;
+                padding: 20px;
+                margin-bottom: 20px;
             }
 
             .profile-avatar {
@@ -1271,7 +1481,7 @@
             }
 
             .badge-grid {
-                grid-template-columns: repeat(2, 1fr); /* Adjust for space */
+                grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
 
@@ -1284,26 +1494,38 @@
                 font-size: 18px;
             }
 
+            .quick-actions {
+                gap: 12px;
+            }
+
+            .action-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+                min-height: 50px;
+            }
+
             .content-display {
-                padding: 20px; /* Reduced padding for content */
+                padding: 20px;
+                flex: 1;
+                overflow-y: auto;
             }
 
             .section-header h2 {
-                font-size: 22px; /* Smaller header */
+                font-size: 22px;
             }
 
             .content-body p {
-                font-size: 15px; /* Smaller text */
+                font-size: 15px;
                 line-height: 1.7;
             }
 
             .quick-stats {
-                grid-template-columns: 1fr; /* Single column for compactness */
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 15px;
             }
 
             .quick-stat {
-                padding: 18px; /* Reduced */
+                padding: 18px;
                 gap: 12px;
             }
 
@@ -1321,12 +1543,12 @@
             }
 
             .project-grid {
-                grid-template-columns: 1fr; /* Single column to fit better */
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
                 gap: 20px;
             }
 
             .project-card {
-                padding: 20px; /* Reduced */
+                padding: 20px;
             }
 
             .project-header h3 {
@@ -1346,7 +1568,7 @@
             }
 
             .skill-tag {
-                padding: 8px 16px; /* Reduced */
+                padding: 8px 16px;
                 font-size: 13px;
                 min-height: 35px;
             }
@@ -1374,7 +1596,7 @@
             }
 
             .achievements-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Smaller cards */
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 15px;
             }
 
@@ -1417,8 +1639,8 @@
                 padding: 25px;
             }
 
-            .form-group {
-                margin-bottom: 18px;
+            .form-row {
+                gap: 12px;
             }
 
             .form-group input,
@@ -1428,10 +1650,6 @@
                 font-size: 15px;
             }
 
-            .form-row {
-                gap: 12px;
-            }
-
             .submit-btn {
                 padding: 14px 25px;
                 font-size: 15px;
@@ -1439,117 +1657,119 @@
             }
         }
 
-        @media (max-width: 768px) and (orientation: portrait) {
-            /* Reinforce portrait handling */
-            .rotate-prompt.show {
-                display: flex;
-            }
-        }
-
-        @media (max-width: 768px) and (orientation: landscape) {
+        @media (max-width: 480px) {
             .profile-header {
-                flex-direction: row;
-                padding: 12px 15px; /* Reduced header padding */
-            }
-
-            .profile-stats {
-                gap: 15px;
-            }
-
-            .stat-item {
-                min-width: 70px;
-                padding: 12px; /* Reduced */
-            }
-
-            .stat-value {
-                font-size: 18px;
+                padding: 10px;
             }
 
             .profile-title h1 {
-                font-size: 24px; /* Smaller */
+                font-size: 20px;
             }
 
-            .subtitle {
-                font-size: 14px;
+            .stat-item {
+                min-width: 60px;
+                padding: 8px;
             }
 
             .contact-btn {
-                padding: 12px 20px;
+                padding: 10px 20px;
                 font-size: 14px;
-                min-height: 40px;
             }
 
-            .quick-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) and (orientation: landscape) {
-            .sidebar {
-                width: 150px; /* Even smaller sidebar */
-            }
-
+            /* For very small screens, fallback to portrait styles even in landscape if needed */
             .nav-section {
-                padding: 10px 12px;
-                font-size: 12px;
+                min-width: 120px;
+                padding: 12px;
             }
 
             .character-display {
-                width: 160px; /* Smaller */
-                padding: 15px;
+                padding: 20px 0;
             }
 
             .avatar {
-                width: 100px;
-                height: 200px;
+                width: 120px;
+                height: 240px;
             }
 
             .content-display {
-                padding: 15px; /* Minimal padding */
+                padding: 20px 15px;
             }
 
-            .profile-panel {
-                width: 160px;
-                padding: 15px 10px;
+            .section-header h2 {
+                font-size: 22px;
             }
 
-            .profile-avatar {
-                width: 60px;
-                height: 60px;
+            .content-body p {
+                font-size: 16px;
             }
 
-            .badge {
-                width: 40px;
-                height: 40px;
+            .quick-stat {
+                padding: 20px;
+                gap: 15px;
             }
 
+            .project-card,
             .achievement-card {
-                padding: 15px;
+                padding: 20px;
+            }
+
+            .skill-tag {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .education-item {
+                padding: 20px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 12px 15px;
+                font-size: 16px;
+            }
+
+            .submit-btn {
+                padding: 15px 25px;
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Rotate Prompt Overlay -->
-    <div id="rotatePrompt" class="rotate-prompt">
-        <div class="rotate-content">
-            <i class="fas fa-mobile-alt fa-rotate-270"></i>
-            <h2>Rotate to Landscape!</h2>
-            <p>Unlock the full gaming experience and epic desktop-like view 🚀<br>Turn your device for the best immersion!</p>
-        </div>
+    <!-- Landscape Prompt Banner for Portrait Mobile -->
+    <div id="landscapePrompt" class="landscape-prompt">
+        <i class="fas fa-mobile-alt fa-rotate-270"></i>
+        Rotate to Landscape for Epic Desktop-Like Gaming View! 🚀
     </div>
 
-    <!-- Header/Profile Section -->
+    <!-- Header/Profile Section - Now with Title and Stats -->
     <header class="profile-header">
         <div class="profile-actions">
             <button class="contact-btn">
                 <i class="fas fa-envelope"></i>
                 Contact
             </button>
+        </div>
+        <div class="profile-title">
+            <h1>MUHAMMED AJMAL U K</h1>
+            <p class="subtitle">Full Stack Developer & AI Enthusiast</p>
+        </div>
+        <div class="profile-stats">
+            <div class="stat-item">
+                <i class="fas fa-code"></i>
+                <span>Projects</span>
+                <span class="stat-value">10+</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-star"></i>
+                <span>Skills</span>
+                <span class="stat-value">89%</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-trophy"></i>
+                <span>Level</span>
+                <span class="stat-value">89</span>
+            </div>
         </div>
     </header>
 
@@ -1660,8 +1880,10 @@
                                 </div>
                                 <p>A project focusing on facilitating travel connections. Built a platform connecting solo travelers based on destination and interests.</p>
                                 <div class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>github.com/ajmal-uk/find-travel-buddy-flutter</span>
+                                    <a href="https://github.com/ajmal-uk/find-travel-buddy-flutter" target="_blank" rel="noopener noreferrer">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        <span>github.com/ajmal-uk/find-travel-buddy-flutter</span>
+                                    </a>
                                 </div>
                             </div>
 
@@ -1672,8 +1894,10 @@
                                 </div>
                                 <p>Built a private no-signup chatbot providing writing and coding assistance hosted on PythonAnywhere.</p>
                                 <div class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>droq.pythonanywhere.com</span>
+                                    <a href="https://droq.pythonanywhere.com" target="_blank" rel="noopener noreferrer">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        <span>droq.pythonanywhere.com</span>
+                                    </a>
                                 </div>
                             </div>
 
@@ -1684,8 +1908,10 @@
                                 </div>
                                 <p>Designed and launched an AI-based utility chatbot offering instant, anonymous writing and coding support.</p>
                                 <div class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>droq.pythonanywhere.com</span>
+                                    <a href="https://droq.pythonanywhere.com" target="_blank" rel="noopener noreferrer">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        <span>droq.pythonanywhere.com</span>
+                                    </a>
                                 </div>
                             </div>
 
@@ -1696,8 +1922,10 @@
                                 </div>
                                 <p>Created an AI-powered mobile app assisting dementia patients and caregivers with memory tracking, interactive chat, and caretaker dashboards.</p>
                                 <div class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>ajmal-uk/dementia-virtual-memory</span>
+                                    <a href="https://github.com/ajmal-uk/dementia-virtual-memory" target="_blank" rel="noopener noreferrer">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        <span>ajmal-uk/dementia-virtual-memory</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -1975,14 +2203,12 @@
     </div>
 
     <script>
-        // Enhanced Interactive Features with Orientation Handling
+        // Enhanced Interactive Features with Landscape Detection
         document.addEventListener('DOMContentLoaded', function() {
             const navSections = document.querySelectorAll('.nav-section');
             const contentSections = document.querySelectorAll('.content-section');
             const characterDisplay = document.getElementById('characterDisplay');
-            const rotatePrompt = document.getElementById('rotatePrompt');
-            const mainContainer = document.querySelector('.main-container');
-            const profileHeader = document.querySelector('.profile-header');
+            const landscapePrompt = document.getElementById('landscapePrompt');
             
             // Mobile detection
             const isMobile = () => window.innerWidth <= 968;
@@ -1992,17 +2218,11 @@
             
             function handleOrientation(e) {
                 if (isMobile() && e.matches) {
-                    // Portrait on mobile: Show prompt, hide content
-                    rotatePrompt.classList.add('show');
-                    mainContainer.style.display = 'none';
-                    profileHeader.style.display = 'none';
-                    document.body.style.overflow = 'hidden';
+                    // Portrait: Show subtle banner
+                    landscapePrompt.classList.add('show');
                 } else {
-                    // Landscape or desktop: Hide prompt, show content
-                    rotatePrompt.classList.remove('show');
-                    mainContainer.style.display = 'flex';
-                    profileHeader.style.display = 'flex';
-                    document.body.style.overflow = '';
+                    // Landscape or desktop: Hide banner
+                    landscapePrompt.classList.remove('show');
                 }
             }
             
@@ -2024,9 +2244,7 @@
             if (navSections.length > 0) {
                 navSections[0].classList.add('active');
             }
-            if (!isMobile() || !portraitQuery.matches) {
-                toggleCharacterDisplay(true);
-            }
+            toggleCharacterDisplay(true);
             
             navSections.forEach(navSection => {
                 navSection.addEventListener('click', function() {
@@ -2057,30 +2275,6 @@
                     }
                 });
             });
-            
-            // Swipe for sidebar
-            let startX = 0;
-            const sidebar = document.querySelector('.sidebar');
-            if (sidebar) {
-                sidebar.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                }, { passive: true });
-                
-                sidebar.addEventListener('touchend', (e) => {
-                    const endX = e.changedTouches[0].clientX;
-                    const diffX = startX - endX;
-                    if (Math.abs(diffX) > 50) {
-                        // Handle swipe to navigate sections
-                        const activeNav = document.querySelector('.nav-section.active');
-                        let currentIndex = Array.from(navSections).indexOf(activeNav);
-                        if (diffX > 0 && currentIndex < navSections.length - 1) {
-                            navSections[currentIndex + 1].click();
-                        } else if (diffX < 0 && currentIndex > 0) {
-                            navSections[currentIndex - 1].click();
-                        }
-                    }
-                }, { passive: true });
-            }
             
             // Contact button
             const contactBtn = document.querySelector('.contact-btn');
@@ -2250,7 +2444,20 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
             const achievementCards = document.querySelectorAll('.achievement-card');
             achievementCards.forEach((card, index) => {
                 card.style.animationDelay = `${index * 0.15}s`;
+                card.style.animation = 'fadeIn 0.6s ease forwards';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
             });
+
+            // Trigger stagger on load
+            setTimeout(() => {
+                achievementCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 150);
+                });
+            }, 500);
             
             // Badge tooltips
             const badges = document.querySelectorAll('.badge');
@@ -2320,7 +2527,7 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 }, 700);
             }
             
-            const clickableElements = document.querySelectorAll('.nav-section, .contact-btn, .action-btn, .project-card, .submit-btn, .skill-tag, .badge, .achievement-card');
+            const clickableElements = document.querySelectorAll('.nav-section, .contact-btn, .action-btn, .project-card, .submit-btn, .skill-tag, .badge, .achievement-card, .project-link a');
             clickableElements.forEach(element => {
                 element.addEventListener('click', function(e) {
                     const rect = this.getBoundingClientRect();
@@ -2340,7 +2547,7 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 }, 600);
             }
             
-            // Typing effect
+            // Typing effect for title
             const profileTitle = document.querySelector('.profile-title h1');
             if (profileTitle) {
                 const text = profileTitle.textContent;
@@ -2356,9 +2563,10 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 setTimeout(typeWriter, 1200);
             }
             
-            // Particles
+            // Particles - Optimized for performance
+            let particleInterval;
             function createParticles() {
-                const particleCount = isMobile() ? 10 : 20;
+                const particleCount = window.innerWidth <= 968 ? 8 : 20;
                 for (let i = 0; i < particleCount; i++) {
                     setTimeout(() => {
                         const particle = document.createElement('div');
@@ -2372,15 +2580,37 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 }
             }
             createParticles();
-            setInterval(createParticles, 10000);
+            particleInterval = setInterval(createParticles, 10000);
             
-            // Orientation change handler for smooth reload
+            // Pause particles on visibility change for performance
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    clearInterval(particleInterval);
+                } else {
+                    particleInterval = setInterval(createParticles, 10000);
+                }
+            });
+            
+            // Smooth scroll to top on orientation change
             window.addEventListener('orientationchange', () => {
                 setTimeout(() => {
                     window.scrollTo(0, 0);
+                    // Re-trigger handleOrientation after resize
+                    handleOrientation({ matches: portraitQuery.matches });
                 }, 500);
             });
+
+            // Lock to landscape if supported (experimental, user gesture required)
+            if (screen.orientation && screen.orientation.lock) {
+                document.querySelector('.contact-btn').addEventListener('click', () => {
+                    if (isMobile() && window.innerHeight > window.innerWidth) {
+                        screen.orientation.lock('landscape').catch(() => {}); // Graceful fallback
+                    }
+                });
+            }
         });
     </script>
 </body>
 </html>
+
+set auto rotation  not nned to rotatle the mobile , in mobile it show as landscape, give the fully modidfed code
