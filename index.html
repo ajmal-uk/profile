@@ -39,43 +39,6 @@
             z-index: -1;
         }
 
-        /* Landscape Prompt Banner - Subtle for Portrait Mobile */
-        .landscape-prompt {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 69, 0, 0.15));
-            color: #ffd700;
-            text-align: center;
-            padding: 10px;
-            font-family: 'Orbitron', monospace;
-            font-size: 14px;
-            z-index: 1500;
-            border-bottom: 2px solid #ffd700;
-            animation: slideDown 0.5s ease;
-        }
-
-        .landscape-prompt.show {
-            display: block;
-        }
-
-        .landscape-prompt i {
-            margin-right: 8px;
-            animation: rotateIcon 2s linear infinite;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes rotateIcon {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
         /* Header/Profile Section - Enhanced with Title and Stats */
         .profile-header {
             background: linear-gradient(90deg, rgba(0, 0, 0, 0.95), rgba(26, 10, 46, 0.85));
@@ -1184,10 +1147,6 @@
 
         /* Mobile Portrait - Compact Column Layout */
         @media (max-width: 968px) and (orientation: portrait) {
-            .landscape-prompt.show {
-                display: block;
-            }
-
             .profile-header {
                 flex-wrap: wrap;
                 gap: 10px;
@@ -1340,10 +1299,12 @@
             }
         }
 
-        /* Mobile Landscape - Desktop-Like Layout for Better Interaction */
+        /* Mobile Landscape - Optimized Desktop-Like Layout with Improvements */
         @media (max-width: 968px) and (orientation: landscape) {
-            .landscape-prompt {
-                display: none !important;
+            body {
+                /* Encourage landscape by subtle prompt if needed, but rely on JS lock */
+                transform: rotate(0deg);
+                transition: transform 0.5s ease;
             }
 
             .profile-header {
@@ -1351,60 +1312,71 @@
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
+                height: auto; /* Ensure compact height */
             }
 
             .profile-stats {
-                gap: 10px;
+                gap: 8px; /* Tighter spacing for landscape */
             }
 
             .stat-item {
-                min-width: 70px;
-                padding: 8px;
+                min-width: 65px;
+                padding: 6px; /* Slightly smaller for better fit */
+                flex-shrink: 0;
             }
 
             .profile-title {
-                flex: none;
+                flex: 1;
                 text-align: left;
+                margin-left: 10px; /* Better alignment */
             }
 
             .profile-title h1 {
-                font-size: 24px;
+                font-size: 22px; /* Slightly smaller for landscape header */
                 margin-bottom: 0;
+                line-height: 1.2;
             }
 
             .subtitle {
-                display: none;
+                display: none; /* Hide subtitle to save vertical space in landscape */
             }
 
             .main-container {
                 flex-direction: row;
-                height: calc(100vh - 80px); /* Adjust for smaller header */
+                height: calc(100vh - 70px); /* Tighter header adjustment for more content space */
+                overflow: hidden; /* Prevent scroll issues in landscape */
             }
 
             .sidebar {
-                width: 180px;
+                width: 160px; /* Narrower sidebar for more content space in landscape */
                 border-right: 3px solid #ffd700;
                 border-bottom: none;
-                padding: 20px 0;
+                padding: 15px 0; /* Reduced padding */
                 flex-direction: column;
                 overflow-y: auto;
                 justify-content: flex-start;
+                scrollbar-width: thin; /* Firefox thin scrollbar */
+            }
+
+            .sidebar::-webkit-scrollbar {
+                width: 4px; /* Thinner scrollbar for compact sidebar */
             }
 
             .nav-section {
                 flex: none;
                 min-width: auto;
-                padding: 15px 20px;
+                padding: 12px 15px; /* More compact padding */
                 justify-content: flex-start;
                 border-bottom: none;
                 border-left: 4px solid transparent;
-                font-size: 14px;
-                min-height: 45px;
+                font-size: 13px; /* Smaller font for fit */
+                min-height: 40px; /* Shorter height for quicker scrolling */
+                letter-spacing: 0.8px; /* Tighter letter spacing */
             }
 
             .nav-section:hover, .nav-section.active {
                 border-left-color: #ffd700;
-                transform: translateX(3px);
+                transform: translateX(2px); /* Subtle transform */
             }
 
             .nav-section span {
@@ -1412,14 +1384,14 @@
             }
 
             .nav-section i:first-child {
-                margin-right: 12px;
+                margin-right: 10px; /* Tighter icon spacing */
                 width: auto;
-                font-size: 16px;
+                font-size: 15px; /* Smaller icon */
             }
 
             .dropdown-icon {
                 display: inline;
-                font-size: 12px;
+                font-size: 11px; /* Smaller dropdown icon */
             }
 
             .content-panel {
@@ -1428,232 +1400,281 @@
             }
 
             .character-display {
-                width: 200px;
+                width: 180px; /* Narrower character display for landscape balance */
                 border-right: 2px solid rgba(255, 215, 0, 0.4);
                 border-bottom: none;
-                padding: 20px;
+                padding: 15px; /* Reduced padding */
                 min-height: 100%;
+                overflow: hidden; /* Prevent overflow */
             }
 
             .avatar {
-                width: 140px;
-                height: 280px;
+                width: 130px; /* Proportional scaling */
+                height: 260px;
+                margin-bottom: 15px; /* Tighter margins */
             }
 
             .avatar-info h3 {
-                font-size: 20px;
+                font-size: 18px; /* Adjusted for space */
             }
 
             .avatar-info p {
-                font-size: 14px;
-                margin-bottom: 15px;
+                font-size: 13px;
+                margin-bottom: 10px; /* Reduced margin */
             }
 
             .profile-panel {
                 display: block;
-                width: 200px;
-                padding: 20px 15px;
+                width: 180px; /* Narrower panel */
+                padding: 15px 12px; /* Compact padding */
                 border-left: 3px solid #ffd700;
                 height: 100%;
+                overflow-y: auto;
+                scrollbar-width: thin;
+            }
+
+            .profile-panel::-webkit-scrollbar {
+                width: 4px;
             }
 
             .profile-card {
-                padding: 20px;
-                margin-bottom: 20px;
-            }
-
-            .profile-avatar {
-                width: 70px;
-                height: 70px;
+                padding: 15px; /* Compact */
                 margin-bottom: 15px;
             }
 
+            .profile-avatar {
+                width: 65px;
+                height: 65px;
+                margin-bottom: 12px;
+            }
+
             .profile-card h3 {
-                font-size: 16px;
+                font-size: 15px;
             }
 
             .profile-subtitle {
-                font-size: 13px;
+                font-size: 12px;
+                margin-bottom: 15px;
             }
 
             .level-text {
-                font-size: 16px;
+                font-size: 15px;
             }
 
             .badge-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
+                grid-template-columns: repeat(2, 1fr); /* 2-column for space */
+                gap: 10px;
             }
 
             .badge {
-                width: 50px;
-                height: 50px;
-            }
-
-            .badge i {
-                font-size: 18px;
-            }
-
-            .quick-actions {
-                gap: 12px;
-            }
-
-            .action-btn {
-                padding: 12px 20px;
-                font-size: 14px;
-                min-height: 50px;
-            }
-
-            .content-display {
-                padding: 20px;
-                flex: 1;
-                overflow-y: auto;
-            }
-
-            .section-header h2 {
-                font-size: 22px;
-            }
-
-            .content-body p {
-                font-size: 15px;
-                line-height: 1.7;
-            }
-
-            .quick-stats {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 15px;
-            }
-
-            .quick-stat {
-                padding: 18px;
-                gap: 12px;
-            }
-
-            .stat-icon {
                 width: 45px;
                 height: 45px;
             }
 
-            .stat-icon i {
-                font-size: 18px;
-            }
-
-            .stat-details .stat-value {
+            .badge i {
                 font-size: 16px;
             }
 
+            .quick-actions {
+                gap: 10px;
+            }
+
+            .action-btn {
+                padding: 10px 18px; /* Compact buttons */
+                font-size: 13px;
+                min-height: 45px;
+            }
+
+            .content-display {
+                padding: 15px; /* Reduced padding for more content */
+                flex: 1;
+                overflow-y: auto;
+                scrollbar-width: thin;
+            }
+
+            .content-display::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .section-header h2 {
+                font-size: 20px; /* Slightly smaller headers */
+                margin-bottom: 20px;
+            }
+
+            .content-body p {
+                font-size: 14px; /* Optimized readability */
+                line-height: 1.6; /* Tighter line height */
+            }
+
+            .quick-stats {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Better grid fit */
+                gap: 12px;
+                margin-top: 20px;
+            }
+
+            .quick-stat {
+                padding: 15px; /* Compact stats */
+                gap: 10px;
+            }
+
+            .stat-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .stat-icon i {
+                font-size: 16px;
+            }
+
+            .stat-details .stat-value {
+                font-size: 15px;
+            }
+
             .project-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 20px;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Allow 2 columns if space */
+                gap: 15px;
             }
 
             .project-card {
-                padding: 20px;
+                padding: 18px; /* Compact cards */
             }
 
             .project-header h3 {
-                font-size: 18px;
+                font-size: 16px;
             }
 
             .project-card p {
-                font-size: 14px;
-            }
-
-            .skills-container {
-                gap: 25px;
-            }
-
-            .skill-category h3 {
-                font-size: 18px;
-            }
-
-            .skill-tag {
-                padding: 8px 16px;
                 font-size: 13px;
-                min-height: 35px;
-            }
-
-            .education-timeline {
-                gap: 20px;
-            }
-
-            .education-item {
-                padding: 20px;
-                gap: 15px;
-            }
-
-            .education-year {
-                min-width: 150px;
-                font-size: 14px;
-            }
-
-            .education-details h3 {
-                font-size: 18px;
-            }
-
-            .institution {
-                font-size: 14px;
-            }
-
-            .achievements-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 15px;
-            }
-
-            .achievement-card {
-                padding: 20px;
-            }
-
-            .achievement-icon {
-                width: 50px;
-                height: 50px;
                 margin-bottom: 15px;
             }
 
+            .skills-container {
+                gap: 20px;
+            }
+
+            .skill-category h3 {
+                font-size: 16px;
+                margin-bottom: 12px;
+            }
+
+            .skill-tags {
+                gap: 10px; /* Tighter tags */
+            }
+
+            .skill-tag {
+                padding: 6px 12px; /* Compact tags */
+                font-size: 12px;
+                min-height: 32px;
+            }
+
+            .education-timeline {
+                gap: 15px;
+            }
+
+            .education-item {
+                padding: 18px;
+                gap: 12px;
+            }
+
+            .education-year {
+                min-width: 120px; /* Adjusted */
+                font-size: 13px;
+            }
+
+            .education-details h3 {
+                font-size: 16px;
+            }
+
+            .institution {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+
+            .achievements-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Better fit */
+                gap: 12px;
+            }
+
+            .achievement-card {
+                padding: 18px;
+            }
+
+            .achievement-icon {
+                width: 45px;
+                height: 45px;
+                margin-bottom: 12px;
+            }
+
             .achievement-icon i {
-                font-size: 20px;
+                font-size: 18px;
             }
 
             .achievement-card h3 {
-                font-size: 18px;
+                font-size: 16px;
+                margin-bottom: 12px;
             }
 
             .achievement-card p {
-                font-size: 14px;
+                font-size: 13px;
             }
 
             .experience-item {
-                padding: 20px;
+                padding: 18px;
             }
 
             .experience-header h3 {
-                font-size: 18px;
+                font-size: 16px;
             }
 
             .experience-item li {
-                font-size: 14px;
-                padding-left: 25px;
+                font-size: 13px;
+                padding-left: 20px;
+                padding: 8px 0;
+            }
+
+            .experience-item li::before {
+                font-size: 16px;
+                left: -5px; /* Adjust for compact */
             }
 
             .contact-form {
-                padding: 25px;
+                padding: 20px;
             }
 
             .form-row {
-                gap: 12px;
+                gap: 10px;
             }
 
             .form-group input,
             .form-group textarea {
-                padding: 12px 15px;
-                min-height: 40px;
-                font-size: 15px;
+                padding: 10px 12px;
+                min-height: 35px;
+                font-size: 14px;
+            }
+
+            .form-group textarea {
+                min-height: 100px; /* Shorter in landscape */
             }
 
             .submit-btn {
-                padding: 14px 25px;
-                font-size: 15px;
-                min-height: 50px;
+                padding: 12px 20px;
+                font-size: 14px;
+                min-height: 45px;
+            }
+
+            /* Additional landscape optimizations: Improve touch targets and spacing */
+            .nav-section,
+            .quick-stat,
+            .project-card,
+            .achievement-card,
+            .skill-tag,
+            .action-btn {
+                min-height: 40px; /* Ensure touch-friendly min height */
+            }
+
+            /* Prevent zoom on input focus in landscape */
+            input, textarea, button {
+                font-size: 16px; /* iOS zoom prevention */
             }
         }
 
@@ -1736,13 +1757,7 @@
     </style>
 </head>
 <body>
-    <!-- Landscape Prompt Banner for Portrait Mobile -->
-    <div id="landscapePrompt" class="landscape-prompt">
-        <i class="fas fa-mobile-alt fa-rotate-270"></i>
-        Rotate to Landscape for Epic Desktop-Like Gaming View! 🚀
-    </div>
-
-    <!-- Header/Profile Section - Now with Title and Stats -->
+    <!-- Header/Profile Section - Completed with Title and Stats -->
     <header class="profile-header">
         <div class="profile-actions">
             <button class="contact-btn">
@@ -1752,23 +1767,23 @@
         </div>
         <div class="profile-title">
             <h1>MUHAMMED AJMAL U K</h1>
-            <p class="subtitle">Full Stack Developer & AI Enthusiast</p>
+            <div class="subtitle">Full Stack Developer & AI Enthusiast</div>
         </div>
         <div class="profile-stats">
-            <div class="stat-item">
-                <i class="fas fa-code"></i>
-                <span>Projects</span>
-                <span class="stat-value">10+</span>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-star"></i>
-                <span>Skills</span>
-                <span class="stat-value">89%</span>
-            </div>
             <div class="stat-item">
                 <i class="fas fa-trophy"></i>
                 <span>Level</span>
                 <span class="stat-value">89</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-code"></i>
+                <span>Projects</span>
+                <span class="stat-value">4+</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-star"></i>
+                <span>Skills</span>
+                <span class="stat-value">20+</span>
             </div>
         </div>
     </header>
@@ -2157,7 +2172,7 @@
                 <h3>MUHAMMED AJMAL U K</h3>
                 <p class="profile-subtitle">Computer Science Graduate</p>
                 <div class="profile-level">
-                    <div class="level-text">Level 89</div>
+                    <div class="level-text">Experience Level</div>
                     <div class="level-bar">
                         <div class="level-progress"></div>
                     </div>
@@ -2203,31 +2218,12 @@
     </div>
 
     <script>
-        // Enhanced Interactive Features with Landscape Detection
+        // Enhanced Interactive Features with Improved Landscape Handling
         document.addEventListener('DOMContentLoaded', function() {
             const navSections = document.querySelectorAll('.nav-section');
             const contentSections = document.querySelectorAll('.content-section');
             const characterDisplay = document.getElementById('characterDisplay');
-            const landscapePrompt = document.getElementById('landscapePrompt');
-            
-            // Mobile detection
-            const isMobile = () => window.innerWidth <= 968;
-            
-            // Orientation media query
-            const portraitQuery = window.matchMedia('(orientation: portrait)');
-            
-            function handleOrientation(e) {
-                if (isMobile() && e.matches) {
-                    // Portrait: Show subtle banner
-                    landscapePrompt.classList.add('show');
-                } else {
-                    // Landscape or desktop: Hide banner
-                    landscapePrompt.classList.remove('show');
-                }
-            }
-            
-            portraitQuery.addListener(handleOrientation);
-            handleOrientation(portraitQuery);
+            let orientationLocked = false;
             
             // Function to show/hide character display
             function toggleCharacterDisplay(show) {
@@ -2272,6 +2268,16 @@
                     
                     if (navigator.vibrate) {
                         navigator.vibrate(50);
+                    }
+
+                    // Enhanced orientation lock: Trigger on user gesture (nav click) and only once
+                    if (screen.orientation && screen.orientation.lock && !orientationLocked && window.innerWidth <= 968 && window.matchMedia('(orientation: portrait)').matches) {
+                        screen.orientation.lock('landscape-primary').then(() => {
+                            orientationLocked = true;
+                            document.body.style.transform = 'rotate(0deg)'; // Ensure no rotation artifact
+                        }).catch((err) => {
+                            console.log('Orientation lock failed:', err); // Graceful fallback
+                        });
                     }
                 });
             });
@@ -2595,22 +2601,27 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
             window.addEventListener('orientationchange', () => {
                 setTimeout(() => {
                     window.scrollTo(0, 0);
-                    // Re-trigger handleOrientation after resize
-                    handleOrientation({ matches: portraitQuery.matches });
+                    // Re-trigger lock if unlocked
+                    if (screen.orientation && screen.orientation.lock && orientationLocked) {
+                        screen.orientation.lock('landscape-primary').catch(() => {});
+                    }
                 }, 500);
             });
 
-            // Lock to landscape if supported (experimental, user gesture required)
-            if (screen.orientation && screen.orientation.lock) {
-                document.querySelector('.contact-btn').addEventListener('click', () => {
-                    if (isMobile() && window.innerHeight > window.innerWidth) {
-                        screen.orientation.lock('landscape').catch(() => {}); // Graceful fallback
-                    }
-                });
+            // Enhanced landscape detection and prompt (non-intrusive)
+            function checkAndPromptLandscape() {
+                if (window.innerWidth <= 968 && window.matchMedia('(orientation: portrait)').matches && !orientationLocked) {
+                    // Optional: Show a subtle toast or indicator encouraging rotation (commented for now)
+                    // const toast = document.createElement('div');
+                    // toast.textContent = 'Rotate to landscape for best experience! 🔄';
+                    // toast.style.cssText = 'position:fixed; top:20px; right:20px; background:rgba(0,0,0,0.8); color:#ffd700; padding:10px; border-radius:10px; z-index:1001; animation:fadeIn 0.5s;';
+                    // document.body.appendChild(toast);
+                    // setTimeout(() => toast.remove(), 3000);
+                }
             }
+            window.addEventListener('resize', checkAndPromptLandscape);
+            checkAndPromptLandscape(); // Initial check
         });
     </script>
 </body>
 </html>
-
-set auto rotation  not nned to rotatle the mobile , in mobile it show as landscape, give the fully modidfed code
