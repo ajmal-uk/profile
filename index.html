@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +22,6 @@
             min-height: 100vh;
         }
 
-        /* Gaming UI Background Pattern */
         body::before {
             content: '';
             position: fixed;
@@ -39,121 +37,77 @@
             z-index: -1;
         }
 
-        /* Header/Profile Section - Enhanced with Title and Stats */
-        .profile-header {
-            background: linear-gradient(90deg, rgba(0, 0, 0, 0.95), rgba(26, 10, 46, 0.85));
-            border-bottom: 3px solid #ffd700;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(15px);
-            position: sticky;
+        .landscape-prompt {
+            display: none;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
-        }
-
-        .profile-title {
-            flex: 1;
-            text-align: center;
-        }
-
-        .profile-title h1 {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(20px, 4vw, 30px);
-            font-weight: 900;
-            background: linear-gradient(45deg, #ffd700, #ff8c00, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
-            animation: gradientShift 3s ease infinite;
-        }
-
-        .subtitle {
-            font-size: clamp(12px, 2.5vw, 16px);
-            color: #cccccc;
-            text-align: center;
-        }
-
-        .profile-stats {
-            display: flex;
-            gap: clamp(10px, 2vw, 30px);
-            flex-shrink: 0;
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            justify-content: center;
             align-items: center;
-            padding: clamp(8px, 1.5vw, 12px);
-            background: rgba(255, 215, 0, 0.15);
-            border: 2px solid #ffd700;
-            border-radius: 10px;
-            min-width: clamp(60px, 12vw, 85px);
-            transition: all 0.3s ease;
+            flex-direction: column;
+            text-align: center;
+            backdrop-filter: blur(10px);
         }
 
-        .stat-item:hover {
-            background: rgba(255, 215, 0, 0.25);
-            transform: scale(1.05);
+        .landscape-prompt.show {
+            display: flex;
         }
 
-        .stat-item i {
-            font-size: clamp(16px, 3vw, 20px);
+        .landscape-prompt i {
+            font-size: 80px;
             color: #ffd700;
-            margin-bottom: 5px;
+            margin-bottom: 20px;
+            animation: rotateIcon 2s linear infinite;
         }
 
-        .stat-item span:first-of-type {
-            font-size: clamp(10px, 2vw, 13px);
-            color: #cccccc;
+        @keyframes rotateIcon {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .stat-value {
-            font-size: clamp(16px, 3vw, 22px);
-            font-weight: 700;
-            color: #ffd700;
+        .landscape-prompt h2 {
             font-family: 'Orbitron', monospace;
+            font-size: 24px;
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
-        .profile-actions {
-            flex-shrink: 0;
+        .landscape-prompt p {
+            font-size: 16px;
+            color: #cccccc;
+            margin-bottom: 30px;
+            max-width: 300px;
         }
 
-        .contact-btn {
+        .landscape-prompt .dismiss-btn {
             background: linear-gradient(45deg, #ffd700, #ff8c00);
             border: none;
-            padding: clamp(10px, 2vw, 14px) clamp(20px, 4vw, 28px);
-            border-radius: 30px;
+            padding: 12px 24px;
+            border-radius: 25px;
             color: #000;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
             font-family: 'Rajdhani', sans-serif;
-            font-size: clamp(14px, 2.5vw, 16px);
-            min-height: clamp(40px, 6vw, 50px);
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
         }
 
-        .contact-btn:hover, .contact-btn:active {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        .landscape-prompt .dismiss-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
         }
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Main Container */
         .main-container {
             display: flex;
-            min-height: calc(100vh - 110px);
+            min-height: 100vh;
         }
 
-        /* Sidebar Navigation - Enhanced */
         .sidebar {
             width: 260px;
             background: linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(26, 10, 46, 0.85));
@@ -203,14 +157,12 @@
             transform: rotate(180deg);
         }
 
-        /* Content Panel */
         .content-panel {
             flex: 1;
             display: flex;
             background: rgba(0, 0, 0, 0.35);
         }
 
-        /* Character Display - Enhanced */
         .character-display {
             width: 320px;
             padding: 35px 25px;
@@ -266,39 +218,34 @@
         .avatar {
             width: 220px;
             height: 440px;
-            border-radius: 18px;
-            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            border-radius: 0;
+            background: none;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 25px;
-            border: 4px solid #ffd700;
+            border: none;
             overflow: hidden;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
-            animation: floatIn 1.5s ease-out;
-        }
-
-        @keyframes floatIn {
-            0% { transform: translateY(60px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
+            transition: none;
+            box-shadow: none;
+            animation: none;
         }
 
         .avatar:hover, .avatar:active {
-            transform: scale(1.08) rotate(3deg);
-            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.5);
+            transform: none;
+            box-shadow: none;
         }
 
         .avatar img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 15px;
-            transition: transform 0.4s ease;
+            border-radius: 0;
+            transition: none;
         }
 
         .avatar:hover img, .avatar:active img {
-            transform: scale(1.08);
+            transform: none;
         }
 
         .avatar-info {
@@ -346,7 +293,6 @@
             text-shadow: 0 0 6px rgba(255, 215, 0, 0.9);
         }
 
-        /* Content Display */
         .content-display {
             flex: 1;
             padding: 35px;
@@ -385,7 +331,6 @@
             margin-right: 18px;
         }
 
-        /* Content Body Styles */
         .content-body p {
             line-height: 1.9;
             margin-bottom: 25px;
@@ -393,63 +338,6 @@
             font-size: 17px;
         }
 
-        /* Quick Stats - Enhanced */
-        .quick-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 35px;
-        }
-
-        .quick-stat {
-            background: rgba(255, 215, 0, 0.15);
-            border: 2px solid #ffd700;
-            border-radius: 15px;
-            padding: 25px;
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            transition: all 0.3s ease;
-        }
-
-        .quick-stat:hover {
-            background: rgba(255, 215, 0, 0.25);
-            transform: translateY(-3px);
-        }
-
-        .stat-icon {
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(45deg, #ffd700, #ff8c00);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stat-icon i {
-            color: #000;
-            font-size: 22px;
-        }
-
-        .stat-details {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-label {
-            font-size: 15px;
-            color: #cccccc;
-            margin-bottom: 6px;
-        }
-
-        .stat-details .stat-value {
-            color: #ffd700;
-            font-weight: 600;
-            font-size: 18px;
-        }
-
-        /* Project Grid - Enhanced */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -513,7 +401,6 @@
             color: #ff8c00;
         }
 
-        /* Skills Container - Enhanced */
         .skills-container {
             display: grid;
             gap: 35px;
@@ -580,7 +467,6 @@
             color: #ff6347;
         }
 
-        /* Education Timeline - Enhanced */
         .education-timeline {
             display: grid;
             gap: 30px;
@@ -654,7 +540,6 @@
             border: 2px solid #ffd700;
         }
 
-        /* Achievements Grid - Enhanced */
         .achievements-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -707,7 +592,6 @@
             font-size: 16px;
         }
 
-        /* Experience List - Enhanced */
         .experience-list {
             display: grid;
             gap: 30px;
@@ -768,7 +652,6 @@
             font-size: 18px;
         }
 
-        /* Contact Form Styles - Enhanced */
         .contact-form-container {
             max-width: 650px;
             margin: 0 auto;
@@ -874,16 +757,15 @@
             border: 2px solid #ff4500;
         }
 
-        /* Enhanced Profile Panel */
         .profile-panel {
             width: 300px;
-            height: calc(100vh - 110px);
+            height: 100vh;
             background: linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(26, 10, 46, 0.85));
             border-left: 3px solid #ffd700;
             padding: 35px 25px;
             overflow-y: auto;
             position: sticky;
-            top: 110px;
+            top: 0;
             z-index: 50;
             transition: all 0.4s ease;
             box-shadow: -8px 0 30px rgba(255, 215, 0, 0.15);
@@ -961,39 +843,6 @@
             font-size: 15px;
         }
 
-        .profile-level {
-            margin-bottom: 18px;
-        }
-
-        .level-text {
-            font-family: 'Orbitron', monospace;
-            color: #ffd700;
-            font-weight: 700;
-            font-size: 20px;
-        }
-
-        .level-bar {
-            width: 100%;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 5px;
-            margin-top: 12px;
-            overflow: hidden;
-        }
-
-        .level-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #ffd700, #ff8c00);
-            transition: width 0.6s ease;
-        }
-
-        .profile-id {
-            font-family: 'Orbitron', monospace;
-            font-size: 13px;
-            color: #cccccc;
-        }
-
-        /* Badges Section - Enhanced */
         .badges-section {
             margin-bottom: 35px;
         }
@@ -1023,6 +872,8 @@
             transition: all 0.4s ease;
             cursor: pointer;
             min-height: 50px;
+            text-decoration: none;
+            color: inherit;
         }
 
         .badge:hover, .badge:active {
@@ -1052,7 +903,6 @@
             font-size: 22px;
         }
 
-        /* Quick Actions - Enhanced */
         .quick-actions {
             display: grid;
             gap: 18px;
@@ -1091,34 +941,32 @@
             box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
         }
 
-        /* Enhanced UI Improvements */
         .nav-section.active,
         .project-card:hover,
         .achievement-card:hover {
             box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.15);
         }
 
-        /* Improved particle animation */
         .particle {
             position: fixed;
-            width: 4px;
-            height: 4px;
-            background: #ffd700;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             pointer-events: none;
             z-index: -1;
-            opacity: 0.8;
-            animation: float 10s linear infinite;
+            opacity: 0.7;
+            filter: blur(2px);
+            animation: fireFloat 8s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-100px) translateX(60px); opacity: 0; }
+        @keyframes fireFloat {
+            0% { transform: translateY(100vh) translateX(0) scale(1); opacity: 0; }
+            20% { opacity: 0.8; transform: translateY(80vh) translateX(calc(50px * var(--rand-x))) scale(1.2); }
+            50% { opacity: 1; transform: translateY(50vh) translateX(calc(100px * var(--rand-x))) scale(1.5); }
+            80% { opacity: 0.8; transform: translateY(20vh) translateX(calc(50px * var(--rand-x))) scale(1.2); }
+            100% { transform: translateY(-100px) translateX(calc(150px * var(--rand-x))) scale(1); opacity: 0; }
         }
 
-        /* Mobile Menu Toggle */
         .mobile-menu-toggle {
             display: none;
             background: none;
@@ -1129,7 +977,6 @@
             padding: 10px;
         }
 
-        /* Responsive Design - Desktop First */
         @media (max-width: 1200px) {
             .profile-panel {
                 width: 250px;
@@ -1145,29 +992,7 @@
             }
         }
 
-        /* Mobile Portrait - Compact Column Layout */
         @media (max-width: 968px) and (orientation: portrait) {
-            .profile-header {
-                flex-wrap: wrap;
-                gap: 10px;
-                padding: 15px;
-            }
-
-            .profile-stats {
-                order: 3;
-                width: 100%;
-                justify-content: center;
-            }
-
-            .profile-title {
-                order: 2;
-                flex: none;
-            }
-
-            .profile-actions {
-                order: 1;
-            }
-
             .main-container {
                 flex-direction: column;
             }
@@ -1248,6 +1073,11 @@
                 gap: 20px;
             }
 
+            .profile-stats {
+                gap: 20px;
+                margin: 30px 0;
+            }
+
             .project-grid {
                 grid-template-columns: 1fr;
                 gap: 25px;
@@ -1299,84 +1129,48 @@
             }
         }
 
-        /* Mobile Landscape - Optimized Desktop-Like Layout with Improvements */
         @media (max-width: 968px) and (orientation: landscape) {
             body {
-                /* Encourage landscape by subtle prompt if needed, but rely on JS lock */
                 transform: rotate(0deg);
                 transition: transform 0.5s ease;
             }
 
-            .profile-header {
-                padding: 10px 15px;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                height: auto; /* Ensure compact height */
-            }
-
-            .profile-stats {
-                gap: 8px; /* Tighter spacing for landscape */
-            }
-
-            .stat-item {
-                min-width: 65px;
-                padding: 6px; /* Slightly smaller for better fit */
-                flex-shrink: 0;
-            }
-
-            .profile-title {
-                flex: 1;
-                text-align: left;
-                margin-left: 10px; /* Better alignment */
-            }
-
-            .profile-title h1 {
-                font-size: 22px; /* Slightly smaller for landscape header */
-                margin-bottom: 0;
-                line-height: 1.2;
-            }
-
-            .subtitle {
-                display: none; /* Hide subtitle to save vertical space in landscape */
-            }
-
             .main-container {
                 flex-direction: row;
-                height: calc(100vh - 70px); /* Tighter header adjustment for more content space */
-                overflow: hidden; /* Prevent scroll issues in landscape */
+                height: 100vh;
+                overflow: hidden;
             }
 
             .sidebar {
-                width: 160px; /* Narrower sidebar for more content space in landscape */
+                width: 160px;
                 border-right: 3px solid #ffd700;
                 border-bottom: none;
-                padding: 15px 0; /* Reduced padding */
+                padding: 15px 0;
                 flex-direction: column;
                 overflow-y: auto;
                 justify-content: flex-start;
-                scrollbar-width: thin; /* Firefox thin scrollbar */
+                scrollbar-width: thin;
             }
 
             .sidebar::-webkit-scrollbar {
-                width: 4px; /* Thinner scrollbar for compact sidebar */
+                width: 4px;
             }
 
             .nav-section {
                 flex: none;
                 min-width: auto;
-                padding: 12px 15px; /* More compact padding */
+                padding: 12px 15px;
                 justify-content: flex-start;
                 border-bottom: none;
                 border-left: 4px solid transparent;
-                font-size: 13px; /* Smaller font for fit */
-                min-height: 40px; /* Shorter height for quicker scrolling */
-                letter-spacing: 0.8px; /* Tighter letter spacing */
+                font-size: 13px;
+                min-height: 40px;
+                letter-spacing: 0.8px;
             }
 
             .nav-section:hover, .nav-section.active {
                 border-left-color: #ffd700;
-                transform: translateX(2px); /* Subtle transform */
+                transform: translateX(2px);
             }
 
             .nav-section span {
@@ -1384,14 +1178,14 @@
             }
 
             .nav-section i:first-child {
-                margin-right: 10px; /* Tighter icon spacing */
+                margin-right: 10px;
                 width: auto;
-                font-size: 15px; /* Smaller icon */
+                font-size: 15px;
             }
 
             .dropdown-icon {
                 display: inline;
-                font-size: 11px; /* Smaller dropdown icon */
+                font-size: 11px;
             }
 
             .content-panel {
@@ -1400,33 +1194,33 @@
             }
 
             .character-display {
-                width: 180px; /* Narrower character display for landscape balance */
+                width: 180px;
                 border-right: 2px solid rgba(255, 215, 0, 0.4);
                 border-bottom: none;
-                padding: 15px; /* Reduced padding */
+                padding: 15px;
                 min-height: 100%;
-                overflow: hidden; /* Prevent overflow */
+                overflow: hidden;
             }
 
             .avatar {
-                width: 130px; /* Proportional scaling */
+                width: 130px;
                 height: 260px;
-                margin-bottom: 15px; /* Tighter margins */
+                margin-bottom: 15px;
             }
 
             .avatar-info h3 {
-                font-size: 18px; /* Adjusted for space */
+                font-size: 18px;
             }
 
             .avatar-info p {
                 font-size: 13px;
-                margin-bottom: 10px; /* Reduced margin */
+                margin-bottom: 10px;
             }
 
             .profile-panel {
                 display: block;
-                width: 180px; /* Narrower panel */
-                padding: 15px 12px; /* Compact padding */
+                width: 180px;
+                padding: 15px 12px;
                 border-left: 3px solid #ffd700;
                 height: 100%;
                 overflow-y: auto;
@@ -1438,7 +1232,7 @@
             }
 
             .profile-card {
-                padding: 15px; /* Compact */
+                padding: 15px;
                 margin-bottom: 15px;
             }
 
@@ -1457,12 +1251,8 @@
                 margin-bottom: 15px;
             }
 
-            .level-text {
-                font-size: 15px;
-            }
-
             .badge-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2-column for space */
+                grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
 
@@ -1480,13 +1270,13 @@
             }
 
             .action-btn {
-                padding: 10px 18px; /* Compact buttons */
+                padding: 10px 18px;
                 font-size: 13px;
                 min-height: 45px;
             }
 
             .content-display {
-                padding: 15px; /* Reduced padding for more content */
+                padding: 15px;
                 flex: 1;
                 overflow-y: auto;
                 scrollbar-width: thin;
@@ -1497,23 +1287,23 @@
             }
 
             .section-header h2 {
-                font-size: 20px; /* Slightly smaller headers */
+                font-size: 20px;
                 margin-bottom: 20px;
             }
 
             .content-body p {
-                font-size: 14px; /* Optimized readability */
-                line-height: 1.6; /* Tighter line height */
+                font-size: 14px;
+                line-height: 1.6;
             }
 
             .quick-stats {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Better grid fit */
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
                 gap: 12px;
                 margin-top: 20px;
             }
 
             .quick-stat {
-                padding: 15px; /* Compact stats */
+                padding: 15px;
                 gap: 10px;
             }
 
@@ -1530,13 +1320,23 @@
                 font-size: 15px;
             }
 
+            .profile-stats {
+                gap: 12px;
+                margin: 20px 0;
+            }
+
+            .stat-item {
+                min-width: 65px;
+                padding: 6px;
+            }
+
             .project-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Allow 2 columns if space */
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 15px;
             }
 
             .project-card {
-                padding: 18px; /* Compact cards */
+                padding: 18px;
             }
 
             .project-header h3 {
@@ -1558,11 +1358,11 @@
             }
 
             .skill-tags {
-                gap: 10px; /* Tighter tags */
+                gap: 10px;
             }
 
             .skill-tag {
-                padding: 6px 12px; /* Compact tags */
+                padding: 6px 12px;
                 font-size: 12px;
                 min-height: 32px;
             }
@@ -1577,7 +1377,7 @@
             }
 
             .education-year {
-                min-width: 120px; /* Adjusted */
+                min-width: 120px;
                 font-size: 13px;
             }
 
@@ -1591,7 +1391,7 @@
             }
 
             .achievements-grid {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Better fit */
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
                 gap: 12px;
             }
 
@@ -1634,7 +1434,7 @@
 
             .experience-item li::before {
                 font-size: 16px;
-                left: -5px; /* Adjust for compact */
+                left: -5px;
             }
 
             .contact-form {
@@ -1653,7 +1453,7 @@
             }
 
             .form-group textarea {
-                min-height: 100px; /* Shorter in landscape */
+                min-height: 100px;
             }
 
             .submit-btn {
@@ -1662,19 +1462,17 @@
                 min-height: 45px;
             }
 
-            /* Additional landscape optimizations: Improve touch targets and spacing */
             .nav-section,
             .quick-stat,
             .project-card,
             .achievement-card,
             .skill-tag,
             .action-btn {
-                min-height: 40px; /* Ensure touch-friendly min height */
+                min-height: 40px;
             }
 
-            /* Prevent zoom on input focus in landscape */
             input, textarea, button {
-                font-size: 16px; /* iOS zoom prevention */
+                font-size: 16px;
             }
         }
 
@@ -1697,7 +1495,6 @@
                 font-size: 14px;
             }
 
-            /* For very small screens, fallback to portrait styles even in landscape if needed */
             .nav-section {
                 min-width: 120px;
                 padding: 12px;
@@ -1757,40 +1554,14 @@
     </style>
 </head>
 <body>
-    <!-- Header/Profile Section - Completed with Title and Stats -->
-    <header class="profile-header">
-        <div class="profile-actions">
-            <button class="contact-btn">
-                <i class="fas fa-envelope"></i>
-                Contact
-            </button>
-        </div>
-        <div class="profile-title">
-            <h1>MUHAMMED AJMAL U K</h1>
-            <div class="subtitle">Full Stack Developer & AI Enthusiast</div>
-        </div>
-        <div class="profile-stats">
-            <div class="stat-item">
-                <i class="fas fa-trophy"></i>
-                <span>Level</span>
-                <span class="stat-value">89</span>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-code"></i>
-                <span>Projects</span>
-                <span class="stat-value">4+</span>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-star"></i>
-                <span>Skills</span>
-                <span class="stat-value">20+</span>
-            </div>
-        </div>
-    </header>
+    <div class="landscape-prompt" id="landscapePrompt">
+        <i class="fas fa-mobile-alt fa-rotate-90"></i>
+        <h2>Landscape Mode Recommended</h2>
+        <p>Rotate your device to landscape for the best gaming-inspired portfolio experience. Unlock full sidebar, character view, and immersive layout!</p>
+        <button class="dismiss-btn" onclick="dismissLandscapePrompt()">Continue in Portrait</button>
+    </div>
 
-    <!-- Main Content Area -->
     <div class="main-container">
-        <!-- Sidebar Navigation -->
         <nav class="sidebar">
             <div class="nav-section active" data-section="overview">
                 <i class="fas fa-user"></i>
@@ -1835,49 +1606,29 @@
                     <div class="avatar">
                         <img src="./character.png" alt="Muhammed Ajmal U K - Full Body">
                     </div>
-                    <div class="avatar-info">
-                        <h3>AJMAL</h3>
-                        <p>Full Stack Developer</p>
-                    </div>
                 </div>
             </div>
 
             <div class="content-display" id="contentDisplay">
                 <section id="overview" class="content-section active">
+                    <div class="profile-title" style="text-align: center; margin-bottom: 30px;">
+                        <h1 style="font-family: 'Orbitron', monospace; font-size: 30px; font-weight: 900; background: linear-gradient(45deg, #ffd700, #ff8c00, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 5px; animation: gradientShift 3s ease infinite;">MUHAMMED AJMAL U K</h1>
+                        <p class="subtitle" style="font-size: 16px; color: #cccccc;">Computer Science Graduate & MCA Student</p>
+                    </div>
                     <div class="section-header">
                         <h2><i class="fas fa-user"></i> ABOUT ME</h2>
                     </div>
                     <div class="content-body">
                         <p>Innovative Computer Science graduate and MCA student passionate about building intelligent, scalable, and user-focused applications. Skilled in Python, Flutter, Firebase, and full-stack development, with strong problem-solving ability and a drive to turn ideas into impactful digital products.</p>
-                        
-                        <div class="quick-stats">
-                            <div class="quick-stat">
-                                <div class="stat-icon">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div class="stat-details">
-                                    <span class="stat-label">Phone</span>
-                                    <span class="stat-value">+91 8547197122</span>
-                                </div>
-                            </div>
-                            <div class="quick-stat">
-                                <div class="stat-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="stat-details">
-                                    <span class="stat-label">Email</span>
-                                    <span class="stat-value">ajmaluk.me@gmail.com</span>
-                                </div>
-                            </div>
-                            <div class="quick-stat">
-                                <div class="stat-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="stat-details">
-                                    <span class="stat-label">Languages</span>
-                                    <span class="stat-value">English, Hindi, Malayalam</span>
-                                </div>
-                            </div>
+                        <p>With a background in AI and software engineering, I thrive on tackling complex challenges and creating solutions that blend technology with real-world needs. My journey in tech started with a fascination for gaming and interactive systems, evolving into expertise in mobile app development, AI chatbots, and healthcare tech innovations.</p>
+                        <p>Beyond coding, I'm an avid gamer, content creator, and quick learner who enjoys collaborating in dynamic teams. I'm always exploring emerging technologies like machine learning and cloud computing to stay ahead in the fast-paced digital landscape.</p>
+                        <div class="skills-highlight" style="margin-top: 30px; padding: 20px; background: rgba(255, 215, 0, 0.1); border-radius: 12px;">
+                            <h3 style="color: #ffd700; margin-bottom: 15px;">Key Strengths:</h3>
+                            <ul style="list-style-type: none; padding-left: 0;">
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #ffd700; margin-right: 10px;"></i>Proficient in cross-platform app development with Flutter and Firebase integration.</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #ffd700; margin-right: 10px;"></i>Experienced in AI-driven tools, including chatbots and memory assistance apps.</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #ffd700; margin-right: 10px;"></i>Strong foundation in data structures, algorithms, and creative design for user-centric products.</li>
+                            </ul>
                         </div>
                     </div>
                 </section>
@@ -1887,13 +1638,14 @@
                         <h2><i class="fas fa-project-diagram"></i> PROJECTS & EXPERIENCE</h2>
                     </div>
                     <div class="content-body">
+                        <p>Here are some of my standout projects that demonstrate my technical skills, creativity, and ability to deliver practical solutions. Each project was built with a focus on user experience, efficiency, and innovation.</p>
                         <div class="project-grid">
                             <div class="project-card">
                                 <div class="project-header">
                                     <h3>Explore Together</h3>
                                     <div class="project-badge">Travel Platform</div>
                                 </div>
-                                <p>A project focusing on facilitating travel connections. Built a platform connecting solo travelers based on destination and interests.</p>
+                                <p>A comprehensive platform designed to connect solo travelers based on shared destinations and interests. Features include real-time matching, chat functionality, and itinerary planning tools. Built with Flutter for cross-platform compatibility and Firebase for backend services.</p>
                                 <div class="project-link">
                                     <a href="https://github.com/ajmal-uk/find-travel-buddy-flutter" target="_blank" rel="noopener noreferrer">
                                         <i class="fas fa-external-link-alt"></i>
@@ -1907,7 +1659,7 @@
                                     <h3>Byte AI</h3>
                                     <div class="project-badge">AI Chatbot</div>
                                 </div>
-                                <p>Built a private no-signup chatbot providing writing and coding assistance hosted on PythonAnywhere.</p>
+                                <p>An advanced private chatbot offering no-signup access to writing, coding, and general assistance. Hosted on PythonAnywhere with integration of AI models for natural language processing and code generation.</p>
                                 <div class="project-link">
                                     <a href="https://droq.pythonanywhere.com" target="_blank" rel="noopener noreferrer">
                                         <i class="fas fa-external-link-alt"></i>
@@ -1921,7 +1673,7 @@
                                     <h3>ToolPix</h3>
                                     <div class="project-badge">Utility Platform</div>
                                 </div>
-                                <p>Designed and launched an AI-based utility chatbot offering instant, anonymous writing and coding support.</p>
+                                <p>An AI-powered utility chatbot providing instant, anonymous support for writing, coding, and productivity tasks. Emphasizes privacy and quick responses, leveraging modern AI frameworks for enhanced accuracy.</p>
                                 <div class="project-link">
                                     <a href="https://droq.pythonanywhere.com" target="_blank" rel="noopener noreferrer">
                                         <i class="fas fa-external-link-alt"></i>
@@ -1935,7 +1687,7 @@
                                     <h3>Dementia Virtual Memory Assistant</h3>
                                     <div class="project-badge">Healthcare AI</div>
                                 </div>
-                                <p>Created an AI-powered mobile app assisting dementia patients and caregivers with memory tracking, interactive chat, and caretaker dashboards.</p>
+                                <p>A mobile app aiding dementia patients and caregivers through memory tracking, interactive AI chats, reminders, and intuitive dashboards. Developed with Flutter and integrated AI for personalized interactions and data insights.</p>
                                 <div class="project-link">
                                     <a href="https://github.com/ajmal-uk/dementia-virtual-memory" target="_blank" rel="noopener noreferrer">
                                         <i class="fas fa-external-link-alt"></i>
@@ -1952,6 +1704,7 @@
                         <h2><i class="fas fa-cogs"></i> TECHNICAL SKILLS</h2>
                     </div>
                     <div class="content-body">
+                        <p>My skill set spans programming, web development, AI, and creative tools, honed through academic projects, certifications, and self-driven learning. I focus on versatile technologies that enable efficient and innovative solutions.</p>
                         <div class="skills-container">
                             <div class="skill-category">
                                 <h3>Programming Languages</h3>
@@ -2008,6 +1761,7 @@
                         <h2><i class="fas fa-graduation-cap"></i> EDUCATION</h2>
                     </div>
                     <div class="content-body">
+                        <p>My educational background has provided a strong foundation in computer science, complemented by high academic performance and practical application of knowledge in real-world projects.</p>
                         <div class="education-timeline">
                             <div class="education-item current">
                                 <div class="education-year">2025 - 2027 (Ongoing)</div>
@@ -2053,13 +1807,14 @@
                         <h2><i class="fas fa-medal"></i> ACHIEVEMENTS & HOBBIES</h2>
                     </div>
                     <div class="content-body">
+                        <p>These achievements highlight my dedication to excellence in tech, leadership, and personal growth. My hobbies fuel my creativity and keep me motivated in pursuing innovative ideas.</p>
                         <div class="achievements-grid">
                             <div class="achievement-card">
                                 <div class="achievement-icon">
                                     <i class="fas fa-rocket"></i>
                                 </div>
                                 <h3>Real-World Tech Projects</h3>
-                                <p>Built and launched real-world tech projects during graduation</p>
+                                <p>Successfully built and launched multiple real-world tech projects during my graduation, demonstrating practical application of skills.</p>
                             </div>
 
                             <div class="achievement-card">
@@ -2107,22 +1862,11 @@
 
                 <section id="experience" class="content-section">
                     <div class="section-header">
-                        <h2><i class="fas fa-briefcase"></i> VOLUNTEER EXPERIENCE</h2>
+                        <h2><i class="fas fa-briefcase"></i> PROFESSIONAL EXPERIENCE</h2>
                     </div>
                     <div class="content-body">
-                        <div class="experience-list">
-                            <div class="experience-item">
-                                <div class="experience-header">
-                                    <h3>NCC Volunteer</h3>
-                                    <span class="experience-period">Leadership Role</span>
-                                </div>
-                                <ul>
-                                    <li>Managed logistics and event coordination as CQMS in NCC</li>
-                                    <li>Handled documentation and cadet records</li>
-                                    <li>Gained leadership, teamwork, and organizational skills</li>
-                                </ul>
-                            </div>
-                        </div>
+                        <p>As a recent graduate entering the professional world, I bring a robust portfolio of hands-on projects, academic excellence, and self-initiated tech explorations. My experience includes developing full-stack applications, AI tools, and collaborative team projects that simulate real-world scenarios.</p>
+                        <p>Key highlights include managing end-to-end project lifecycles—from ideation and design to deployment and optimization—while incorporating user feedback for iterative improvements. With a gamer's mindset for strategy and persistence, I'm eager to apply my skills in a professional setting, contributing fresh ideas and efficient solutions to innovative teams.</p>
                     </div>
                 </section>
 
@@ -2131,7 +1875,7 @@
                         <h2><i class="fas fa-address-book"></i> GET IN TOUCH</h2>
                     </div>
                     <div class="content-body">
-                        <p>Ready to collaborate or have a question? Drop me a message below. I'll respond as soon as possible!</p>
+                        <p>Interested in collaborating on a project, discussing tech innovations, or exploring opportunities? Feel free to reach out—I'm always open to new connections and ideas!</p>
                         <div class="contact-form-container">
                             <form class="contact-form" id="contactForm">
                                 <div class="form-row">
@@ -2163,7 +1907,6 @@
             </div>
         </main>
 
-        <!-- Enhanced Profile Info Panel (Right Side) -->
         <aside class="profile-panel">
             <div class="profile-card">
                 <div class="profile-avatar">
@@ -2171,36 +1914,20 @@
                 </div>
                 <h3>MUHAMMED AJMAL U K</h3>
                 <p class="profile-subtitle">Computer Science Graduate</p>
-                <div class="profile-level">
-                    <div class="level-text">Experience Level</div>
-                    <div class="level-bar">
-                        <div class="level-progress"></div>
-                    </div>
-                </div>
-                <div class="profile-id">ID: AJMAL-UK-2025</div>
             </div>
 
             <div class="badges-section">
-                <h4>SKILL BADGES</h4>
+                <h4>SOCIAL LINKS</h4>
                 <div class="badge-grid">
-                    <div class="badge expert" title="Python Expert">
-                        <i class="fab fa-python"></i>
-                    </div>
-                    <div class="badge expert" title="AI Developer">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <div class="badge advanced" title="Full Stack">
-                        <i class="fas fa-layer-group"></i>
-                    </div>
-                    <div class="badge intermediate" title="Mobile Dev">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="badge expert" title="Problem Solver">
-                        <i class="fas fa-puzzle-piece"></i>
-                    </div>
-                    <div class="badge advanced" title="Team Leader">
-                        <i class="fas fa-users"></i>
-                    </div>
+                    <a href="https://www.instagram.com/ajmal_uk/" target="_blank" rel="noopener noreferrer" class="badge expert" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/ajmal-uk" target="_blank" rel="noopener noreferrer" class="badge expert" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ajmal-uk/" target="_blank" rel="noopener noreferrer" class="badge advanced" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
                 </div>
             </div>
 
@@ -2213,19 +1940,23 @@
                     <i class="fas fa-share"></i>
                     Share Profile
                 </button>
+                <button class="action-btn secondary" onclick="document.querySelector('[data-section=&quot;contact&quot;]').click();">
+                    <i class="fas fa-envelope"></i>
+                    Get In Touch
+                </button>
             </div>
         </aside>
     </div>
 
     <script>
-        // Enhanced Interactive Features with Improved Landscape Handling
         document.addEventListener('DOMContentLoaded', function() {
             const navSections = document.querySelectorAll('.nav-section');
             const contentSections = document.querySelectorAll('.content-section');
             const characterDisplay = document.getElementById('characterDisplay');
+            const landscapePrompt = document.getElementById('landscapePrompt');
             let orientationLocked = false;
+            let promptDismissed = false;
             
-            // Function to show/hide character display
             function toggleCharacterDisplay(show) {
                 if (show) {
                     characterDisplay.classList.remove('hidden');
@@ -2236,11 +1967,26 @@
                 }
             }
             
-            // Initialize
+            window.dismissLandscapePrompt = function() {
+                landscapePrompt.classList.remove('show');
+                promptDismissed = true;
+            };
+            
+            function checkAndPromptLandscape() {
+                const isMobile = window.innerWidth <= 968;
+                const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+                if (isMobile && isPortrait && !orientationLocked && !promptDismissed) {
+                    landscapePrompt.classList.add('show');
+                } else {
+                    landscapePrompt.classList.remove('show');
+                }
+            }
+            
             if (navSections.length > 0) {
                 navSections[0].classList.add('active');
             }
             toggleCharacterDisplay(true);
+            checkAndPromptLandscape(); 
             
             navSections.forEach(navSection => {
                 navSection.addEventListener('click', function() {
@@ -2270,34 +2016,44 @@
                         navigator.vibrate(50);
                     }
 
-                    // Enhanced orientation lock: Trigger on user gesture (nav click) and only once
                     if (screen.orientation && screen.orientation.lock && !orientationLocked && window.innerWidth <= 968 && window.matchMedia('(orientation: portrait)').matches) {
-                        screen.orientation.lock('landscape-primary').then(() => {
-                            orientationLocked = true;
-                            document.body.style.transform = 'rotate(0deg)'; // Ensure no rotation artifact
-                        }).catch((err) => {
-                            console.log('Orientation lock failed:', err); // Graceful fallback
-                        });
+                        if (document.fullscreenElement) {
+                            screen.orientation.lock('landscape-primary').then(() => {
+                                orientationLocked = true;
+                                document.body.style.transform = 'rotate(0deg)'; 
+                                checkAndPromptLandscape(); 
+                            }).catch((err) => {
+                                console.log('Orientation lock failed:', err); 
+                            });
+                        } else {
+                            document.documentElement.requestFullscreen().then(() => {
+                                screen.orientation.lock('landscape-primary').then(() => {
+                                    orientationLocked = true;
+                                    checkAndPromptLandscape();
+                                }).catch((err) => {
+                                    console.log('Orientation lock failed after fullscreen:', err);
+                                    document.exitFullscreen();
+                                });
+                            }).catch((err) => {
+                                console.log('Fullscreen request failed:', err);
+                            });
+                        }
                     }
                 });
             });
             
-            // Contact button
-            const contactBtn = document.querySelector('.contact-btn');
-            if (contactBtn) {
-                contactBtn.addEventListener('click', function() {
-                    const contactNav = document.querySelector('[data-section="contact"]');
-                    const contactContent = document.getElementById('contact');
-                    if (contactNav && contactContent) {
-                        contactNav.click();
+            window.addEventListener('orientationchange', function() {
+                setTimeout(() => {
+                    checkAndPromptLandscape();
+                    if (screen.orientation && screen.orientation.lock && orientationLocked) {
+                        screen.orientation.lock('landscape-primary').catch(() => {});
                     }
-                    if (navigator.vibrate) {
-                        navigator.vibrate(100);
-                    }
-                });
-            }
+                }, 500);
+            });
+            
+            window.addEventListener('resize', checkAndPromptLandscape);
+            
 
-            // Contact Form
             const contactForm = document.getElementById('contactForm');
             const formMessage = document.getElementById('formMessage');
             if (contactForm) {
@@ -2334,7 +2090,6 @@
                 });
             }
             
-            // Action buttons
             const downloadBtn = document.querySelector('.action-btn.primary');
             if (downloadBtn) {
                 downloadBtn.addEventListener('click', function() {
@@ -2392,39 +2147,40 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 });
             }
             
-            const shareBtn = document.querySelector('.action-btn.secondary');
-            if (shareBtn) {
-                shareBtn.addEventListener('click', function() {
-                    if (navigator.share) {
-                        navigator.share({
-                            title: 'Muhammed Ajmal U K - Portfolio',
-                            text: 'Check out my gaming-inspired portfolio!',
-                            url: window.location.href
-                        });
-                    } else {
-                        navigator.clipboard.writeText(window.location.href).then(() => {
-                            alert('Portfolio URL copied to clipboard!');
-                        }).catch(() => {
-                            const textarea = document.createElement('textarea');
-                            textarea.value = window.location.href;
-                            document.body.appendChild(textarea);
-                            textarea.select();
-                            document.execCommand('copy');
-                            document.body.removeChild(textarea);
-                            alert('Portfolio URL copied to clipboard!');
-                        });
-                    }
-                    this.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 150);
-                    if (navigator.vibrate) {
-                        navigator.vibrate(100);
-                    }
-                });
-            }
+            const shareBtn = document.querySelectorAll('.action-btn.secondary');
+            shareBtn.forEach(btn => {
+                if (btn.textContent.includes('Share Profile')) {
+                    btn.addEventListener('click', function() {
+                        if (navigator.share) {
+                            navigator.share({
+                                title: 'Muhammed Ajmal U K - Portfolio',
+                                text: 'Check out my gaming-inspired portfolio!',
+                                url: window.location.href
+                            });
+                        } else {
+                            navigator.clipboard.writeText(window.location.href).then(() => {
+                                alert('Portfolio URL copied to clipboard!');
+                            }).catch(() => {
+                                const textarea = document.createElement('textarea');
+                                textarea.value = window.location.href;
+                                document.body.appendChild(textarea);
+                                textarea.select();
+                                document.execCommand('copy');
+                                document.body.removeChild(textarea);
+                                alert('Portfolio URL copied to clipboard!');
+                            });
+                        }
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                        if (navigator.vibrate) {
+                            navigator.vibrate(100);
+                        }
+                    });
+                }
+            });
             
-            // Hover/Tap effects for tags and cards
             const skillTags = document.querySelectorAll('.skill-tag');
             skillTags.forEach(tag => {
                 tag.addEventListener('mouseenter', () => tag.style.transform = 'scale(1.05)');
@@ -2446,7 +2202,6 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 card.addEventListener('touchend', () => card.style.borderColor = '#ffd700', { passive: true });
             });
             
-            // Achievement stagger animation
             const achievementCards = document.querySelectorAll('.achievement-card');
             achievementCards.forEach((card, index) => {
                 card.style.animationDelay = `${index * 0.15}s`;
@@ -2455,7 +2210,6 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 card.style.transform = 'translateY(20px)';
             });
 
-            // Trigger stagger on load
             setTimeout(() => {
                 achievementCards.forEach((card, index) => {
                     setTimeout(() => {
@@ -2465,7 +2219,6 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 });
             }, 500);
             
-            // Badge tooltips
             const badges = document.querySelectorAll('.badge');
             badges.forEach(badge => {
                 badge.addEventListener('mouseenter', function() {
@@ -2501,7 +2254,6 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 });
             });
             
-            // Ripple effect
             function createRippleEffect(element, x, y) {
                 const ripple = document.createElement('div');
                 ripple.style.cssText = `
@@ -2533,7 +2285,7 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 }, 700);
             }
             
-            const clickableElements = document.querySelectorAll('.nav-section, .contact-btn, .action-btn, .project-card, .submit-btn, .skill-tag, .badge, .achievement-card, .project-link a');
+            const clickableElements = document.querySelectorAll('.nav-section, .action-btn, .project-card, .submit-btn, .skill-tag, .badge, .achievement-card, .project-link a');
             clickableElements.forEach(element => {
                 element.addEventListener('click', function(e) {
                     const rect = this.getBoundingClientRect();
@@ -2545,7 +2297,6 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 }, { passive: true });
             });
             
-            // Level progress
             const levelProgress = document.querySelector('.level-progress');
             if (levelProgress) {
                 setTimeout(() => {
@@ -2553,7 +2304,6 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 }, 600);
             }
             
-            // Typing effect for title
             const profileTitle = document.querySelector('.profile-title h1');
             if (profileTitle) {
                 const text = profileTitle.textContent;
@@ -2569,58 +2319,50 @@ Dr. Shijo M Joseph - Professor, Computer Science - +91 94474 47985
                 setTimeout(typeWriter, 1200);
             }
             
-            // Particles - Optimized for performance
             let particleInterval;
             function createParticles() {
-                const particleCount = window.innerWidth <= 968 ? 8 : 20;
+                const particleCount = window.innerWidth <= 968 ? 15 : 30;
+                const colors = ['#ffd700', '#ff4500', '#ff8c00']; // Fire-like colors: yellow, orange, red-orange
                 for (let i = 0; i < particleCount; i++) {
                     setTimeout(() => {
                         const particle = document.createElement('div');
                         particle.className = 'particle';
+                        const size = Math.random() * 6 + 4; // Vary size between 4-10px
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        const randX = (Math.random() * 2 - 1); // -1 to 1 for varied horizontal movement
+                        const duration = Math.random() * 4 + 6; // 6-10s duration
+                        particle.style.width = `${size}px`;
+                        particle.style.height = `${size}px`;
+                        particle.style.background = color;
                         particle.style.left = Math.random() * window.innerWidth + 'px';
+                        particle.style.animationDuration = `${duration}s`;
+                        particle.style.setProperty('--rand-x', randX);
                         document.body.appendChild(particle);
                         setTimeout(() => {
                             if (particle.parentNode) particle.parentNode.removeChild(particle);
-                        }, 10000);
-                    }, i * 300);
+                        }, duration * 1000);
+                    }, i * 200);
                 }
             }
             createParticles();
-            particleInterval = setInterval(createParticles, 10000);
+            particleInterval = setInterval(createParticles, 8000);
             
-            // Pause particles on visibility change for performance
             document.addEventListener('visibilitychange', () => {
                 if (document.hidden) {
                     clearInterval(particleInterval);
                 } else {
-                    particleInterval = setInterval(createParticles, 10000);
+                    particleInterval = setInterval(createParticles, 8000);
                 }
             });
             
-            // Smooth scroll to top on orientation change
             window.addEventListener('orientationchange', () => {
                 setTimeout(() => {
                     window.scrollTo(0, 0);
-                    // Re-trigger lock if unlocked
                     if (screen.orientation && screen.orientation.lock && orientationLocked) {
                         screen.orientation.lock('landscape-primary').catch(() => {});
                     }
                 }, 500);
             });
-
-            // Enhanced landscape detection and prompt (non-intrusive)
-            function checkAndPromptLandscape() {
-                if (window.innerWidth <= 968 && window.matchMedia('(orientation: portrait)').matches && !orientationLocked) {
-                    // Optional: Show a subtle toast or indicator encouraging rotation (commented for now)
-                    // const toast = document.createElement('div');
-                    // toast.textContent = 'Rotate to landscape for best experience! 🔄';
-                    // toast.style.cssText = 'position:fixed; top:20px; right:20px; background:rgba(0,0,0,0.8); color:#ffd700; padding:10px; border-radius:10px; z-index:1001; animation:fadeIn 0.5s;';
-                    // document.body.appendChild(toast);
-                    // setTimeout(() => toast.remove(), 3000);
-                }
-            }
-            window.addEventListener('resize', checkAndPromptLandscape);
-            checkAndPromptLandscape(); // Initial check
         });
     </script>
 </body>
