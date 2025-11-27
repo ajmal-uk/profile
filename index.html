@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Muhammed Ajmal U K | Full-Stack Developer</title>
+    <title>Muhammed Ajmal U K | Elite Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #FFD700; /* Gold */
             --secondary: #FF8C00; /* Orange */
-            --accent: #00e5ff; /* Cyan for tech vibes */
-            --bg-dark: #09090b;
-            --panel-bg: rgba(20, 20, 25, 0.9);
-            --border-color: rgba(255, 215, 0, 0.3);
-            --font-head: 'Black Ops One', cursive; /* Gaming Header Font */
-            --font-body: 'Rajdhani', sans-serif; /* HUD Body Font */
+            --accent: #00f0ff; /* Cyber Cyan */
+            --bg-dark: #050505;
+            --card-bg: rgba(20, 20, 25, 0.6);
+            --glass-border: rgba(255, 215, 0, 0.15);
+            --font-head: 'Orbitron', sans-serif;
+            --font-body: 'Chakra Petch', sans-serif;
         }
 
         * {
@@ -28,30 +28,29 @@
         body {
             font-family: var(--font-body);
             background-color: var(--bg-dark);
-            background-image: 
-                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
-                url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); 
             color: #fff;
-            overflow: hidden; /* App-like feel */
+            overflow: hidden;
             height: 100vh;
+            perspective: 1000px;
         }
 
-        /* Ambient Background Glow */
-        body::before {
-            content: '';
+        /* --- BACKGROUND EFFECTS --- */
+        #bgCanvas {
             position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(255, 140, 0, 0.08), transparent 60%);
-            animation: pulseBg 10s infinite alternate;
-            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
         }
 
-        @keyframes pulseBg {
-            0% { transform: scale(1); opacity: 0.5; }
-            100% { transform: scale(1.1); opacity: 0.8; }
+        .vignette {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, #000 90%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* --- LAYOUT --- */
@@ -61,241 +60,266 @@
             width: 100vw;
         }
 
-        /* --- SIDEBAR (PC) --- */
+        /* --- SIDEBAR --- */
         .sidebar {
-            width: 280px;
-            background: rgba(10, 10, 15, 0.95);
-            border-right: 2px solid var(--primary);
+            width: 300px;
+            background: rgba(5, 5, 8, 0.85);
+            border-right: 1px solid var(--glass-border);
             display: flex;
             flex-direction: column;
-            padding: 20px 0;
+            padding: 30px 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            clip-path: polygon(0 0, 100% 0, 100% 95%, 85% 100%, 0 100%);
+            backdrop-filter: blur(15px);
+            clip-path: polygon(0 0, 100% 0, 100% 95%, 90% 100%, 0 100%);
         }
 
         .nav-logo {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 0 15px;
+            margin-bottom: 40px;
+            position: relative;
         }
 
         .nav-logo h2 {
             font-family: var(--font-head);
             color: var(--primary);
-            font-size: 24px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            font-size: 26px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
         }
 
         .nav-items {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            overflow-y: auto;
+            gap: 5px;
+            padding: 0 15px;
+            overflow-y: auto; /* Allow scroll if screen is short */
         }
 
         .nav-btn {
-            padding: 15px 25px;
-            background: transparent;
-            border: none;
-            border-left: 4px solid transparent;
-            color: #aaa;
+            padding: 18px 25px;
+            background: linear-gradient(90deg, transparent, transparent);
+            border: 1px solid transparent;
+            color: #888;
             font-family: var(--font-head);
-            font-size: 16px;
+            font-size: 14px;
             cursor: pointer;
             text-align: left;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             align-items: center;
             gap: 15px;
+            text-transform: uppercase;
             position: relative;
+            overflow: hidden;
+            clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--primary);
+            transform: scaleY(0);
+            transition: transform 0.3s;
         }
 
         .nav-btn:hover, .nav-btn.active {
-            color: var(--primary);
-            background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), transparent);
-            border-left: 4px solid var(--primary);
-            padding-left: 30px;
+            color: #fff;
+            background: rgba(255, 215, 0, 0.05);
+            border-color: rgba(255, 215, 0, 0.2);
+            padding-left: 35px;
+            text-shadow: 0 0 8px var(--primary);
         }
 
-        .nav-btn i {
-            width: 25px;
-            text-align: center;
+        .nav-btn:hover::before, .nav-btn.active::before {
+            transform: scaleY(1);
         }
+
+        .nav-btn i { width: 20px; text-align: center; }
 
         /* --- CONTENT AREA --- */
         .content-panel {
             flex: 1;
             position: relative;
-            overflow: hidden;
             display: flex;
+            overflow: hidden;
         }
 
-        /* --- CHARACTER DISPLAY (3D Model Area) --- */
+        /* --- CHARACTER DISPLAY --- */
         .character-section {
-            width: 350px;
+            width: 400px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            transition: transform 0.5s ease;
+            z-index: 10;
+            pointer-events: none;
         }
 
         .character-img {
-            max-height: 85vh;
+            max-height: 90vh;
             width: auto;
-            filter: drop-shadow(0 0 20px rgba(0,0,0,0.8));
-            animation: floatChar 4s ease-in-out infinite;
-            z-index: 10;
+            filter: drop-shadow(0 0 30px rgba(0,0,0,0.8));
+            animation: breathe 4s ease-in-out infinite;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
         }
 
-        @keyframes floatChar {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
-        /* Platform glow under character */
-        .platform-glow {
-            position: absolute;
-            bottom: 50px;
-            width: 200px;
-            height: 60px;
-            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.4), transparent 70%);
-            transform: scaleY(0.3);
-            z-index: 1;
-        }
-
-        /* --- SCROLLABLE DATA DISPLAY --- */
+        /* --- DATA DISPLAY --- */
         .data-display {
             flex: 1;
-            padding: 30px;
+            padding: 40px;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: var(--primary) rgba(0,0,0,0.3);
+            scrollbar-color: var(--primary) transparent;
+            perspective: 1000px;
         }
 
-        .data-display::-webkit-scrollbar {
-            width: 6px;
-        }
-        .data-display::-webkit-scrollbar-thumb {
-            background: var(--primary);
-        }
+        .data-display::-webkit-scrollbar { width: 6px; }
+        .data-display::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
 
-        /* --- SECTIONS --- */
-        .section {
-            display: none;
-            animation: slideIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-            max-width: 900px;
-            margin: 0 auto;
-            padding-bottom: 80px; /* Space for mobile nav */
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- HEADERS --- */
-        .glitch-header {
-            font-family: var(--font-head);
-            font-size: 42px;
-            color: #fff;
-            margin-bottom: 20px;
-            position: relative;
-            text-transform: uppercase;
-            border-bottom: 3px solid var(--secondary);
-            display: inline-block;
-            padding-right: 50px;
-            clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
-        }
-        
-        .glitch-header span { color: var(--primary); }
-
-        /* --- CARDS (Tactical Style) --- */
+        /* --- 3D CARDS --- */
         .tac-card {
-            background: linear-gradient(135deg, rgba(30, 30, 40, 0.9), rgba(15, 15, 20, 0.95));
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            margin-bottom: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            margin-bottom: 25px;
             position: relative;
-            /* Angled corners like a game HUD */
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: transform 0.1s ease, box-shadow 0.3s;
             clip-path: polygon(
                 20px 0, 100% 0, 
                 100% calc(100% - 20px), calc(100% - 20px) 100%, 
                 0 100%, 0 20px
             );
-            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .tac-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15);
-            border-color: var(--primary);
-        }
-
-        .tac-card::before {
+        .tac-card::after {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 5px; height: 100%;
-            background: var(--primary);
-            opacity: 0.5;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.05);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
-        /* --- PROFILE OVERVIEW --- */
+        .tac-card:hover::after { opacity: 1; }
+
+        /* --- TYPOGRAPHY & COMPONENTS --- */
+        .glitch-header {
+            font-family: var(--font-head);
+            font-size: 48px;
+            color: #fff;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch-header span { color: var(--primary); }
+
         .profile-header {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             align-items: center;
         }
         
         .profile-pic {
-            width: 100px;
-            height: 100px;
-            border: 3px solid var(--primary);
-            padding: 3px;
-            background: #000;
-            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            width: 120px;
+            height: 120px;
+            border: 2px solid var(--primary);
+            padding: 4px;
+            background: rgba(0,0,0,0.5);
+            position: relative;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
         }
-        
+
         .profile-pic img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 100%; height: 100%; object-fit: cover; clip-path: inherit;
+        }
+
+        .profile-pic::before {
+            content: '';
+            position: absolute;
+            top: -5px; left: -5px; right: -5px; bottom: -5px;
+            border: 1px solid var(--primary);
             clip-path: inherit;
+            animation: spin 10s linear infinite;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .role-text {
+            font-family: var(--font-body);
+            font-weight: 700;
+            color: var(--secondary);
+            letter-spacing: 2px;
+            border: 1px solid var(--secondary);
+            padding: 2px 10px;
+            display: inline-block;
+            font-size: 12px;
+            background: rgba(255, 140, 0, 0.1);
+            margin-top: 5px;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 25px;
+            transform: translateZ(20px);
         }
 
         .stat-box {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid var(--primary);
-            padding: 10px;
+            background: linear-gradient(180deg, rgba(255, 215, 0, 0.05), transparent);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 15px;
             text-align: center;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            position: relative;
         }
 
-        .stat-val { font-size: 20px; font-weight: 700; color: var(--primary); }
-        .stat-lbl { font-size: 12px; color: #aaa; text-transform: uppercase; }
+        .stat-box::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--primary); box-shadow: 0 0 10px var(--primary);
+        }
 
-        /* --- BUTTONS --- */
+        .stat-val { font-family: var(--font-head); font-size: 24px; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .stat-lbl { font-size: 12px; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+
         .btn-tac {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background: var(--primary);
             color: #000;
             border: none;
-            padding: 12px 30px;
+            padding: 14px 35px;
             font-family: var(--font-head);
+            font-weight: 700;
             font-size: 16px;
             cursor: pointer;
             clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
@@ -304,442 +328,387 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            margin-right: 10px;
-            margin-top: 15px;
-        }
-
-        .btn-tac:hover {
-            filter: brightness(1.2);
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-        }
-
-        .btn-tac.secondary {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-tac.secondary:hover {
-            background: var(--primary);
-            color: #000;
-        }
-
-        /* --- EDUCATION (Rank Progression) --- */
-        .roadmap {
+            margin-right: 15px;
+            margin-top: 20px;
+            text-transform: uppercase;
             position: relative;
-            padding-left: 30px;
-            border-left: 3px dashed var(--border-color);
-            margin-left: 10px;
+            transform: translateZ(30px);
         }
 
-        .roadmap-item {
-            position: relative;
-            margin-bottom: 40px;
-        }
+        .btn-tac:hover { background: #fff; box-shadow: 0 0 25px var(--primary); letter-spacing: 1px; }
+        .btn-tac.secondary { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-tac.secondary:hover { background: var(--primary); color: #000; }
 
+        .roadmap { margin-left: 15px; padding-left: 30px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .roadmap-item { position: relative; margin-bottom: 45px; }
         .roadmap-item::before {
-            content: '';
-            position: absolute;
-            left: -39px;
-            top: 5px;
-            width: 16px;
-            height: 16px;
-            background: var(--bg-dark);
-            border: 3px solid var(--primary);
-            border-radius: 50%;
-            z-index: 2;
+            content: ''; position: absolute; left: -37px; top: 5px; width: 12px; height: 12px;
+            background: var(--bg-dark); border: 2px solid var(--primary); transform: rotate(45deg);
             box-shadow: 0 0 10px var(--primary);
         }
-
-        .roadmap-year {
-            font-family: var(--font-head);
-            color: var(--secondary);
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .grade-badge {
-            display: inline-block;
-            background: rgba(0, 229, 255, 0.2);
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 2px 8px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-top: 5px;
-            clip-path: polygon(5px 0, 100% 0, 100% 100%, 0 100%, 0 5px);
-        }
-
-        /* --- SKILLS --- */
-        .skill-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
+        .roadmap-year { font-family: var(--font-head); color: var(--accent); font-size: 14px; margin-bottom: 5px; }
         
+        .skill-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
         .skill-tag {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid #444;
-            padding: 8px 15px;
-            font-size: 14px;
-            transition: 0.3s;
-            cursor: default;
+            background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 8px 16px; font-size: 14px; color: #aaa; transition: 0.3s;
+            clip-path: polygon(8px 0, 100% 0, 100% 100%, 0 100%, 0 8px);
         }
-        
         .skill-tag:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: rgba(255, 215, 0, 0.1);
+            background: var(--accent); color: #000; border-color: var(--accent); box-shadow: 0 0 15px var(--accent);
         }
 
-        /* --- MOBILE OPTIMIZATION --- */
-        @media (max-width: 968px) {
-            .main-container {
-                flex-direction: column;
-            }
+        /* --- ANIMATION --- */
+        .section { display: none; opacity: 0; animation: fadeIn 0.5s forwards; }
+        .section.active { display: block; }
+        @keyframes fadeIn { to { opacity: 1; } }
 
+        /* =========================================================================
+           MOBILE OPTIMIZATION (PORTRAIT)
+           ========================================================================= */
+        @media (max-width: 968px) and (orientation: portrait) {
+            .main-container { flex-direction: column; }
+            
+            /* Bottom Navigation */
             .sidebar {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 70px;
-                flex-direction: row;
-                border-right: none;
-                border-top: 2px solid var(--primary);
-                padding: 0;
-                clip-path: none;
-                background: #000;
-                justify-content: space-around;
-                align-items: center;
-                z-index: 1000;
+                position: fixed; bottom: 0; left: 0; width: 100%; height: 75px;
+                flex-direction: row; padding: 0; clip-path: none;
+                border-right: none; border-top: 1px solid var(--glass-border);
+                background: rgba(0,0,0,0.95);
+                z-index: 999;
+                justify-content: space-evenly;
             }
-
-            .nav-logo, .nav-btn span {
-                display: none; /* Hide text, show icons only */
-            }
-
-            .nav-items {
-                flex-direction: row;
-                width: 100%;
-                justify-content: space-around;
-                overflow: hidden;
-            }
-
+            .nav-logo { display: none; }
+            .nav-items { flex-direction: row; gap: 0; width: 100%; justify-content: space-evenly; }
             .nav-btn {
-                padding: 10px;
-                border: none;
-                font-size: 20px;
+                padding: 10px; border: none; font-size: 22px; flex-direction: column;
+                background: transparent; clip-path: none; gap: 5px; justify-content: center;
             }
+            .nav-btn span { font-size: 10px; margin-top: 2px; }
+            .nav-btn.active { background: transparent; color: var(--primary); padding-left: 10px; }
+            .nav-btn::before { bottom: 0; top: auto; width: 100%; height: 2px; }
 
-            .nav-btn.active {
-                background: transparent;
-                color: var(--primary);
-                border: none;
-                text-shadow: 0 0 10px var(--primary);
+            /* Content Layout */
+            .character-section { display: none; } /* Hide char in portrait */
+            .content-panel { height: calc(100vh - 75px); }
+            .data-display { padding: 20px; padding-bottom: 100px; }
+            
+            /* Component Scaling */
+            .glitch-header { font-size: 32px; }
+            .profile-header { flex-direction: column; text-align: center; }
+            .stats-grid { grid-template-columns: repeat(3, 1fr); }
+            .stat-val { font-size: 18px; }
+            .btn-tac { width: 100%; justify-content: center; margin-right: 0; }
+        }
+
+        /* =========================================================================
+           MOBILE OPTIMIZATION (LANDSCAPE) - EXACT DESKTOP LAYOUT
+           ========================================================================= */
+        @media (max-width: 968px) and (orientation: landscape) {
+            .main-container { flex-direction: row; }
+            
+            /* Sidebar on Left (Scaled Down) */
+            .sidebar {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                width: 200px; /* Smaller width */
+                height: 100vh;
+                padding: 15px 0;
+                justify-content: flex-start;
+                clip-path: none;
+                border-right: 1px solid var(--glass-border);
             }
+            .nav-logo { margin-bottom: 15px; }
+            .nav-logo h2 { font-size: 18px; }
+            .nav-items { flex-direction: column; gap: 2px; justify-content: flex-start; }
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 12px;
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+            .nav-btn span { font-size: 12px; display: inline; margin-top: 0; }
+            .nav-btn i { font-size: 14px; width: 20px; }
 
+            /* Character Visible (Scaled Down) */
             .character-section {
-                display: none; /* Hide 3D model on mobile to save space */
+                display: flex;
+                width: 250px;
+                z-index: 5;
+            }
+            .character-img {
+                max-height: 95vh;
             }
 
-            .content-panel {
-                height: calc(100vh - 70px); /* Height minus bottom nav */
-            }
-
-            .data-display {
-                padding: 15px;
-                padding-bottom: 80px;
-            }
-
-            .glitch-header {
-                font-size: 28px;
-                padding-right: 20px;
-            }
-
-            .tac-card {
-                padding: 15px;
-                clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            }
-
-            .profile-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .btn-tac {
-                width: 100%;
-                justify-content: center;
-            }
+            /* Content Panel */
+            .content-panel { height: 100vh; }
+            .data-display { padding: 20px; }
+            
+            /* Component Scaling for Short Screens */
+            .glitch-header { font-size: 28px; margin-bottom: 15px; }
+            .tac-card { padding: 20px; margin-bottom: 15px; }
+            .profile-pic { width: 80px; height: 80px; }
+            .profile-header h1 { font-size: 24px; }
+            .stats-grid { margin-top: 15px; }
+            .stat-box { padding: 10px; }
+            .stat-val { font-size: 18px; }
+            .roadmap-item { margin-bottom: 25px; }
         }
     </style>
 </head>
 <body>
 
+<canvas id="bgCanvas"></canvas>
+<div class="vignette"></div>
+
 <div class="main-container">
     <nav class="sidebar">
         <div class="nav-logo">
-            <h2><i class="fas fa-crosshairs"></i> AJMAL UK</h2>
+            <h2>AJMAL UK</h2>
         </div>
         <div class="nav-items">
             <button class="nav-btn active" data-target="overview"><i class="fas fa-home"></i> <span>Lobby</span></button>
-            <button class="nav-btn" data-target="about"><i class="fas fa-id-card"></i> <span>Profile</span></button>
-            <button class="nav-btn" data-target="education"><i class="fas fa-medal"></i> <span>Rank/Edu</span></button>
-            <button class="nav-btn" data-target="projects"><i class="fas fa-rocket"></i> <span>Missions</span></button>
-            <button class="nav-btn" data-target="contact"><i class="fas fa-envelope"></i> <span>Squad Up</span></button>
+            <button class="nav-btn" data-target="about"><i class="fas fa-fingerprint"></i> <span>Profile</span></button>
+            <button class="nav-btn" data-target="education"><i class="fas fa-medal"></i> <span>Rank</span></button>
+            <button class="nav-btn" data-target="projects"><i class="fas fa-database"></i> <span>Missions</span></button>
+            <button class="nav-btn" data-target="contact"><i class="fas fa-satellite-dish"></i> <span>Comms</span></button>
         </div>
     </nav>
 
     <main class="content-panel">
-        <div class="character-section">
-            <img src="./character.png" alt="Character" class="character-img" onerror="this.src='https://placehold.co/200x400/000000/FFD700?text=Ajmal+Char'">
-            <div class="platform-glow"></div>
+        <div class="character-section" id="charContainer">
+            <img src="./character.png" alt="Character" class="character-img" id="charImg" onerror="this.src='https://placehold.co/200x400/000000/FFD700?text=Ajmal+Char'">
         </div>
 
         <div class="data-display" id="scrollContainer">
             
             <section id="overview" class="section active">
-                <div class="tac-card">
+                <div class="tac-card tilt-card">
                     <div class="profile-header">
                         <div class="profile-pic">
                             <img src="avatar.png" alt="Avatar" onerror="this.src='https://placehold.co/100x100/111/FFD700?text=UK'">
                         </div>
                         <div>
-                            <h1 style="font-family: var(--font-head); font-size: 32px; color: var(--primary);">Muhammed Ajmal U K</h1>
-                            <p style="color: var(--secondary); letter-spacing: 1px;">FULL-STACK DEVELOPER | AI ENGINEER</p>
-                            <p style="font-size: 14px; margin-top: 5px; color: #ccc;">MCA Student @ CET | Founder of UTHAKKAN</p>
+                            <h1 style="font-family: var(--font-head); font-size: 38px; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Muhammed Ajmal U K</h1>
+                            <span class="role-text">FULL-STACK & AI DEVELOPER</span>
+                            <p style="font-size: 14px; margin-top: 10px; color: #bbb;">Founder of UTHAKKAN | MCA Scholar @ CET</p>
                         </div>
                     </div>
                     
                     <div class="stats-grid">
                         <div class="stat-box">
                             <div class="stat-val">500K+</div>
-                            <div class="stat-lbl">Subs (YT)</div>
+                            <div class="stat-lbl">YouTube Subs</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-val">10K+</div>
-                            <div class="stat-lbl">SEO Clicks</div>
+                            <div class="stat-lbl">Web Traffic</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-val">4+</div>
-                            <div class="stat-lbl">Live Projects</div>
+                            <div class="stat-val">Top 1%</div>
+                            <div class="stat-lbl">Innovation</div>
                         </div>
                     </div>
 
-                    <div style="margin-top: 25px;">
-                        <a href="#" id="downloadCV" class="btn-tac"><i class="fas fa-download"></i> Download Resume</a>
+                    <div style="margin-top: 30px;">
+                        <a href="#" id="downloadCV" class="btn-tac"><i class="fas fa-download"></i> Download CV</a>
                         <a href="https://github.com/ajmal-uk" target="_blank" class="btn-tac secondary"><i class="fab fa-github"></i> GitHub</a>
                     </div>
                 </div>
 
-                <h3 class="glitch-header" style="font-size: 24px; margin-top: 20px;">Current <span>Status</span></h3>
-                <div class="tac-card">
-                    <p><strong style="color:var(--primary)">> Role:</strong> Full Stack Web Development Intern (Future Interns)</p>
-                    <p><strong style="color:var(--primary)">> Education:</strong> MCA Ongoing (2025-2027)</p>
-                    <p><strong style="color:var(--primary)">> Objective:</strong> Building scalable AI solutions & cross-platform apps.</p>
+                <h3 class="glitch-header" style="font-size: 24px; margin-top: 20px;">Mission <span>Status</span></h3>
+                <div class="tac-card tilt-card">
+                    <p style="margin-bottom: 10px;"><strong style="color:var(--primary)">> Current Objective:</strong> MCA (2025-2027) at CET</p>
+                    <p style="margin-bottom: 10px;"><strong style="color:var(--primary)">> Active Role:</strong> Full Stack Intern @ Future Interns</p>
+                    <p><strong style="color:var(--primary)">> Primary Spec:</strong> Building Scalable AI Agents</p>
                 </div>
             </section>
 
             <section id="about" class="section">
-                <h2 class="glitch-header">Player <span>Profile</span></h2>
+                <h2 class="glitch-header">Operative <span>File</span></h2>
                 
-                <div class="tac-card">
-                    <h3 style="color: var(--primary); margin-bottom: 10px;">Bio</h3>
-                    <p style="line-height: 1.6; color: #ddd;">
-                        Innovative Computer Science graduate and MCA student passionate about building intelligent, scalable applications. 
-                        Skilled in Python, Flutter, Firebase, and SQL. I blend technology with creativity, managing a YouTube gaming channel 
-                        with 500K+ subscribers while developing production-ready code.
+                <div class="tac-card tilt-card">
+                    <h3 style="color: var(--primary); margin-bottom: 15px; font-family: var(--font-head);">Bio Data</h3>
+                    <p style="line-height: 1.8; color: #ccc;">
+                        I am an innovative Computer Science graduate blending high-performance coding with creative content creation. 
+                        My journey involves mastering <strong style="color:#fff">Python, Flutter, and AI</strong> to solve real-world problems. 
+                        When I'm not coding production-ready apps, I'm managing a massive gaming community on YouTube.
                     </p>
                 </div>
 
-                <div class="tac-card">
-                    <h3 style="color: var(--primary); margin-bottom: 15px;">Weaponry (Skills)</h3>
-                    <div style="margin-bottom: 15px;">
-                        <span style="color: var(--secondary); font-weight: bold; font-size: 14px; display:block; margin-bottom:5px;">PROGRAMMING</span>
+                <div class="tac-card tilt-card">
+                    <h3 style="color: var(--primary); margin-bottom: 20px; font-family: var(--font-head);">Loadout (Skills)</h3>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <span style="color: #fff; font-weight: bold; font-size: 14px; display:block; margin-bottom:8px;">LANGUAGES</span>
                         <div class="skill-grid">
                             <div class="skill-tag">Python</div>
                             <div class="skill-tag">Dart</div>
                             <div class="skill-tag">JavaScript</div>
-                            <div class="skill-tag">SQL</div>
                             <div class="skill-tag">Java</div>
+                            <div class="skill-tag">SQL</div>
                             <div class="skill-tag">C++</div>
                         </div>
                     </div>
-                    <div style="margin-bottom: 15px;">
-                        <span style="color: var(--secondary); font-weight: bold; font-size: 14px; display:block; margin-bottom:5px;">FRAMEWORKS</span>
+
+                    <div style="margin-bottom: 20px;">
+                        <span style="color: #fff; font-weight: bold; font-size: 14px; display:block; margin-bottom:8px;">TECH STACK</span>
                         <div class="skill-grid">
                             <div class="skill-tag">Flutter</div>
                             <div class="skill-tag">Flask</div>
                             <div class="skill-tag">React.js</div>
-                            <div class="skill-tag">Tailwind CSS</div>
-                            <div class="skill-tag">DeepFace</div>
-                            <div class="skill-tag">Gemini API</div>
-                        </div>
-                    </div>
-                    <div>
-                        <span style="color: var(--secondary); font-weight: bold; font-size: 14px; display:block; margin-bottom:5px;">TOOLS</span>
-                        <div class="skill-grid">
                             <div class="skill-tag">Firebase</div>
-                            <div class="skill-tag">Git/GitHub</div>
-                            <div class="skill-tag">Postman</div>
-                            <div class="skill-tag">VS Code</div>
-                            <div class="skill-tag">Android Studio</div>
+                            <div class="skill-tag">DeepFace AI</div>
+                            <div class="skill-tag">Gemini API</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="tac-card">
-                    <h3 style="color: var(--primary); margin-bottom: 15px;">Experience Log</h3>
+                <div class="tac-card tilt-card">
+                    <h3 style="color: var(--primary); margin-bottom: 15px; font-family: var(--font-head);">Experience Log</h3>
                     
-                    <div style="margin-bottom: 20px; border-left: 2px solid var(--secondary); padding-left: 15px;">
-                        <h4 style="font-size: 18px;">Full Stack Web Development Intern</h4>
-                        <p style="color: #aaa; font-size: 14px;">Future Interns | Nov 2025 - Dec 2025</p>
-                        <p style="font-size: 14px; margin-top: 5px;">Building e-commerce components and personal portfolios. Focused on modular React.js architecture and UI responsiveness.</p>
+                    <div style="margin-bottom: 25px; border-left: 2px solid var(--secondary); padding-left: 20px;">
+                        <h4 style="font-size: 20px; color:#fff;">Full Stack Web Intern</h4>
+                        <p style="color: var(--accent); font-size: 14px; margin-bottom:5px;">Future Interns | Nov 2025 - Dec 2025</p>
+                        <p style="font-size: 14px; color:#bbb;">Engineered modular e-commerce components using React.js and optimized UI responsiveness for high-traffic scenarios.</p>
                     </div>
 
-                    <div style="border-left: 2px solid var(--accent); padding-left: 15px;">
-                        <h4 style="font-size: 18px;">Data Analytics Simulation</h4>
-                        <p style="color: #aaa; font-size: 14px;">Deloitte Australia (Virtual) | Nov 2025</p>
-                        <p style="font-size: 14px; margin-top: 5px;">Completed analytics simulation involving data cleaning, Excel classification, and created Tableau dashboards for insights.</p>
+                    <div style="border-left: 2px solid var(--accent); padding-left: 20px;">
+                        <h4 style="font-size: 20px; color:#fff;">Data Analytics Virtual Internship</h4>
+                        <p style="color: var(--accent); font-size: 14px; margin-bottom:5px;">Deloitte Australia | Nov 2025</p>
+                        <p style="font-size: 14px; color:#bbb;">Executed complex data cleaning and visualization tasks using Tableau and Excel to drive business insights.</p>
                     </div>
                 </div>
             </section>
 
             <section id="education" class="section">
-                <h2 class="glitch-header">Rank <span>Progression</span></h2>
-                <div class="tac-card">
+                <h2 class="glitch-header">Rank <span>History</span></h2>
+                <div class="tac-card tilt-card">
                     <div class="roadmap">
                         
                         <div class="roadmap-item">
-                            <div class="roadmap-year">2025 - 2027 (Ongoing)</div>
-                            <h3 style="color: #fff;">Master of Computer Applications (MCA)</h3>
-                            <p style="color: #aaa; font-size: 14px;">College of Engineering, Trivandrum</p>
-                            <span class="grade-badge">Current Level</span>
+                            <div class="roadmap-year">2025 - 2027</div>
+                            <h3 style="color: #fff; font-size:20px;">Master of Computer Applications</h3>
+                            <p style="color: #888;">College of Engineering, Trivandrum</p>
+                            <span style="color: var(--primary); font-size: 12px;">STATUS: ACTIVE</span>
                         </div>
 
                         <div class="roadmap-item">
                             <div class="roadmap-year">2022 - 2025</div>
-                            <h3 style="color: #fff;">B.Sc. Computer Science</h3>
-                            <p style="color: #aaa; font-size: 14px;">Mahatma Gandhi College, Iritty</p>
-                            <span class="grade-badge">CGPA: 8.97 / 89%</span>
+                            <h3 style="color: #fff; font-size:20px;">B.Sc. Computer Science</h3>
+                            <p style="color: #888;">Mahatma Gandhi College, Iritty</p>
+                            <span style="color: var(--primary); font-size: 12px;">SCORE: 89% (High Distinction)</span>
                         </div>
 
                         <div class="roadmap-item">
                             <div class="roadmap-year">2020 - 2022</div>
-                            <h3 style="color: #fff;">Higher Secondary</h3>
-                            <p style="color: #aaa; font-size: 14px;">GHSS Ulikkal</p>
-                            <span class="grade-badge">Score: 91%</span>
+                            <h3 style="color: #fff; font-size:20px;">Higher Secondary</h3>
+                            <p style="color: #888;">GHSS Ulikkal</p>
+                            <span style="color: var(--primary); font-size: 12px;">SCORE: 91%</span>
                         </div>
 
                         <div class="roadmap-item">
                             <div class="roadmap-year">2019 - 2020</div>
-                            <h3 style="color: #fff;">SSLC</h3>
-                            <p style="color: #aaa; font-size: 14px;">GHSS Ulikkal</p>
-                            <span class="grade-badge">Score: 98%</span>
+                            <h3 style="color: #fff; font-size:20px;">SSLC</h3>
+                            <p style="color: #888;">GHSS Ulikkal</p>
+                            <span style="color: var(--primary); font-size: 12px;">SCORE: 98%</span>
                         </div>
 
                     </div>
                 </div>
                 
-                <div class="tac-card">
-                    <h3 style="color: var(--primary);">Certifications</h3>
-                    <ul style="list-style: none; margin-top: 10px; line-height: 1.8;">
-                        <li><i class="fas fa-certificate" style="color: var(--secondary);"></i> IBM Software Engineering (Coursera)</li>
-                        <li><i class="fas fa-certificate" style="color: var(--secondary);"></i> Google & Kaggle AI Agent Development</li>
-                        <li><i class="fas fa-certificate" style="color: var(--secondary);"></i> Google Cloud Arcade Facilitator</li>
-                        <li><i class="fas fa-certificate" style="color: var(--secondary);"></i> Oracle OCI AI Foundations Associate</li>
-                    </ul>
+                <div class="tac-card tilt-card">
+                    <h3 style="color: var(--primary); font-family: var(--font-head);">Certifications</h3>
+                    <div class="skill-grid" style="margin-top:15px;">
+                        <div class="skill-tag" style="border-color: var(--secondary); color: #fff;">IBM Software Engineering</div>
+                        <div class="skill-tag" style="border-color: var(--secondary); color: #fff;">Google Cloud Facilitator</div>
+                        <div class="skill-tag" style="border-color: var(--secondary); color: #fff;">Oracle AI Foundations</div>
+                        <div class="skill-tag" style="border-color: var(--secondary); color: #fff;">NCC 'C' Certificate</div>
+                    </div>
                 </div>
             </section>
 
             <section id="projects" class="section">
-                <h2 class="glitch-header">Mission <span>Log</span></h2>
+                <h2 class="glitch-header">Operations <span>Log</span></h2>
 
-                <div class="tac-card">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                        <h3 style="color: var(--primary); font-size: 20px;">Dementia Virtual Memory Assistant</h3>
-                        <span class="grade-badge" style="background: rgba(255,0,0,0.1); border-color: red; color: red;">Healthcare AI</span>
+                <div class="tac-card tilt-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <h3 style="color: var(--primary); font-family: var(--font-head); font-size: 22px;">Dementia Memory Assistant</h3>
+                        <i class="fas fa-heartbeat" style="color: #ff3333; font-size: 20px;"></i>
                     </div>
-                    <p style="font-size: 14px; color: #ccc; margin: 10px 0;">
-                        Caregiver-patient app with task management, reminders, and memory gallery. Integrated DeepFace for facial recognition.
+                    <p style="color: #bbb; margin-bottom: 15px;">
+                        A vital healthcare app for patients & caregivers. Features AI-powered memory gallery, routine management, and DeepFace integration for family recognition.
                     </p>
-                    <div class="skill-grid" style="margin-bottom: 10px;">
-                        <span style="font-size:12px; color: var(--accent);">#Flutter</span>
-                        <span style="font-size:12px; color: var(--accent);">#Python</span>
-                        <span style="font-size:12px; color: var(--accent);">#DeepFace</span>
+                    <div class="skill-grid">
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">DeepFace</span>
+                        <span class="skill-tag">Python</span>
                     </div>
-                    <a href="https://github.com/ajmal-uk/dementia-virtual-memory" class="btn-tac secondary" style="padding: 5px 15px; font-size: 12px;">View Repo</a>
+                    <a href="https://github.com/ajmal-uk/dementia-virtual-memory" target="_blank" class="btn-tac secondary" style="padding: 10px 20px; font-size: 12px; margin-top: 15px;">Inspect Code</a>
                 </div>
 
-                <div class="tac-card">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                        <h3 style="color: var(--primary); font-size: 20px;">ToolPix - AI Platform</h3>
-                        <span class="grade-badge">10K+ Clicks</span>
+                <div class="tac-card tilt-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <h3 style="color: var(--primary); font-family: var(--font-head); font-size: 22px;">ToolPix AI</h3>
+                        <i class="fas fa-robot" style="color: var(--accent); font-size: 20px;"></i>
                     </div>
-                    <p style="font-size: 14px; color: #ccc; margin: 10px 0;">
-                        AI tool platform featuring developer utilities and compilers. Achieved 10K+ organic clicks via AI-driven SEO.
+                    <p style="color: #bbb; margin-bottom: 15px;">
+                        High-traffic AI utility platform. Provides instant developer tools and code compilation. Optimized via AI-driven SEO to reach 10K+ organic clicks.
                     </p>
-                    <div class="skill-grid" style="margin-bottom: 10px;">
-                        <span style="font-size:12px; color: var(--accent);">#Flask</span>
-                        <span style="font-size:12px; color: var(--accent);">#GeminiAPI</span>
-                        <span style="font-size:12px; color: var(--accent);">#SEO</span>
+                    <div class="skill-grid">
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">Gemini API</span>
+                        <span class="skill-tag">SEO</span>
                     </div>
-                    <a href="https://toolpix.pythonanywhere.com" class="btn-tac secondary" style="padding: 5px 15px; font-size: 12px;">Live Site</a>
+                    <a href="https://toolpix.pythonanywhere.com" target="_blank" class="btn-tac secondary" style="padding: 10px 20px; font-size: 12px; margin-top: 15px;">Launch</a>
                 </div>
 
-                <div class="tac-card">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                        <h3 style="color: var(--primary); font-size: 20px;">Explore Together</h3>
-                        <span class="grade-badge">Travel Tech</span>
+                <div class="tac-card tilt-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <h3 style="color: var(--primary); font-family: var(--font-head); font-size: 22px;">Explore Together</h3>
+                        <i class="fas fa-plane" style="color: var(--secondary); font-size: 20px;"></i>
                     </div>
-                    <p style="font-size: 14px; color: #ccc; margin: 10px 0;">
-                        Travel buddy-matching system connecting users with similar destinations. Features real-time updates.
+                    <p style="color: #bbb; margin-bottom: 15px;">
+                        Social travel platform connecting solo travelers. Features real-time location matching and secure chat functionality.
                     </p>
-                    <div class="skill-grid" style="margin-bottom: 10px;">
-                        <span style="font-size:12px; color: var(--accent);">#Flutter</span>
-                        <span style="font-size:12px; color: var(--accent);">#Firebase</span>
+                    <div class="skill-grid">
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">Google Maps</span>
                     </div>
-                    <a href="https://github.com/ajmal-uk/explore-together" class="btn-tac secondary" style="padding: 5px 15px; font-size: 12px;">View Repo</a>
-                </div>
-
-                <div class="tac-card">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                        <h3 style="color: var(--primary); font-size: 20px;">Byte AI</h3>
-                        <span class="grade-badge">Chatbot</span>
-                    </div>
-                    <p style="font-size: 14px; color: #ccc; margin: 10px 0;">
-                        Multi-model chatbot supporting Gemini, Groq, and OpenRouter LLMs with a clean UI.
-                    </p>
-                    <div class="skill-grid" style="margin-bottom: 10px;">
-                        <span style="font-size:12px; color: var(--accent);">#Python</span>
-                        <span style="font-size:12px; color: var(--accent);">#Flask</span>
-                    </div>
-                    <a href="https://byteai.pythonanywhere.com" class="btn-tac secondary" style="padding: 5px 15px; font-size: 12px;">Live Site</a>
+                    <a href="https://github.com/ajmal-uk/explore-together" target="_blank" class="btn-tac secondary" style="padding: 10px 20px; font-size: 12px; margin-top: 15px;">Inspect Code</a>
                 </div>
 
             </section>
 
             <section id="contact" class="section">
-                <h2 class="glitch-header">Squad <span>Up</span></h2>
-                <div class="tac-card">
-                    <p style="margin-bottom: 20px;">Ready to collaborate? Send a request.</p>
+                <h2 class="glitch-header">Establish <span>Comms</span></h2>
+                <div class="tac-card tilt-card">
+                    <p style="margin-bottom: 25px; color: #aaa;">Ready to deploy on a new mission? Send a secure transmission.</p>
                     <form id="contactForm">
-                        <div style="margin-bottom: 15px;">
-                            <input type="text" placeholder="CODENAME (Name)" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid #444; color: #fff; font-family: var(--font-body);">
+                        <div style="margin-bottom: 20px;">
+                            <input type="text" placeholder="AGENT NAME" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid #444; color: #fff; font-family: var(--font-head);">
                         </div>
-                        <div style="margin-bottom: 15px;">
-                            <input type="email" placeholder="COMMS CHANNEL (Email)" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid #444; color: #fff; font-family: var(--font-body);">
+                        <div style="margin-bottom: 20px;">
+                            <input type="email" placeholder="SECURE EMAIL" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid #444; color: #fff; font-family: var(--font-head);">
                         </div>
-                        <div style="margin-bottom: 15px;">
-                            <textarea placeholder="MISSION BRIEF (Message)" rows="5" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid #444; color: #fff; font-family: var(--font-body);"></textarea>
+                        <div style="margin-bottom: 20px;">
+                            <textarea placeholder="MISSION BRIEFING..." rows="5" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid #444; color: #fff; font-family: var(--font-body);"></textarea>
                         </div>
-                        <button type="submit" class="btn-tac" style="width: 100%; justify-content: center;">TRANSMIT</button>
+                        <button type="submit" class="btn-tac" style="width: 100%; justify-content: center;">INITIATE TRANSMISSION</button>
                     </form>
-                    <div style="margin-top: 30px; border-top: 1px dashed #444; padding-top: 20px;">
-                        <p><i class="fas fa-envelope" style="color: var(--primary);"></i> ajmaluk.me@gmail.com</p>
-                        <p style="margin-top: 10px;"><i class="fas fa-phone" style="color: var(--primary);"></i> +91 85471 97122</p>
-                        <p style="margin-top: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> Kannur, Kerala, India</p>
+                    
+                    <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 15px; border-top: 1px dashed #444; padding-top: 25px;">
+                        <a href="mailto:ajmaluk.me@gmail.com" style="color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-envelope" style="color: var(--primary);"></i> ajmaluk.me@gmail.com
+                        </a>
+                        <span style="color: #fff; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-phone" style="color: var(--primary);"></i> +91 85471 97122
+                        </span>
+                        <span style="color: #fff; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> Kannur, Kerala, India
+                        </span>
                     </div>
                 </div>
             </section>
@@ -749,53 +718,137 @@
 </div>
 
 <script>
+    // --- PARTICLE SYSTEM (RISING EMBERS) ---
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let particles = [];
+    const particleCount = 60;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + Math.random() * 100;
+            this.speed = 0.5 + Math.random() * 1.5;
+            this.size = Math.random() * 3;
+            this.color = `rgba(255, ${150 + Math.random() * 105}, 0, ${Math.random() * 0.5})`;
+        }
+        update() {
+            this.y -= this.speed;
+            if (this.y < -10) {
+                this.y = canvas.height + 10;
+                this.x = Math.random() * canvas.width;
+            }
+        }
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+    }
+    
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        requestAnimationFrame(animateParticles);
+    }
+    initParticles();
+    animateParticles();
+
+    // --- 3D TILT EFFECT & NAVIGATION ---
     document.addEventListener('DOMContentLoaded', () => {
-        // --- NAVIGATION LOGIC ---
         const navBtns = document.querySelectorAll('.nav-btn');
         const sections = document.querySelectorAll('.section');
         const scrollContainer = document.getElementById('scrollContainer');
 
+        // Navigation
         navBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Active State
                 navBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
-                // Section Switching
                 const targetId = btn.getAttribute('data-target');
                 sections.forEach(sec => {
                     sec.classList.remove('active');
-                    if(sec.id === targetId) {
-                        sec.classList.add('active');
-                    }
+                    if(sec.id === targetId) sec.classList.add('active');
                 });
-
-                // Scroll top on switch
                 scrollContainer.scrollTop = 0;
             });
         });
 
-        // --- RESUME DOWNLOAD ---
+        // 3D Card Tilt Logic
+        const cards = document.querySelectorAll('.tilt-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Calculate center
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Rotation values (limit to +/- 10 degrees)
+                const rotateX = ((y - centerY) / centerY) * -5;
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
+            });
+        });
+
+        // Character Parallax Effect
+        const charImg = document.getElementById('charImg');
+        document.addEventListener('mousemove', (e) => {
+            // Apply only if screen width > 968 OR if in landscape mode
+            const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+            if(window.innerWidth > 968 || isLandscape) {
+                const x = (window.innerWidth - e.pageX * 2) / 100;
+                const y = (window.innerHeight - e.pageY * 2) / 100;
+                charImg.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            }
+        });
+
+        // Resume Download
         document.getElementById('downloadCV').addEventListener('click', function(e) {
             e.preventDefault();
             const link = document.createElement('a');
-            link.href = '/static/resume.pdf'; // Correct path as requested
+            link.href = '/static/resume.pdf'; 
             link.download = 'Muhammed_Ajmal_UK_Resume.pdf';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            alert("Downloading Resume Resource Pack...");
         });
 
-        // --- CONTACT FORM HANDLER ---
+        // Contact Form
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = this.querySelector('button');
             const originalText = btn.innerText;
-            btn.innerText = "TRANSMITTING...";
+            btn.innerText = "ENCRYPTING & SENDING...";
             setTimeout(() => {
-                btn.innerText = "TRANSMISSION COMPLETE";
-                btn.style.background = "var(--primary)";
+                btn.innerText = "TRANSMISSION SUCCESSFUL";
+                btn.style.background = "#00ff00"; // Green for success
                 setTimeout(() => {
                     btn.innerText = originalText;
                     btn.style.background = "";
