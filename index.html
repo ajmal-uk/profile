@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Muhammed Ajmal U K | Elite Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
@@ -30,38 +30,33 @@
             background-color: var(--bg-dark);
             color: #fff;
             overflow: hidden;
-            height: 100vh;
-            perspective: 1000px; /* Enable 3D space */
+            height: 100vh; /* Fallback */
+            height: 100dvh; /* Dynamic height for mobile browsers */
+            perspective: 1000px;
         }
 
         /* --- BACKGROUND EFFECTS --- */
         #bgCanvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            pointer-events: none;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2; pointer-events: none;
         }
 
-        /* Vignette Overlay */
         .vignette {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, transparent 0%, #000 90%);
-            z-index: -1;
-            pointer-events: none;
+            z-index: -1; pointer-events: none;
         }
 
         /* --- LAYOUT --- */
         .main-container {
             display: flex;
-            height: 100vh;
+            height: 100%;
             width: 100vw;
         }
 
-        /* --- SIDEBAR (PC) --- */
+        /* --- SIDEBAR --- */
         .sidebar {
             width: 300px;
             background: rgba(5, 5, 8, 0.85);
@@ -71,7 +66,6 @@
             padding: 30px 0;
             z-index: 100;
             backdrop-filter: blur(15px);
-            /* Tactical Angle */
             clip-path: polygon(0 0, 100% 0, 100% 95%, 90% 100%, 0 100%);
         }
 
@@ -87,21 +81,7 @@
             font-size: 26px;
             letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-            position: relative;
             display: inline-block;
-        }
-
-        /* Scanning line under logo */
-        .nav-logo::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 2px;
-            background: var(--primary);
-            box-shadow: 0 0 10px var(--primary);
         }
 
         .nav-items {
@@ -109,6 +89,7 @@
             flex-direction: column;
             gap: 5px;
             padding: 0 15px;
+            overflow-y: auto;
         }
 
         .nav-btn {
@@ -131,12 +112,8 @@
         }
 
         .nav-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-            background: var(--primary);
-            transform: scaleY(0);
-            transition: transform 0.3s;
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--primary); transform: scaleY(0); transition: transform 0.3s;
         }
 
         .nav-btn:hover, .nav-btn.active {
@@ -147,10 +124,7 @@
             text-shadow: 0 0 8px var(--primary);
         }
 
-        .nav-btn:hover::before, .nav-btn.active::before {
-            transform: scaleY(1);
-        }
-
+        .nav-btn:hover::before, .nav-btn.active::before { transform: scaleY(1); }
         .nav-btn i { width: 20px; text-align: center; }
 
         /* --- CONTENT AREA --- */
@@ -161,7 +135,7 @@
             overflow: hidden;
         }
 
-        /* --- CHARACTER DISPLAY (3D Parallax) --- */
+        /* --- CHARACTER DISPLAY --- */
         .character-section {
             width: 400px;
             display: flex;
@@ -169,7 +143,8 @@
             justify-content: center;
             position: relative;
             z-index: 10;
-            pointer-events: none; /* Let mouse pass through to parallax */
+            pointer-events: none;
+            transition: opacity 0.3s ease;
         }
 
         .character-img {
@@ -178,7 +153,7 @@
             filter: drop-shadow(0 0 30px rgba(0,0,0,0.8));
             animation: breathe 4s ease-in-out infinite;
             transform-style: preserve-3d;
-            transition: transform 0.1s ease-out; /* For parallax */
+            transition: transform 0.1s ease-out;
         }
 
         @keyframes breathe {
@@ -199,38 +174,26 @@
         .data-display::-webkit-scrollbar { width: 6px; }
         .data-display::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
 
-        /* --- 3D CARDS (The "Better UI" part) --- */
+        /* --- 3D CARDS --- */
         .tac-card {
             background: var(--card-bg);
             border: 1px solid var(--glass-border);
             padding: 30px;
             margin-bottom: 25px;
             position: relative;
-            backdrop-filter: blur(10px); /* Glassmorphism */
+            backdrop-filter: blur(10px);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
             transform-style: preserve-3d;
             transform: perspective(1000px);
             transition: transform 0.1s ease, box-shadow 0.3s;
-            /* Tech Corners */
-            clip-path: polygon(
-                20px 0, 100% 0, 
-                100% calc(100% - 20px), calc(100% - 20px) 100%, 
-                0 100%, 0 20px
-            );
+            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
         }
 
-        /* Inner Glow on Hover */
         .tac-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: inherit;
-            box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.05);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit; box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.05);
+            pointer-events: none; opacity: 0; transition: opacity 0.3s;
         }
-
         .tac-card:hover::after { opacity: 1; }
 
         /* --- HEADERS --- */
@@ -244,178 +207,120 @@
             position: relative;
             display: inline-block;
         }
-        
         .glitch-header span { color: var(--primary); }
 
         /* --- PROFILE --- */
         .profile-header {
-            display: flex;
-            gap: 30px;
-            align-items: center;
+            display: flex; gap: 30px; align-items: center;
         }
         
         .profile-pic {
-            width: 120px;
-            height: 120px;
-            border: 2px solid var(--primary);
-            padding: 4px;
-            background: rgba(0,0,0,0.5);
-            position: relative;
+            width: 120px; height: 120px;
+            border: 2px solid var(--primary); padding: 4px;
+            background: rgba(0,0,0,0.5); position: relative;
             clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
         }
-
-        .profile-pic img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            clip-path: inherit;
-        }
-
-        /* Glowing Ring behind avatar */
+        .profile-pic img { width: 100%; height: 100%; object-fit: cover; clip-path: inherit; }
         .profile-pic::before {
-            content: '';
-            position: absolute;
-            top: -5px; left: -5px; right: -5px; bottom: -5px;
-            border: 1px solid var(--primary);
-            clip-path: inherit;
-            animation: spin 10s linear infinite;
-            opacity: 0.5;
-            z-index: -1;
+            content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
+            border: 1px solid var(--primary); clip-path: inherit;
+            animation: spin 10s linear infinite; opacity: 0.5; z-index: -1;
         }
-
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
         .role-text {
-            font-family: var(--font-body);
-            font-weight: 700;
-            color: var(--secondary);
-            letter-spacing: 2px;
-            border: 1px solid var(--secondary);
-            padding: 2px 10px;
-            display: inline-block;
-            font-size: 12px;
-            background: rgba(255, 140, 0, 0.1);
-            margin-top: 5px;
+            font-family: var(--font-body); font-weight: 700; color: var(--secondary);
+            letter-spacing: 2px; border: 1px solid var(--secondary); padding: 2px 10px;
+            display: inline-block; font-size: 12px; background: rgba(255, 140, 0, 0.1); margin-top: 5px;
         }
 
-        /* --- STATS GRID --- */
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            margin-top: 25px;
-            transform: translateZ(20px); /* Lifts stats off the card in 3D */
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px; margin-top: 25px; transform: translateZ(20px);
         }
-
         .stat-box {
             background: linear-gradient(180deg, rgba(255, 215, 0, 0.05), transparent);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            padding: 15px;
-            text-align: center;
-            position: relative;
+            border: 1px solid rgba(255, 215, 0, 0.2); padding: 15px; text-align: center; position: relative;
         }
-
         .stat-box::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 2px;
-            background: var(--primary);
-            box-shadow: 0 0 10px var(--primary);
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--primary); box-shadow: 0 0 10px var(--primary);
         }
-
         .stat-val { font-family: var(--font-head); font-size: 24px; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
         .stat-lbl { font-size: 12px; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- BUTTONS --- */
         .btn-tac {
-            background: var(--primary);
-            color: #000;
-            border: none;
-            padding: 14px 35px;
-            font-family: var(--font-head);
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
+            background: var(--primary); color: #000; border: none; padding: 14px 35px;
+            font-family: var(--font-head); font-weight: 700; font-size: 16px; cursor: pointer;
             clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-right: 15px;
-            margin-top: 20px;
-            text-transform: uppercase;
-            position: relative;
-            transform: translateZ(30px); /* 3D pop */
+            transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center;
+            gap: 10px; margin-right: 15px; margin-top: 20px; text-transform: uppercase; position: relative; transform: translateZ(30px);
         }
+        .btn-tac:hover { background: #fff; box-shadow: 0 0 25px var(--primary); letter-spacing: 1px; }
+        .btn-tac.secondary { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-tac.secondary:hover { background: var(--primary); color: #000; }
 
-        .btn-tac:hover {
-            background: #fff;
-            box-shadow: 0 0 25px var(--primary);
-            letter-spacing: 1px;
-        }
-
-        .btn-tac.secondary {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-tac.secondary:hover {
-            background: var(--primary);
-            color: #000;
-        }
-
-        /* --- EDUCATION TIMELINE --- */
         .roadmap { margin-left: 15px; padding-left: 30px; border-left: 2px solid rgba(255,255,255,0.1); }
         .roadmap-item { position: relative; margin-bottom: 45px; }
         .roadmap-item::before {
-            content: ''; position: absolute; left: -37px; top: 5px;
-            width: 12px; height: 12px; background: var(--bg-dark);
-            border: 2px solid var(--primary); transform: rotate(45deg); /* Diamond shape */
+            content: ''; position: absolute; left: -37px; top: 5px; width: 12px; height: 12px;
+            background: var(--bg-dark); border: 2px solid var(--primary); transform: rotate(45deg);
             box-shadow: 0 0 10px var(--primary);
         }
         .roadmap-year { font-family: var(--font-head); color: var(--accent); font-size: 14px; margin-bottom: 5px; }
         
-        /* --- SKILLS --- */
         .skill-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
         .skill-tag {
-            background: rgba(0, 240, 255, 0.05);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            padding: 8px 16px;
-            font-size: 14px;
-            color: #aaa;
-            transition: 0.3s;
+            background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 8px 16px; font-size: 14px; color: #aaa; transition: 0.3s;
             clip-path: polygon(8px 0, 100% 0, 100% 100%, 0 100%, 0 8px);
         }
         .skill-tag:hover {
-            background: var(--accent); color: #000; border-color: var(--accent);
-            box-shadow: 0 0 15px var(--accent);
+            background: var(--accent); color: #000; border-color: var(--accent); box-shadow: 0 0 15px var(--accent);
         }
 
-        /* --- MOBILE OPTIMIZATION --- */
-        @media (max-width: 968px) {
+        .section { display: none; opacity: 0; animation: fadeIn 0.5s forwards; }
+        .section.active { display: block; }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        /* =========================================================================
+           MOBILE PORTRAIT OPTIMIZATION
+           ========================================================================= */
+        @media (max-width: 968px) and (orientation: portrait) {
             .main-container { flex-direction: column; }
+            
+            /* Sidebar becomes Bottom Nav */
             .sidebar {
-                position: fixed; bottom: 0; left: 0; width: 100%; height: 75px;
-                flex-direction: row; padding: 0; clip-path: none;
-                border-right: none; border-top: 1px solid var(--glass-border);
-                background: rgba(0,0,0,0.95);
-                z-index: 999;
-                justify-content: space-evenly;
+                position: fixed;
+                bottom: 0; left: 0; width: 100%; height: 75px;
+                padding-bottom: env(safe-area-inset-bottom); /* Fix for swipe bar */
+                flex-direction: row; padding-top: 5px; clip-path: none;
+                border-right: none; border-top: 2px solid var(--primary);
+                background: #050505; /* Solid background */
+                z-index: 10000; /* Force on top */
+                justify-content: space-around;
+                box-shadow: 0 -5px 20px rgba(0,0,0,0.8);
             }
             .nav-logo { display: none; }
-            .nav-items { flex-direction: row; gap: 0; width: 100%; justify-content: space-evenly; }
+            .nav-items { flex-direction: row; gap: 0; width: 100%; height: 100%; justify-content: space-around; align-items: center; overflow: visible; }
             .nav-btn {
-                padding: 10px; border: none; font-size: 22px; flex-direction: column;
-                background: transparent; clip-path: none; gap: 5px; justify-content: center;
+                padding: 0; border: none; font-size: 24px; flex-direction: column;
+                background: transparent; clip-path: none; gap: 4px; justify-content: center;
+                height: 100%; width: 20%;
             }
-            .nav-btn span { font-size: 10px; margin-top: 2px; }
-            .nav-btn.active { background: transparent; color: var(--primary); padding-left: 10px; }
-            .nav-btn::before { bottom: 0; top: auto; width: 100%; height: 2px; }
+            .nav-btn span { font-size: 10px; margin-top: 0; color: #666; }
+            .nav-btn i { color: #888; }
+            
+            .nav-btn.active { padding-left: 0; background: transparent; border: none; }
+            .nav-btn.active i { color: var(--primary); transform: translateY(-3px); text-shadow: 0 0 10px var(--primary); }
+            .nav-btn.active span { color: var(--primary); }
+            .nav-btn::before { display: none; }
 
-            .character-section { display: none; } /* Hide char on mobile */
-            .content-panel { height: calc(100vh - 75px); }
-            .data-display { padding: 20px; padding-bottom: 100px; }
+            /* Content */
+            .character-section { display: none !important; } /* FORCE Hide char in portrait */
+            .content-panel { height: 100%; } /* Fill available space */
+            .data-display { padding: 20px; padding-bottom: 100px; /* Space for nav */ }
+            
             .glitch-header { font-size: 32px; }
             .profile-header { flex-direction: column; text-align: center; }
             .stats-grid { grid-template-columns: repeat(3, 1fr); }
@@ -423,10 +328,115 @@
             .btn-tac { width: 100%; justify-content: center; margin-right: 0; }
         }
 
-        /* --- SECTIONS --- */
-        .section { display: none; opacity: 0; animation: fadeIn 0.5s forwards; }
-        .section.active { display: block; }
-        @keyframes fadeIn { to { opacity: 1; } }
+        /* =========================================================================
+           MOBILE LANDSCAPE OPTIMIZATION (THE "LOBBY" VIEW)
+           ========================================================================= */
+        @media (max-width: 968px) and (orientation: landscape) {
+            .main-container { flex-direction: row; }
+            
+            /* Compact Sidebar on Left */
+            .sidebar {
+                position: relative;
+                width: 60px; /* Thin sidebar */
+                height: 100%;
+                padding: 10px 0;
+                clip-path: none;
+                background: rgba(0,0,0,0.8);
+                border-right: 2px solid var(--primary);
+            }
+            
+            .nav-logo { margin-bottom: 10px; }
+            .nav-logo h2 { display: none; } 
+            
+            .nav-items { 
+                flex-direction: column; 
+                gap: 5px; 
+                padding: 0; 
+                align-items: center; 
+                margin-top: 10px;
+            }
+            
+            .nav-btn {
+                padding: 10px;
+                justify-content: center;
+                width: 45px;
+                height: 45px;
+                clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+                margin-bottom: 5px;
+            }
+            .nav-btn span { display: none; } /* Remove text labels */
+            .nav-btn i { font-size: 18px; width: auto; }
+            
+            .nav-btn.active { padding-left: 10px; background: rgba(255,215,0,0.2); }
+            
+            /* Main Content Area */
+            .content-panel { 
+                flex: 1; 
+                display: flex;
+                flex-direction: row;
+                overflow: hidden;
+            }
+
+            /* Character Logic: Controlled by JS, but styled here */
+            .character-section {
+                display: none; /* Default hidden */
+                width: 35%; 
+                height: 100%;
+                align-items: flex-end;
+                z-index: 5;
+            }
+            .character-section.show {
+                display: flex; /* Only show when class added */
+            }
+            .character-img {
+                max-height: 90vh;
+                width: auto;
+                object-fit: contain;
+                transform: translateX(-10px);
+            }
+
+            /* Content on Right */
+            .data-display { 
+                flex: 1;
+                padding: 15px;
+                padding-left: 0;
+            }
+
+            /* Responsive Typography & Stats for Short Screens */
+            .glitch-header { font-size: 5vh; margin-bottom: 5px; }
+            .profile-header h1 { font-size: 6vh; line-height: 1; }
+            .role-text { font-size: 2vh; padding: 2px 5px; margin-top: 2px; }
+            .profile-pic { width: 10vh; height: 10vh; border-width: 2px; }
+            
+            /* Optimized Stats Grid for Landscape */
+            .stats-grid { 
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 5px;
+                margin-top: 10px; 
+            }
+            .stat-box { 
+                padding: 5px; 
+                border: 1px solid rgba(255,215,0,0.2);
+            }
+            .stat-val { font-size: 3vh; }
+            .stat-lbl { font-size: 1.2vh; }
+            
+            .tac-card { 
+                padding: 15px; 
+                margin-bottom: 10px; 
+                background: rgba(20, 20, 25, 0.8); 
+            }
+            
+            .btn-tac { 
+                padding: 6px 15px; 
+                font-size: 2.2vh; 
+                margin-top: 10px; 
+                margin-right: 5px;
+            }
+            
+            p, .roadmap-year, .skill-tag { font-size: 2.2vh; }
+        }
     </style>
 </head>
 <body>
@@ -449,7 +459,7 @@
     </nav>
 
     <main class="content-panel">
-        <div class="character-section" id="charContainer">
+        <div class="character-section show" id="charContainer">
             <img src="./character.png" alt="Character" class="character-img" id="charImg" onerror="this.src='https://placehold.co/200x400/000000/FFD700?text=Ajmal+Char'">
         </div>
 
@@ -462,9 +472,9 @@
                             <img src="avatar.png" alt="Avatar" onerror="this.src='https://placehold.co/100x100/111/FFD700?text=UK'">
                         </div>
                         <div>
-                            <h1 style="font-family: var(--font-head); font-size: 38px; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Muhammed Ajmal U K</h1>
+                            <h1 style="font-family: var(--font-head); color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3);">Muhammed Ajmal U K</h1>
                             <span class="role-text">FULL-STACK & AI DEVELOPER</span>
-                            <p style="font-size: 14px; margin-top: 10px; color: #bbb;">Founder of UTHAKKAN | MCA Scholar @ CET</p>
+                            <p style="font-size: 14px; margin-top: 5px; color: #bbb;">Founder of UTHAKKAN | MCA Scholar @ CET</p>
                         </div>
                     </div>
                     
@@ -483,16 +493,16 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 30px;">
+                    <div style="margin-top: 20px;">
                         <a href="#" id="downloadCV" class="btn-tac"><i class="fas fa-download"></i> Download CV</a>
                         <a href="https://github.com/ajmal-uk" target="_blank" class="btn-tac secondary"><i class="fab fa-github"></i> GitHub</a>
                     </div>
                 </div>
 
-                <h3 class="glitch-header" style="font-size: 24px; margin-top: 20px;">Mission <span>Status</span></h3>
+                <h3 class="glitch-header" style="margin-top: 15px;">Mission <span>Status</span></h3>
                 <div class="tac-card tilt-card">
-                    <p style="margin-bottom: 10px;"><strong style="color:var(--primary)">> Current Objective:</strong> MCA (2025-2027) at CET</p>
-                    <p style="margin-bottom: 10px;"><strong style="color:var(--primary)">> Active Role:</strong> Full Stack Intern @ Future Interns</p>
+                    <p style="margin-bottom: 5px;"><strong style="color:var(--primary)">> Current Objective:</strong> MCA (2025-2027) at CET</p>
+                    <p style="margin-bottom: 5px;"><strong style="color:var(--primary)">> Active Role:</strong> Full Stack Intern @ Future Interns</p>
                     <p><strong style="color:var(--primary)">> Primary Spec:</strong> Building Scalable AI Agents</p>
                 </div>
             </section>
@@ -501,8 +511,8 @@
                 <h2 class="glitch-header">Operative <span>File</span></h2>
                 
                 <div class="tac-card tilt-card">
-                    <h3 style="color: var(--primary); margin-bottom: 15px; font-family: var(--font-head);">Bio Data</h3>
-                    <p style="line-height: 1.8; color: #ccc;">
+                    <h3 style="color: var(--primary); margin-bottom: 10px; font-family: var(--font-head);">Bio Data</h3>
+                    <p style="line-height: 1.6; color: #ccc;">
                         I am an innovative Computer Science graduate blending high-performance coding with creative content creation. 
                         My journey involves mastering <strong style="color:#fff">Python, Flutter, and AI</strong> to solve real-world problems. 
                         When I'm not coding production-ready apps, I'm managing a massive gaming community on YouTube.
@@ -510,10 +520,10 @@
                 </div>
 
                 <div class="tac-card tilt-card">
-                    <h3 style="color: var(--primary); margin-bottom: 20px; font-family: var(--font-head);">Loadout (Skills)</h3>
+                    <h3 style="color: var(--primary); margin-bottom: 15px; font-family: var(--font-head);">Loadout (Skills)</h3>
                     
-                    <div style="margin-bottom: 20px;">
-                        <span style="color: #fff; font-weight: bold; font-size: 14px; display:block; margin-bottom:8px;">LANGUAGES</span>
+                    <div style="margin-bottom: 15px;">
+                        <span style="color: #fff; font-weight: bold; font-size: 14px; display:block; margin-bottom:5px;">LANGUAGES</span>
                         <div class="skill-grid">
                             <div class="skill-tag">Python</div>
                             <div class="skill-tag">Dart</div>
@@ -524,8 +534,8 @@
                         </div>
                     </div>
 
-                    <div style="margin-bottom: 20px;">
-                        <span style="color: #fff; font-weight: bold; font-size: 14px; display:block; margin-bottom:8px;">TECH STACK</span>
+                    <div style="margin-bottom: 15px;">
+                        <span style="color: #fff; font-weight: bold; font-size: 14px; display:block; margin-bottom:5px;">TECH STACK</span>
                         <div class="skill-grid">
                             <div class="skill-tag">Flutter</div>
                             <div class="skill-tag">Flask</div>
@@ -540,14 +550,14 @@
                 <div class="tac-card tilt-card">
                     <h3 style="color: var(--primary); margin-bottom: 15px; font-family: var(--font-head);">Experience Log</h3>
                     
-                    <div style="margin-bottom: 25px; border-left: 2px solid var(--secondary); padding-left: 20px;">
-                        <h4 style="font-size: 20px; color:#fff;">Full Stack Web Intern</h4>
+                    <div style="margin-bottom: 20px; border-left: 2px solid var(--secondary); padding-left: 20px;">
+                        <h4 style="font-size: 18px; color:#fff;">Full Stack Web Intern</h4>
                         <p style="color: var(--accent); font-size: 14px; margin-bottom:5px;">Future Interns | Nov 2025 - Dec 2025</p>
                         <p style="font-size: 14px; color:#bbb;">Engineered modular e-commerce components using React.js and optimized UI responsiveness for high-traffic scenarios.</p>
                     </div>
 
                     <div style="border-left: 2px solid var(--accent); padding-left: 20px;">
-                        <h4 style="font-size: 20px; color:#fff;">Data Analytics Virtual Internship</h4>
+                        <h4 style="font-size: 18px; color:#fff;">Data Analytics Virtual Internship</h4>
                         <p style="color: var(--accent); font-size: 14px; margin-bottom:5px;">Deloitte Australia | Nov 2025</p>
                         <p style="font-size: 14px; color:#bbb;">Executed complex data cleaning and visualization tasks using Tableau and Excel to drive business insights.</p>
                     </div>
@@ -561,28 +571,28 @@
                         
                         <div class="roadmap-item">
                             <div class="roadmap-year">2025 - 2027</div>
-                            <h3 style="color: #fff; font-size:20px;">Master of Computer Applications</h3>
+                            <h3 style="color: #fff; font-size:18px;">Master of Computer Applications</h3>
                             <p style="color: #888;">College of Engineering, Trivandrum</p>
                             <span style="color: var(--primary); font-size: 12px;">STATUS: ACTIVE</span>
                         </div>
 
                         <div class="roadmap-item">
                             <div class="roadmap-year">2022 - 2025</div>
-                            <h3 style="color: #fff; font-size:20px;">B.Sc. Computer Science</h3>
+                            <h3 style="color: #fff; font-size:18px;">B.Sc. Computer Science</h3>
                             <p style="color: #888;">Mahatma Gandhi College, Iritty</p>
                             <span style="color: var(--primary); font-size: 12px;">SCORE: 89% (High Distinction)</span>
                         </div>
 
                         <div class="roadmap-item">
                             <div class="roadmap-year">2020 - 2022</div>
-                            <h3 style="color: #fff; font-size:20px;">Higher Secondary</h3>
+                            <h3 style="color: #fff; font-size:18px;">Higher Secondary</h3>
                             <p style="color: #888;">GHSS Ulikkal</p>
                             <span style="color: var(--primary); font-size: 12px;">SCORE: 91%</span>
                         </div>
 
                         <div class="roadmap-item">
                             <div class="roadmap-year">2019 - 2020</div>
-                            <h3 style="color: #fff; font-size:20px;">SSLC</h3>
+                            <h3 style="color: #fff; font-size:18px;">SSLC</h3>
                             <p style="color: #888;">GHSS Ulikkal</p>
                             <span style="color: var(--primary); font-size: 12px;">SCORE: 98%</span>
                         </div>
@@ -606,7 +616,7 @@
 
                 <div class="tac-card tilt-card">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <h3 style="color: var(--primary); font-family: var(--font-head); font-size: 22px;">Dementia Memory Assistant</h3>
+                        <h3 style="color: var(--primary); font-family: var(--font-head); font-size: 20px;">Dementia Memory Assistant</h3>
                         <i class="fas fa-heartbeat" style="color: #ff3333; font-size: 20px;"></i>
                     </div>
                     <p style="color: #bbb; margin-bottom: 15px;">
@@ -622,7 +632,7 @@
 
                 <div class="tac-card tilt-card">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <h3 style="color: var(--primary); font-family: var(--font-head); font-size: 22px;">ToolPix AI</h3>
+                        <h3 style="color: var(--primary); font-family: var(--font-head); font-size: 20px;">ToolPix AI</h3>
                         <i class="fas fa-robot" style="color: var(--accent); font-size: 20px;"></i>
                     </div>
                     <p style="color: #bbb; margin-bottom: 15px;">
@@ -638,7 +648,7 @@
 
                 <div class="tac-card tilt-card">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <h3 style="color: var(--primary); font-family: var(--font-head); font-size: 22px;">Explore Together</h3>
+                        <h3 style="color: var(--primary); font-family: var(--font-head); font-size: 20px;">Explore Together</h3>
                         <i class="fas fa-plane" style="color: var(--secondary); font-size: 20px;"></i>
                     </div>
                     <p style="color: #bbb; margin-bottom: 15px;">
@@ -690,7 +700,6 @@
 </div>
 
 <script>
-    // --- PARTICLE SYSTEM (RISING EMBERS) ---
     const canvas = document.getElementById('bgCanvas');
     const ctx = canvas.getContext('2d');
     
@@ -744,27 +753,34 @@
     initParticles();
     animateParticles();
 
-    // --- 3D TILT EFFECT & NAVIGATION ---
     document.addEventListener('DOMContentLoaded', () => {
         const navBtns = document.querySelectorAll('.nav-btn');
         const sections = document.querySelectorAll('.section');
         const scrollContainer = document.getElementById('scrollContainer');
+        const charContainer = document.getElementById('charContainer');
 
-        // Navigation
+        // Navigation Logic
         navBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 navBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+                
                 const targetId = btn.getAttribute('data-target');
                 sections.forEach(sec => {
                     sec.classList.remove('active');
                     if(sec.id === targetId) sec.classList.add('active');
                 });
                 scrollContainer.scrollTop = 0;
+
+                // Character Logic: Only show in 'overview' (Lobby)
+                if(targetId === 'overview') {
+                    charContainer.classList.add('show');
+                } else {
+                    charContainer.classList.remove('show');
+                }
             });
         });
 
-        // 3D Card Tilt Logic
         const cards = document.querySelectorAll('.tilt-card');
         
         cards.forEach(card => {
@@ -772,15 +788,10 @@
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
-                // Calculate center
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
-                // Rotation values (limit to +/- 10 degrees)
                 const rotateX = ((y - centerY) / centerY) * -5;
                 const rotateY = ((x - centerX) / centerX) * 5;
-
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             });
 
@@ -789,17 +800,16 @@
             });
         });
 
-        // Character Parallax Effect
         const charImg = document.getElementById('charImg');
         document.addEventListener('mousemove', (e) => {
-            if(window.innerWidth > 968) {
+            const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+            if(window.innerWidth > 968 || isLandscape) {
                 const x = (window.innerWidth - e.pageX * 2) / 100;
                 const y = (window.innerHeight - e.pageY * 2) / 100;
                 charImg.style.transform = `translateX(${x}px) translateY(${y}px)`;
             }
         });
 
-        // Resume Download
         document.getElementById('downloadCV').addEventListener('click', function(e) {
             e.preventDefault();
             const link = document.createElement('a');
@@ -810,7 +820,6 @@
             document.body.removeChild(link);
         });
 
-        // Contact Form
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = this.querySelector('button');
@@ -818,7 +827,7 @@
             btn.innerText = "ENCRYPTING & SENDING...";
             setTimeout(() => {
                 btn.innerText = "TRANSMISSION SUCCESSFUL";
-                btn.style.background = "#00ff00"; // Green for success
+                btn.style.background = "#00ff00"; 
                 setTimeout(() => {
                     btn.innerText = originalText;
                     btn.style.background = "";
