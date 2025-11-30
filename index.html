@@ -388,11 +388,14 @@
             .character-section.show {
                 display: flex; /* Only show when class added */
             }
+            
+            /* UPDATED: Reduced image size for landscape */
             .character-img {
-                max-height: 90vh;
+                max-height: 75vh; /* Reduced from 90vh */
                 width: auto;
                 object-fit: contain;
-                transform: translateX(-10px);
+                transform: translateX(-5px);
+                margin-bottom: 2vh; /* Slight breathing room at bottom */
             }
 
             /* Content on Right */
