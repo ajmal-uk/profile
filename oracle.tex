@@ -1,0 +1,153 @@
+\documentclass[a4paper,10pt]{article}
+
+% ---------- PAGE SETUP ----------
+\usepackage[a4paper, top=0.4in, bottom=0.4in, left=0.5in, right=0.5in]{geometry}
+\usepackage{fontspec}
+\usepackage[english]{babel}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+% Enable color for links to make them obvious but professional
+\usepackage[colorlinks=true, urlcolor=darkblue, linkcolor=darkblue, pdfborder={0 0 0}]{hyperref}
+
+\pagestyle{empty}
+\raggedright
+
+% ---------- FONT ----------
+\setmainfont{Noto Sans}
+
+% ---------- COLORS ----------
+\definecolor{oracleRed}{RGB}{199, 70, 52}  % Oracle-ish Red for headers
+\definecolor{darkblue}{RGB}{0, 50, 100}    % Professional Blue for links
+
+% ---------- SECTION STYLE ----------
+% Using Oracle Red for section headers to align with target company branding
+\titleformat{\section}
+  {\large\bfseries\color{oracleRed}\uppercase}
+  {}
+  {0pt}
+  {}
+  [\vspace{-3pt}\titlerule]
+
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+
+% ---------- LISTS ----------
+\setlist[itemize]{
+  leftmargin=0.15in,
+  labelsep=4pt,
+  itemsep=2pt, % Slightly increased for better readability ("friendlier" look)
+  parsep=0pt,
+  topsep=2pt
+}
+
+\renewcommand\labelitemi{\scriptsize$\bullet$} % Slightly larger bullet for readability
+
+% ---------- CUSTOM COMMANDS ----------
+\newcommand{\resumeEntry}[4]{
+  \textbf{#1} \hfill #2 \\
+  \textit{#3} \hfill \textit{#4}
+}
+
+\newcommand{\projectEntry}[3]{
+  \noindent\textbf{#1} $|$ \textit{#2} \hfill #3
+}
+
+\begin{document}
+
+% ================= HEADER =================
+\begin{center}
+    {\LARGE \textbf{MUHAMMED AJMAL U K}} \\[4pt]
+    \small
+    \href{mailto:ajmaluk.me@gmail.com}{ajmaluk.me@gmail.com} $|$
+    +91 85471 97122 $|$
+    \href{https://linkedin.com/in/ajmal-uk}{linkedin.com/in/ajmal-uk} $|$
+    \href{https://github.com/ajmal-uk}{github.com/ajmal-uk} $|$
+    \href{https://ajmaluk.netlify.app}{ajmaluk.netlify.app}
+\end{center}
+
+\vspace{-4pt}
+
+% ================= SUMMARY =================
+\section{Professional Summary}
+Driven \textbf{Oracle Certified Associate} and MCA student with a passion for building inclusive, cloud-native solutions. Proficient in \textbf{Oracle Cloud Infrastructure (OCI)}, SQL, and Full-Stack Development. Proven track record of deploying user-centric applications (serving 35K+ users) and integrating Generative AI for enterprise automation. Eager to bring a blend of technical expertise and community leadership to Oracle's intern program to help solve complex real-world challenges.
+
+% ================= EDUCATION =================
+\section{Education}
+
+\textbf{Master of Computer Applications (MCA)} \hfill 2025 -- 2027 \\
+College of Engineering, Trivandrum
+
+\vspace{2pt}
+
+\textbf{B.Sc. Computer Science} \hfill 2022 -- 2025 \\
+Mahatma Gandhi College, Iritty \hfill \textbf{CGPA: 8.97} (First Class)
+
+% ================= TECHNICAL SKILLS =================
+\section{Technical Skills}
+\begin{itemize}
+  \item \textbf{Cloud \& Infrastructure:} \textbf{Oracle Cloud Infrastructure (OCI)}, Firebase, Netlify, Cloudinary
+  \item \textbf{Core Technologies:} Python, SQL (MySQL/PostgreSQL), Dart, JavaScript, C++
+  \item \textbf{Development Frameworks:} Flutter (Mobile), Flask (Backend), React.js, Tailwind CSS
+  \item \textbf{AI \& Automation:} Generative AI Agents, Gemini API, RAG Pipelines, Prompt Engineering
+  \item \textbf{Developer Tools:} Git/GitHub, Postman, VS Code, Android Studio, Tableau
+\end{itemize}
+
+% ================= CERTIFICATIONS =================
+\section{Certifications}
+\begin{itemize}
+  \item \textbf{Oracle OCI AI Foundations Associate} -- \textit{Oracle University} \hfill \textbf{2025}
+  \item \textbf{Google \& Kaggle AI Agent Development} -- \textit{Specialized Program} \hfill \textbf{2025}
+  \item \textbf{IBM Software Engineering Specialization} -- \textit{Coursera} \hfill \textbf{2024}
+  \item \textbf{Google Cloud Arcade Facilitator} -- \textit{Google Cloud} \hfill \textbf{2024}
+\end{itemize}
+
+% ================= PROJECTS =================
+\section{Projects}
+
+\projectEntry{Dementia Virtual Memory Assistant}{Flutter, Python, AI \& Accessibility}{Aug 2025 -- Oct 2025}
+\begin{itemize}
+  \item Developed an empathetic mobile application to support patients with memory loss and their caregivers.
+  \item Integrated \textbf{DeepFace/ArcFace} via a Flask backend for instant, secure biometric identification.
+  \item Designed a privacy-focused database schema to manage sensitive medical logs.
+  \item \textit{Highlights: Accessibility, Privacy-First Design, AI Integration.}
+  \item \textbf{Repo:} \href{https://github.com/ajmal-uk/dementia-virtual-memory}{github.com/ajmal-uk/dementia-virtual-memory}
+\end{itemize}
+
+\projectEntry{toolpix — AI Tools Platform}{Flask, SQL, SEO}{Apr 2025 -- Jun 2025}
+\begin{itemize}
+  \item Architected a high-performance web platform providing developer utilities and AI automation.
+  \item Optimized SQL queries and backend logic to handle \textbf{35K+ organic clicks}.
+  \item Focused on scalable architecture and clean code principles.
+  \item \textbf{Live:} \href{https://toolpix.pythonanywhere.com/}{toolpix.pythonanywhere.com}
+\end{itemize}
+
+\projectEntry{Explore Together — Travel Matching App}{Flutter, NoSQL}{Oct 2024 -- Dec 2024}
+\begin{itemize}
+  \item Created a real-time social matching algorithm connecting travelers based on location data.
+  \item Implemented live messaging and state management using Firebase (NoSQL).
+  \item \textbf{Repo:} \href{https://github.com/ajmal-uk/explore-together}{github.com/ajmal-uk/explore-together}
+\end{itemize}
+
+% ================= EXPERIENCE =================
+\section{Experience}
+
+\resumeEntry{Full Stack Web Development Intern}{Nov 2025 -- Dec 2025}{Future Interns}{Remote}
+\begin{itemize}
+  \item Engineered modular React components to improve application responsiveness across devices.
+  \item Collaborated within an Agile team, utilizing Git for version control and efficient CI/CD workflows.
+\end{itemize}
+
+\resumeEntry{Data Analytics Virtual Experience}{Nov 2025}{Deloitte Australia (Forage)}{Remote}
+\begin{itemize}
+  \item Performed data cleaning, classification, and predictive modeling tasks simulating real consultancy work.
+  \item Built interactive Tableau dashboards to visualize complex datasets for stakeholder decision-making.
+\end{itemize}
+
+% ================= LEADERSHIP & COMMUNITY =================
+\section{Leadership \& Community}
+\begin{itemize}
+  \item \textbf{Community Builder:} Co-manage a gaming YouTube channel with \textbf{550K+ subscribers}; skilled in digital communication, audience engagement, and content strategy.
+  \item \textbf{NCC Sergeant:} Holder of 'B' \& 'C' Certificates; led cadet platoons, fostering discipline and teamwork.
+\end{itemize}
+
+\end{document}
