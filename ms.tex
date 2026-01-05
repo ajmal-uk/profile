@@ -1,0 +1,153 @@
+\documentclass[a4paper,10pt]{article}
+
+% ---------- PAGE SETUP ----------
+\usepackage[a4paper, top=0.25in, bottom=0.25in, left=0.45in, right=0.45in]{geometry}
+\usepackage{fontspec}
+\usepackage[english]{babel}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\pagestyle{empty}
+\raggedright
+
+% ---------- FONT ----------
+\setmainfont{Noto Sans}
+
+% ---------- COLORS ----------
+\definecolor{msblue}{RGB}{0,70,140}
+
+% ---------- SECTION STYLE ----------
+\titleformat{\section}
+  {\large\bfseries\color{msblue}\uppercase}
+  {}
+  {0pt}
+  {}
+  [\vspace{-3pt}\titlerule]
+
+\titlespacing*{\section}{0pt}{4pt}{3pt}
+
+% ---------- LISTS ----------
+\setlist[itemize]{
+  leftmargin=0.15in,
+  itemsep=1pt,
+  topsep=2pt,
+  parsep=0pt
+}
+\renewcommand\labelitemi{\tiny$\bullet$}
+
+% ---------- COMMANDS ----------
+\newcommand{\resumeEntry}[4]{
+  \textbf{#1} \hfill #2\\
+  \textit{#3} \hfill \textit{#4}
+}
+\newcommand{\projectEntry}[3]{
+  \noindent\textbf{#1} $|$ \textit{#2} \hfill #3
+}
+
+\begin{document}
+
+% ================= HEADER =================
+\begin{center}
+  {\LARGE \textbf{MUHAMMED AJMAL U K}}\\[4pt]
+  \small
+  \href{mailto:ajmaluk.me@gmail.com}{ajmaluk.me@gmail.com} $|$
+  +91 85471 97122 $|$
+  \href{https://linkedin.com/in/ajmal-uk}{linkedin.com/in/ajmal-uk} $|$
+  \href{https://github.com/ajmal-uk}{github.com/ajmal-uk} $|$
+  \href{https://ajmaluk.netlify.app}{ajmaluk.netlify.app}
+\end{center}
+
+\vspace{-4pt}
+
+% ================= SUMMARY =================
+\section{Professional Summary}
+Software Engineering Intern candidate and MCA student with a strong foundation in
+\textbf{computer science fundamentals, data structures, and algorithms}.
+Hands-on experience designing, developing, and testing scalable web and mobile
+applications using Python, Flutter, Flask, SQL, and Firebase. Built production
+systems generating \textbf{10K+ organic clicks} and AI-powered solutions focused
+on performance, reliability, and user impact. Thrives in collaborative environments
+with a growth mindset and passion for learning new technologies.
+
+% ================= SKILLS =================
+\section{Technical Skills}
+\begin{itemize}
+  \item \textbf{Programming Languages:} Python, Dart, JavaScript, SQL
+  \item \textbf{Frameworks \& Libraries:} Flutter, Flask, React.js (basic), Tailwind CSS
+  \item \textbf{Databases:} MySQL, Firebase Realtime DB, Firestore
+  \item \textbf{Cloud \& Tools:} Git, GitHub, Firebase, PythonAnywhere, Netlify, Postman
+  \item \textbf{AI \& Systems:} LLM Integration, Chatbot Development, Gemini API
+  \item \textbf{CS Fundamentals:} Data Structures, Algorithms, OOP, State Management
+\end{itemize}
+
+% ================= PROJECTS =================
+\section{Projects}
+
+\projectEntry{Dementia Virtual Memory Assistant}{Flutter, Python, Flask}{Aug 2025 -- Oct 2025}
+\begin{itemize}
+  \item Designed and developed a mobile application to support dementia patients
+  with reminders, memory logs, and caregiver coordination.
+  \item Implemented real-time facial recognition using \textbf{DeepFace (ArcFace)}
+  via Flask to identify family members and improve user safety.
+  \item Applied clean architecture principles to ensure maintainability and scalability.
+\end{itemize}
+
+\projectEntry{ToolPix — AI Tools Platform}{Flask, SQL, Gemini API}{Apr 2025 -- Jun 2025}
+\begin{itemize}
+  \item Built a scalable web platform offering developer utilities and AI automation tools.
+  \item Improved performance and availability through query optimization and backend tuning.
+  \item Achieved \textbf{10K+ organic clicks} using SEO best practices and AI-driven content generation.
+\end{itemize}
+
+\projectEntry{Byte AI — Multi-Model Chatbot}{Python, Flask, LLM APIs}{Mar 2024 -- Sep 2024}
+\begin{itemize}
+  \item Developed a multi-model chatbot integrating \textbf{Gemini, Groq, and OpenRouter}.
+  \item Designed a clean ChatGPT-style UI and modular backend routing for extensibility.
+\end{itemize}
+
+\projectEntry{Explore Together — Travel Matching App}{Flutter, Firebase}{Oct 2024 -- Dec 2024}
+\begin{itemize}
+  \item Built a real-time travel matching application connecting users based on destinations.
+  \item Implemented live updates and messaging using Firebase services.
+\end{itemize}
+
+% ================= EXPERIENCE =================
+\section{Experience}
+
+\resumeEntry{Full Stack Web Development Intern}{Nov 2025 -- Dec 2025}{Future Interns}{Remote}
+\begin{itemize}
+  \item Collaborated with team members to build and improve web features using React and Tailwind.
+  \item Applied Git-based workflows and incorporated feedback to enhance code quality.
+\end{itemize}
+
+\resumeEntry{Data Analytics Virtual Experience}{Nov 2025}{Deloitte Australia (Forage)}{Remote}
+\begin{itemize}
+  \item Analyzed datasets to identify trends and support data-driven decisions.
+  \item Built Tableau dashboards to communicate insights to stakeholders.
+\end{itemize}
+
+% ================= EDUCATION =================
+\section{Education}
+
+\textbf{Master of Computer Applications (MCA)} \hfill 2025 -- 2027\\
+College of Engineering, Trivandrum
+
+\vspace{1pt}
+
+\textbf{B.Sc. Computer Science} \hfill 2022 -- 2025\\
+Mahatma Gandhi College, Iritty \hfill \textbf{CGPA: 8.97}
+
+% ================= CERTIFICATIONS =================
+\section{Certifications \& Leadership}
+\begin{itemize}
+  \item IBM Software Engineering — Coursera
+  \item Oracle OCI AI Foundations Associate
+  \item Oracle AI Agent Studio Foundations
+  \item Google \& Kaggle AI Agent Development Program
+  \item NCC Sergeant — B \& C Certificates
+  \item Co-manages a YouTube channel with \textbf{500K+ subscribers}
+\end{itemize}
+
+\end{document}
